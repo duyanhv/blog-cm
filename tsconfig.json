@@ -28,5 +28,14 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "rootDir": "src",
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    // try disable strict mode
+    "noImplicitUseStrict": true,
+    "strict": false
   }
 }
