@@ -1,6 +1,8 @@
 import Link from 'next/link';
-
-export default ({ children }) => {
+export interface Props {
+  children: any;
+}
+export default ({ children }: Props) => {
   return (
     <div>
       <Link href={'/'}><a>Home</a></Link>&nbsp;
