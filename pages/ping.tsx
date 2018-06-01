@@ -1,4 +1,7 @@
-import App from '../nextjs/layout/App';
+import App, { Props } from '../nextjs/layout/App';
+export interface Test extends Props {
+  test: string;
+}
 
 export default props => {
   const mainHeading = props.title || 'PING';
