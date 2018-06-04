@@ -62,7 +62,7 @@ export class AuthService {
       throw new HttpException('Invalid token', HttpStatus.BAD_REQUEST);
     }
 
-    if (oldTokenData.exp < Math.round(new Date().getTime() / 1000)) {
+    if (oldTokenData && oldTokenData.exp && oldTokenData.exp < Math.round(new Date().getTime() / 1000)) {
       throw new HttpException('Token expired', HttpStatus.UNAUTHORIZED);
     }
 
@@ -74,8 +74,8 @@ export class AuthService {
         ),
       )
       .exec();
-
-    return this.createToken(user);
+    
+    return this.createToken(user as User);
   }
 
   /** create a new token */

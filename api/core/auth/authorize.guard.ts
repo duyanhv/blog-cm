@@ -43,12 +43,13 @@ export class AuthorizeGuard implements CanActivate {
       );
     }
 
+    if (payload && payload.exp && payload.exp < Math.round(new Date().getTime() / 1000)) {
+      throw new HttpException('Token expired', HttpStatus.UNAUTHORIZED);
+    }
+
     req.username = payload.username;
     req.userId = payload.id;
 
-    if (payload.exp < Math.round(new Date().getTime() / 1000)) {
-      throw new HttpException('Token expired', HttpStatus.UNAUTHORIZED);
-    }
     if (permission === AuthorizedPermission) {
       return true;
     }
