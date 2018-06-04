@@ -31,7 +31,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "rootDir": "src",
+    // "rootDir": "src",
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     // try disable strict mode
