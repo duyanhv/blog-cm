@@ -10,10 +10,18 @@ type APIResponse = {
 
 const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
     const handle = app.getRequestHandler();
+<<<<<<< HEAD
     
     server.use(express.static('public'));
 
     server.get('/_next/*', (req, res) => {
+=======
+    server.get('/_next/*', (req, res) => {
+        return handle(req, res);
+    });
+
+    server.get('/static/*', (req, res) => {
+>>>>>>> 1a03b3edf7b5fa892a9edb7e314630bcbf5b6a5d
         return handle(req, res);
     });
 
@@ -21,6 +29,7 @@ const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
         return handle(req, res);
     });
 
+<<<<<<< HEAD
     server.get('/admin/*', (req, res) => {
         return handle(req, res);
     });
@@ -28,6 +37,9 @@ const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
     server.get('/admin', (_req, res) => {
         return res.sendFile(path.join(__dirname, '../../../public/index.html'));
     });
+=======
+    server.use(express.static('public'));
+>>>>>>> 1a03b3edf7b5fa892a9edb7e314630bcbf5b6a5d
 };
 
 const setupPublicRoutes = (server: express.Express, app: next.Server) => {
