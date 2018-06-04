@@ -53,7 +53,7 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     });
 
     server.get('/', (req, res) => {
-        const actualPage = '/ping';
+        const actualPage = '/index';
         const queryParams = { slug: req.params.slug, name: req.params.name };
         app.render(req, res, actualPage, queryParams);
     });

@@ -22,10 +22,10 @@ class Home extends React.Component {
         <Slider />
         {/* <Promo /> */}
         <Technology />
-        <News/>
-        <TeacherImage/>
+        <News />
+        <TeacherImage />
         <About />
-        <SignUpForTesting/>
+        <SignUpForTesting />
         <AboutStats />
         <Testimonials />
         <Projects />
