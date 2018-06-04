@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as next from 'next';
 import * as morgan from 'morgan';
-import * as path from 'path';
 
 type APIResponse = {
     success: boolean;

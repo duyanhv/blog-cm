@@ -99,7 +99,8 @@ export class UsersService {
       .findOne({ username })
       .select('username firstName middleName lastName email')
       .exec();
-    return user;
+    
+    return user as User;
   }
 
   async findByEmail(email: string): Promise<User> {
@@ -108,7 +109,7 @@ export class UsersService {
       .select('username firstName middleName lastName email')
       .exec();
 
-    return user;
+    return user as User;
   }
 
   async findById(id: string): Promise<User> {
@@ -117,7 +118,7 @@ export class UsersService {
       .select('_id')
       .exec();
 
-    return user;
+    return user as User;
   }
 
   async create(user: CreateUserInputDto): Promise<FindAllUsersDetailDto> {

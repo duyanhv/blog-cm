@@ -119,18 +119,20 @@ export class UploadImageService {
         .exec();
 
       // Update filename in public folder
-      const oldFile = path.join(
-        __dirname,
-        `../../../../../../static/images/upload/${imageInfo.album}/${
-          imageInfo.filename
-        }`,
-      );
-      const newFile = path.join(
-        __dirname,
-        `../../../../../../static/images/upload/${imageInfo.album}/${newName}`,
-      );
-      const rename = promisify(fs.rename);
-      await rename(oldFile, newFile);
+      if (imageInfo && imageInfo.album) {
+        const oldFile = path.join(
+          __dirname,
+          `../../../../../../static/images/upload/${imageInfo.album}/${
+            imageInfo.filename
+          }`,
+        );
+        const newFile = path.join(
+          __dirname,
+          `../../../../../../static/images/upload/${imageInfo.album}/${newName}`,
+        );
+        const rename = promisify(fs.rename);
+        await rename(oldFile, newFile);
+      }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -148,12 +150,14 @@ export class UploadImageService {
         .exec();
 
       // Delete from public folder
-      const filePath = path.join(
-        __dirname,
-        `../../../../../../static/images/upload/default/${imageInfo.filename}`,
-      );
-      const unlink = promisify(fs.unlink);
-      await unlink(filePath);
+      if (imageInfo && imageInfo.filename) {
+        const filePath = path.join(
+          __dirname,
+          `../../../../../../static/images/upload/default/${imageInfo.filename}`,
+        );
+        const unlink = promisify(fs.unlink);
+        await unlink(filePath);
+      }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
