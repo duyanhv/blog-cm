@@ -1,4 +1,4 @@
-import { Injectable, Inject, HttpStatus, HttpException } from '@nestjs/common';
+import { Component, Inject, HttpStatus, HttpException } from '@nestjs/common';
 import { User } from './interfaces';
 import { Model, Query } from 'mongoose';
 import {
@@ -13,7 +13,7 @@ import * as Joi from 'joi';
 import { UsersConst } from './constants/users.constant';
 import config from '../../config';
 
-@Injectable()
+@Component()
 export class UsersService {
   constructor(
     @Inject(UsersConst.UserModelToken) private readonly userModel: Model<User>,

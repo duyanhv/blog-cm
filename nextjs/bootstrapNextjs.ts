@@ -1,22 +1,36 @@
 import * as express from 'express';
 import * as next from 'next';
 import * as morgan from 'morgan';
+import * as path from 'path';
 
 type APIResponse = {
     success: boolean;
     message: string;
 };
 
-const bootstrapNextjs = async (server: express.Express) => {
-    const dev = process.env.NODE_ENV !== 'production';
-    const app = next({ dev });
+const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
     const handle = app.getRequestHandler();
+    
+    server.use(express.static('public'));
 
-    await app.prepare();
+    server.get('/_next/*', (req, res) => {
+        return handle(req, res);
+    });
 
-    // Middleware
-    server.use(morgan('short'));
+    server.get('/static/*', (req, res) => {
+        return handle(req, res);
+    });
 
+    server.get('/admin/*', (req, res) => {
+        return handle(req, res);
+    });
+
+    server.get('/admin', (_req, res) => {
+        return res.sendFile(path.join(__dirname, '../../../public/index.html'));
+    });
+};
+
+const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     server.get('/people', (req, res) => {
         const actualPage = '/ping';
         const queryParams = {};
@@ -49,10 +63,19 @@ const bootstrapNextjs = async (server: express.Express) => {
         const queryParams = { slug: req.params.slug, name: req.params.name };
         app.render(req, res, actualPage, queryParams);
     });
+};
 
-    server.get('/_next/*', (req, res) => {
-        return handle(req, res);
-    });
+const bootstrapNextjs = async (server: express.Express) => {
+    const dev = process.env.NODE_ENV !== 'production';
+    const app = next({ dev });
+
+    await app.prepare();
+
+    // Middleware
+    server.use(morgan('short'));
+
+    setupNextjsRoutes(server, app);
+    setupPublicRoutes(server, app);
 };
 
 export { bootstrapNextjs };

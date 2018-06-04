@@ -1,15 +1,19 @@
-import { Injectable, HttpStatus, Inject, HttpException } from '@nestjs/common';
+import { Component, HttpStatus, Inject, HttpException } from '@nestjs/common';
 import { UsersConst } from './constants/users.constant';
 import { Model } from 'mongoose';
 import { User } from './interfaces';
 import { GetProfileResultDto, UpdateProfileInputDto } from './dto';
+import { processImage } from '../../core/helpers';
 import * as fs from 'fs';
+import * as path from 'path';
 import * as Joi from 'joi';
 import * as bcrypt from 'bcrypt';
 import config from '../../config';
 
-@Injectable()
+@Component()
 export class ProfileService {
+  private readonly baseHyperlink: string = `/static/profile-pictures`;
+
   constructor(
     @Inject(UsersConst.UserModelToken) private readonly userModel: Model<User>,
   ) {}
@@ -39,10 +43,19 @@ export class ProfileService {
         .exec();
 
       if (profileInfo) {
-        const profilePictureSrc = `uploads/profile-pictures/${id}`;
-        profileInfo.imageSrc = fs.existsSync(profilePictureSrc)
-          ? profilePictureSrc + `/${id}.jpg`
-          : undefined;
+        const defaultAvatarHyperlink = `${
+          this.baseHyperlink
+        }/default-avatar.png`;
+        const profilePictureHyperlink = `${this.baseHyperlink}/${id}.jpg`;
+        const profilePictureLocation = path.join(
+          __dirname,
+          `../../../../../static/profile-pictures/${id}.jpg`,
+        );
+
+        profileInfo.imageSrc = fs.existsSync(profilePictureLocation)
+          ? profilePictureHyperlink
+          : defaultAvatarHyperlink;
+
         return profileInfo;
       } else {
         throw new HttpException('User Not Founnd', HttpStatus.NOT_FOUND);
@@ -97,6 +110,32 @@ export class ProfileService {
       }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    }
+  }
+
+  async uploadProfilePicture(file: any, req: any): Promise<string> {
+    if (!file) {
+      throw new HttpException('File Not Found', HttpStatus.BAD_REQUEST);
+    } else if (!req.userId) {
+      throw new HttpException('User Not Found', HttpStatus.BAD_REQUEST);
+    }
+
+    try {
+      // Generate new filename
+      const newFilePath: string = path.join(
+        __dirname,
+        `../../../../../static/profile-pictures/${req.userId}.jpg`,
+      );
+
+      // Resize image and save image to public folder
+      await processImage(`${file.destination}${file.filename}`, newFilePath);
+
+      // Delete temporary file
+      fs.unlinkSync(file.path);
+
+      return `${this.baseHyperlink}/${req.userId}.jpg`;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
 }

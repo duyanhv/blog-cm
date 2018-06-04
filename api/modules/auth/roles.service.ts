@@ -1,4 +1,4 @@
-import { Injectable, Inject, HttpStatus, HttpException } from '@nestjs/common';
+import { Component, Inject, HttpStatus, HttpException } from '@nestjs/common';
 import { Model, Query } from 'mongoose';
 import * as Joi from 'joi';
 import { Role } from './interfaces';
@@ -11,7 +11,7 @@ import {
 } from './dto';
 import { UpdateRoleInputDto } from './dto/update-role.dto';
 
-@Injectable()
+@Component()
 export class RolesService {
   constructor(
     @Inject(RolesConst.RoleModelToken) private readonly roleModel: Model<Role>,

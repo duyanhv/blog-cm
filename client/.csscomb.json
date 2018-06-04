@@ -1,0 +1,41 @@
+{
+    "always-semicolon": true,
+    "block-indent": "\t",
+    "color-case": "lower",
+    "color-shorthand": false,
+    "element-case": "lower",
+    "eof-newline": true,
+    "leading-zero": true,
+    "quotes": "single",
+    "remove-empty-rulesets": true,
+    "sort-order": [
+        [
+            "$variable"
+        ],
+        [
+            "$include"
+        ],
+        [
+            "top",
+            "padding"
+        ],
+        [
+            "$include media"
+        ]
+    ],
+    "sort-order-fallback": "abc",
+    "space-after-colon": " ",
+    "space-after-combinator": " ",
+    "space-after-opening-brace": "\n",
+    "space-after-selector-delimiter": " ",
+    "space-before-closing-brace": "\n",
+    "space-before-colon": "",
+    "space-before-combinator": " ",
+    "space-before-opening-brace": "",
+    "space-before-selector-delimiter": "",
+    "space-between-declarations": "\n",
+    "strip-spaces": true,
+    "tab-size": true,
+    "unitless-zero": true,
+    "vendor-prefix-align": true
+}

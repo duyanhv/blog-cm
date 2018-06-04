@@ -1,7 +1,8 @@
 import {
   Module,
   NestModule,
-  MiddlewareConsumer,
+  RequestMethod,
+  MiddlewaresConsumer,
 } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
@@ -39,7 +40,7 @@ import { RolesController } from './roles.controller';
   imports: [DatabaseModule],
 })
 export class AuthModule implements NestModule {
-  public configure(consumer: MiddlewareConsumer): void {
+  public configure(consumer: MiddlewaresConsumer): void {
     consumer
       .apply(
         session({
@@ -53,28 +54,26 @@ export class AuthModule implements NestModule {
       .apply([passport.initialize(), passport.session()])
       .forRoutes(UsersController)
       .apply(passport.authenticate('facebook'))
-      .forRoutes('/users/auth/facebook') // { path: '/users/auth/facebook', method: RequestMethod.GET })
+      .forRoutes({ path: '/users/auth/facebook', method: RequestMethod.GET })
       .apply((req, res, next) => {
         passport.authenticate('facebook', (_error, _user, _info) => {
           res.send('Success');
         })(req, res, next);
       })
-      .forRoutes('/users/auth/facebookCallback')
-      // {
-      //   path: '/users/auth/facebookCallback',
-      //   method: RequestMethod.GET,
-      // })
+      .forRoutes({
+        path: '/users/auth/facebookCallback',
+        method: RequestMethod.GET,
+      })
       .apply(passport.authenticate('google', { scope: ['profile', 'email'] }))
-      .forRoutes('/users/auth/google') // { path: '/users/auth/google', method: RequestMethod.GET })
+      .forRoutes({ path: '/users/auth/google', method: RequestMethod.GET })
       .apply((req, res, next) => {
         passport.authenticate('google', (_error, _user, _info) => {
           res.send('Success');
         })(req, res, next);
       })
-      .forRoutes('/users/auth/googleCallback');
-      // {
-      //   path: '/users/auth/googleCallback',
-      //   method: RequestMethod.GET,
-      // });
+      .forRoutes({
+        path: '/users/auth/googleCallback',
+        method: RequestMethod.GET,
+      });
   }
 }
