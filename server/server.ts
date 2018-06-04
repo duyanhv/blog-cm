@@ -1,6 +1,6 @@
 import * as express from 'express';
-import { bootstrapApi } from '../api/bootstrapApi';
 import { bootstrapNextjs } from '../nextjs/bootstrapNextjs';
+import { bootstrapApi } from '../src/api/bootstrapApi';
 
 const bootstrap = async () => {
   const port = parseInt(process.env.PORT, 10) || 3000;

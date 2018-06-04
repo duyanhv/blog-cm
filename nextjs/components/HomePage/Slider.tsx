@@ -41,17 +41,17 @@ class Slider extends React.Component {
                                 <Carousel.Item>
                                 <img src="static/img/slides/flexslider/1.jpg" alt="" />
                                 <div className="flex-caption">
-                                    <h3>Modern Design</h3>
-                                    <p>Duis fermentum auctor ligula ac malesuada. Mauris et metus odio, in pulvinar urna</p>
-                                    <a href="#" className="btn btn-theme">Learn More</a>
+                                    {/* <h3>Thi trắc nghiệm trực tuyến miễn phí</h3> */}
+                                    <p>Thi trắc nghiệm trực tuyến miễn phí</p>
+                                    <a href="#" className="btn btn-theme">Tìm hiểu thêm</a>
                                 </div>
                             </Carousel.Item>
 
                             <Carousel.Item >
                                 <img src="static/img/slides/flexslider/2.jpg" alt="" />
                                 <div className="flex-caption">
-                                    <h3>Fully Responsive</h3>
-                                    <p>Sodales neque vitae justo sollicitudin aliquet sit amet diam curabitur sed fermentum.</p>
+                                    {/* <h3>Fully Responsive</h3> */}
+                                    <p>Xem kết quả thi vào lớp 10 2016-2017</p>
                                     <a href="#" className="btn btn-theme">Learn More</a>
                                 </div>
                             </Carousel.Item>
@@ -59,8 +59,8 @@ class Slider extends React.Component {
                             <Carousel.Item>
                                 <img src="static/img/slides/flexslider/2.jpg" alt="" />
                                 <div className="flex-caption">
-                                    <h3>Clean Fast</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit donec mer lacinia.</p>
+                                    {/* <h3>Clean Fast</h3> */}
+                                    <p>Trung tâm khai giảng chương trình tiểu học theo chuẩn kiến thức</p>
                                     <a href="#" className="btn btn-theme">Learn More</a>
                                 </div>
                             </Carousel.Item>

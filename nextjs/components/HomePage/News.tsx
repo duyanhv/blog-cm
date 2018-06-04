@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { Row, Col, Grid } from 'react-bootstrap';
-import { Card, CardImg, CardTitle, CardBody, CardSubtitle, CardText } from 'reactstrap';
+import { Table, Card, CardImg, CardTitle, CardBody, CardSubtitle, CardText } from 'reactstrap';
 // export interface TechnologyProps {
 
 // }
@@ -42,13 +42,13 @@ class News extends React.Component {
                 <Grid>
                     <Row>
                         <Col xs={6} md={4}>
-                            <div className="newsCard">
-                                <Card>
+                            <div className="newsCard-div">
+                                <Card className="news-card">
                                     <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
                                         alt="Card image cap" />
                                     <CardBody className="newsCardBody">
                                         <CardTitle>Card title</CardTitle>
-                                        <CardSubtitle>Card subtitle</CardSubtitle>
+                                        {/* <CardSubtitle>Card subtitle</CardSubtitle> */}
                                         <CardText>Some quick example text to build on the card title
                                         and make up the bulk of the card's content.</CardText>
                                     </CardBody>
@@ -57,13 +57,14 @@ class News extends React.Component {
                         </Col>
 
                         <Col xs={6} md={4}>
-                            <div className="newsCard">
+                            <div className="newsCard-div">
                                 <Card>
-                                    <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+                                    <CardImg className="cardImg" top
+                                    src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
                                         alt="Card image cap" />
                                     <CardBody className="newsCardBody">
                                         <CardTitle>Card title</CardTitle>
-                                        <CardSubtitle>Card subtitle</CardSubtitle>
+                                        {/* <CardSubtitle>Card subtitle</CardSubtitle> */}
                                         <CardText>Some quick example text to build on the card title
                                         and make up the bulk of the card's content.</CardText>
                                     </CardBody>
@@ -72,13 +73,13 @@ class News extends React.Component {
                         </Col>
 
                         <Col xs={6} md={4}>
-                            <div className="newsCard">
+                            <div className="newsCard-div">
                                 <Card>
                                     <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
                                         alt="Card image cap" />
                                     <CardBody className="newsCardBody">
                                         <CardTitle>Card title</CardTitle>
-                                        <CardSubtitle>Card subtitle</CardSubtitle>
+                                        {/* <CardSubtitle>Card subtitle</CardSubtitle> */}
                                         <CardText>Some quick example text to build on the card title
                                         and make up the bulk of the card's content.</CardText>
                                     </CardBody>
@@ -90,7 +91,7 @@ class News extends React.Component {
 
                 <Grid>
                     <Row>
-                        <Col>
+                        {/* <Col>
                             <Slider {...settings}>
                             <div className="newsCard">
                                 <Card>
@@ -182,6 +183,44 @@ class News extends React.Component {
                                 </Card>
                             </div>
                             </Slider>
+                        </Col> */}
+                        <Col>
+                            <div className="news-table">
+                                <Table responsive>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>SubTitle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Lorem ipsum dolor sit amet, donec mi ut pede, tortor est,
+                                                 elit euismod nec elit quis, sed mauris ac. Integer amet
+                                                  aptent mi, sit wisi cras elit quis tellus nulla, blandit n
+                                                  ulla eget. Massa tristique quam, suscipit pede massa, lobo
+                                              rtis semper pellentesque vitae cras ut ipsum. D</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Lorem ipsum dolor sit amet, donec mi ut pede, tortor est,
+                                                 elit euismod nec elit quis, sed mauris ac. Integer amet
+                                                  aptent mi, sit wisi cras elit quis tellus nulla, blandit n
+                                                  ulla eget. Massa tristique quam, suscipit pede massa, lobo
+                                              rtis semper pellentesque vitae cras ut ipsum. D</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Lorem ipsum dolor sit amet, donec mi ut pede, tortor est,
+                                                 elit euismod nec elit quis, sed mauris ac. Integer amet
+                                                  aptent mi, sit wisi cras elit quis tellus nulla, blandit n
+                                                  ulla eget. Massa tristique quam, suscipit pede massa, lobo
+                                              rtis semper pellentesque vitae cras ut ipsum. D</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                            </div>
                         </Col>
                     </Row>
                 </Grid>

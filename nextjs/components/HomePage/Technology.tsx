@@ -14,7 +14,7 @@ class Technology extends React.Component {
                             <div className="text-center">
                                 {/* <h2>We use <span className="highlight">modern</span> infrastructure & technology</h2> */}
                                 <h2>Các mô hình lớp dạy tốt</h2>
-                                <p>Lorem ipsum dolor sit amet, ne duis posse mei, ut cum vero nominati. Sed graece aeterno consectetuer te. Cu duo tota deleniti, vis ea fuisset nostrum. Meliore inciderint qui ne. Suas cotidieque vel ut ei eros perpetua qui. Ponderum lobortis reformidans</p>
+                                {/* <p>Lorem ipsum dolor sit amet, ne duis posse mei, ut cum vero nominati. Sed graece aeterno consectetuer te. Cu duo tota deleniti, vis ea fuisset nostrum. Meliore inciderint qui ne. Suas cotidieque vel ut ei eros perpetua qui. Ponderum lobortis reformidans</p> */}
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,8 @@ class Technology extends React.Component {
                                     <div className="box">
                                         <div className="aligncenter">
                                             <div className="icon">
-                                                <i className="fa fa-desktop fa-5x"></i>
+                                                <img src="http://daytot.vn/uploads/glass1.png"/>
+                                                {/* <i className="fa fa-desktop fa-5x"></i> */}
                                             </div>
                                             <h4>Fully responsive</h4>
                                         </div>
@@ -38,7 +39,8 @@ class Technology extends React.Component {
                                     <div className="box">
                                         <div className="aligncenter">
                                             <div className="icon">
-                                                <i className="fa fa-file-code-o fa-5x"></i>
+                                            <img src="http://daytot.vn/uploads/glass6.png" alt=""/>
+                                                {/* <i className="fa fa-file-code-o fa-5x"></i> */}
                                             </div>
                                             <h4>Fully responsive</h4>
                                         </div>
@@ -48,7 +50,8 @@ class Technology extends React.Component {
                                     <div className="box">
                                         <div className="aligncenter">
                                             <div className="icon">
-                                                <i className="fa fa-paper-plane-o fa-5x"></i>
+                                                <img src="http://daytot.vn/uploads/glass20.png" alt=""/>
+                                                {/* <i className="fa fa-paper-plane-o fa-5x"></i> */}
                                             </div>
                                             <h4>Fully responsive</h4>
                                         </div>
@@ -58,9 +61,13 @@ class Technology extends React.Component {
                                     <div className="box">
                                         <div className="aligncenter">
                                             <div className="icon">
-                                                <i className="fa fa-cubes fa-5x"></i>
+                                                <img src="http://daytot.vn/uploads/khoa-tieng-anh.png" alt=""/>
+                                                {/* <i className="fa fa-cubes fa-5x"></i> */}
                                             </div>
                                             <h4>Fully responsive</h4>
+                                            <div className="box-description">
+                                            Khóa học tiếng Anh chuyên biệt dành cho các học sinh theo từng học lực khác nhau
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

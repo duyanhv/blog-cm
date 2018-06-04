@@ -18,13 +18,16 @@ class TeacherImage extends React.Component {
             infinite: true,
             speed: 500,
             slidesToShow: 5,
-            adaptiveHeight: true,
+            // adaptiveHeight: true,
             // slidesToScroll: 1
             arrows: false,
             accessibility: true,
             autoplay: true,
             autoplaySpeed: 3000,
             centerMode: true,
+            pauseOnFocus: true,
+            pauseOnHover: true,
+            className: 'slider-div'
         };
         return (
             <section id="content">
@@ -90,24 +93,17 @@ class TeacherImage extends React.Component {
                     <Row>
                         <Col>
                             <Slider {...settings}>
-                                <div onClick={this.onClick}>
-                                    <img src="https://picsum.photos/200/300/?random" alt="" />
-                                </div>
-                                <div>
-                                    <img src="https://picsum.photos/200/300/?random" alt="" />
-                                </div>
-                                <div>
-                                    <img src="https://picsum.photos/200/300/?random" alt="" />
-                                </div>
-                                <div>
-                                    <img src="https://picsum.photos/200/300/?random" alt="" />
-                                </div>
-                                <div>
-                                    <img src="https://picsum.photos/200/300/?random" alt="" />
-                                </div>
-                                <div>
-                                    <img src="https://picsum.photos/200/300/?random" alt="" />
-                                </div>
+                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+
+                                <img onClick={this.onClick} src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+
+                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+
+                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+
+                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+
+                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
                             </Slider>
                         </Col>
                     </Row>

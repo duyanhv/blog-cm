@@ -21,14 +21,11 @@
 /* ===================================
 1. General
 ==================================== */
-.newsCard{
-    border: 1px solid #D8D8D8;
-    border-radius: 5px;
+
+.signUpSubmitButton{
+	margin-top: 10px;
 }
 
-.newsCardBody{
-	padding: 10px;
-}
 body {
 	font-family:'Open Sans', Arial, sans-serif;
 	font-size:14px;
@@ -647,7 +644,7 @@ section.callaction {
 #content {
 	position:relative;
 	background:#fff;
-	padding:60px 0 40px 0;
+	padding: -20vh 0 40px 0;
 }
 
 #content img {
@@ -658,6 +655,14 @@ section.callaction {
 
 .box {
 	width: 100%;
+	/* border: 1px solid black; */
+	border-radius: 5px;
+	background-color: rgba(255,0,0,0.1);
+	padding: 10px 0;
+	height: 30vh;
+	position: relative;
+	display: block;
+	box-sizing: border-box;
 }
 .box-gray  {
 	background: #f8f8f8;
@@ -673,6 +678,42 @@ section.callaction {
 
 .box .icon {
 	margin-bottom: 20px;
+}
+
+.box h4{
+	z-index: 1;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -70%);
+	
+}
+
+.box .box-description{
+	position: absolute;
+	margin-top: -1vh;
+	width: 100%;
+	height: 0;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	/* display: block; */
+	z-index: 10;
+	-webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+	bottom: 0;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #FFFFFF;
+	font-size: 2vh;
+	font-weight: bold;
+	text-align: left;
+}
+
+.box:hover .box-description{
+	/* display: flex; */
+	height: 15vh;
+	padding: 1em;
 }
 
 /* ---- parallax ---- */
@@ -963,6 +1004,14 @@ form.register-form .row {
 
 
 /* testimonial slide */
+.slider-div{
+	margin-bottom: 2vh;
+}
+
+.slider-div img{
+	cursor: pointer;
+}
+
 .testimonialslide {
 	margin-top:0;
 	padding-top: 0;
@@ -2003,7 +2052,29 @@ a.scrollup i:hover {
 }
 
 
+/* ===============================
+ News
+================================ */
+.cardImg{
+	width: 100%;
+	height: 60%;
+	position: relative;
+}
+.news-table{
+	margin: 0 100px;
+}
 
+.newsCard-div{
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.newsCardBody{
+	margin-top: -15px;
+	line-height: 5vh;
+	padding: 10px;
+}
 
 /* =============================
 18. Position & alignment

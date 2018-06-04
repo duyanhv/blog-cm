@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Row, Col, Form, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
-// export interface ContactFormProps {
+import { Button, Row, Col, Form, FormGroup, ControlLabel, FormControl, Checkbox, Grid } from 'react-bootstrap';
+import moment from 'moment';
 
-// }
 interface SignUpForTestingState {
     value: string;
+    date: Date;
 }
 
 class SignUpForTesting extends React.Component<SignUpForTestingState> {
@@ -13,10 +13,15 @@ class SignUpForTesting extends React.Component<SignUpForTestingState> {
         this.handleChange = this.handleChange.bind(this);
 
         this.state = {
-            value: ''
+            value: '',
+            date: moment()
         };
     }
-
+    log(date) {
+        this.setState({
+            date: date
+        });
+    }
     getValidationState() {
         const length = this.state.value.length;
         if (length > 10) {
@@ -35,67 +40,112 @@ class SignUpForTesting extends React.Component<SignUpForTestingState> {
 
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-8 col-md-offset-2">
-                        <h2>Contact us <small>get in touch with us by filling form below</small></h2>
-                        <hr className="colorgraph" />
-                        <div id="sendmessage">Your message has been sent. Thank you!</div>
-                        <div id="errormessage"></div>
-                        <form action="" method="post" role="form" className="contactForm">
-                            <div className="form-group">
-                                <input type="text" name="name" className="form-control" id="name"
-                                    placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div className="validation"></div>
-                            </div>
-                            <div className="form-group">
-                                <input type="email" className="form-control" name="email"
-                                    id="email" placeholder="Your Email" data-rule="email"
-                                    data-msg="Please enter a valid email" />
-                                <div className="validation"></div>
-                            </div>
-                            <div className="form-group">
-                                <input type="text" className="form-control" name="subject"
-                                    id="subject" placeholder="Subject" data-rule="minlen:4"
-                                    data-msg="Please enter at least 8 chars of subject" />
-                                <div className="validation"></div>
-                            </div>
-                            <div className="form-group">
-                                <textarea className="form-control" name={'message'} rows={5}
-                                    data-rule="required" data-msg="Please write something for us"
-                                    placeholder="Message"></textarea>
-                                <div className="validation"></div>
-                            </div>
+            <div>
+                <Grid>
+                    <Row>
+                        <Col xs={4} md={2}></Col>
+                        <Col xs={12} md={8}>
+                            <Form horizontal>
+                                <h2>Đăng ký test - học thử</h2>
+                                <hr className="colorgraph" />
+                                <FormGroup controlId="">
+                                    <Col componentClass={ControlLabel} xs={6} md={4}>
+                                        <p className="text-left">Họ tên học sinh</p>
+                                    </Col>
 
-                            <div className="text-center"><button type="submit"
-                                className="btn btn-theme btn-block btn-md">Send Message</button></div>
+                                    <Col xs={12} md={8}>
+                                        <FormControl
+                                            type="text"
+                                            value={this.state.value}
+                                            placeholder="Họ và tên học sinh"
+                                            onChange={this.handleChange}
+                                        />
+                                    </Col>
+                                </FormGroup>
 
-                        </form>
-                        <hr className="colorgraph" />
+                                <FormGroup controlId="">
+                                    <Col componentClass={ControlLabel} xs={6} md={4}>
+                                        <p className="text-left">Đăng ký làm bài test năng lực</p>
+                                    </Col>
 
-                    </div>
-                </div>
+                                    <Col xs={12} md={8}>
+                                        <FormControl componentClass="select" placeholder="Đăng ký làm bài test năng lực">
+                                            <option value="select">Đăng ký học thử tại dạy tốt</option>
+                                            <option value="other">...</option>
+                                        </FormControl>
+                                    </Col>
+                                </FormGroup>
 
-                <Row>
-                    <Col>
-                        <Form>
-                            <FormGroup
-                                controlId="formBasicText"
-                                validationState={this.getValidationState()}
-                            >
-                                <ControlLabel>Working example with validation</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.value}
-                                    placeholder="Enter text"
-                                    onChange={this.handleChange}
-                                />
-                                <FormControl.Feedback />
-                                <HelpBlock>Validation is based on string length.</HelpBlock>
-                            </FormGroup>
-                        </Form>
-                    </Col>
-                </Row>
+                                <FormGroup controlId="">
+                                    <Col componentClass={ControlLabel} xs={6} md={4}>
+                                        <p className="text-left">Điện thoại học sinh</p>
+                                    </Col>
+
+                                    <Col xs={12} md={8}>
+                                        <FormControl
+                                            type="text"
+                                            value={this.state.value}
+                                            placeholder="Nhập số điện thoại học sinh"
+                                            onChange={this.handleChange}
+                                        />
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup controlId="">
+                                    <Col componentClass={ControlLabel} xs={6} md={4}>
+                                        <p className="text-left">Ngày sinh</p>
+                                    </Col>
+
+                                    <Col xs={12} md={8}>
+                                        <FormControl
+                                            type="text"
+                                            value={this.state.value}
+                                            placeholder="Nhập ngày tháng năm sinh"
+                                            onChange={this.handleChange}
+                                        />
+
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup controlId="">
+                                    <Col componentClass={ControlLabel} xs={6} md={4}>
+                                        <p className="text-left">Lớp đăng ký</p>
+                                    </Col>
+
+                                    <Col xs={12} md={8}>
+                                        <FormControl componentClass="select" placeholder="-----">
+                                            <option value="select">Lớp 1</option>
+                                            <option value="other">...</option>
+                                        </FormControl>
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Col componentClass={ControlLabel} xs={6} md={4}>
+                                        <p className="text-left">Môn đăng ký</p>
+                                    </Col>
+                                    <Col xs={12} md={8}>
+                                        <Checkbox inline>Toán</Checkbox>
+                                        <Checkbox inline>Văn</Checkbox>
+                                        <Checkbox inline>Anh</Checkbox>
+                                        <Checkbox inline>Lý</Checkbox>
+                                        <Checkbox inline>Hoá</Checkbox>
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Col>
+                                        <Button bsStyle="primary" block>
+                                            Đăng ký
+                                        </Button>
+                                    </Col>
+                                </FormGroup>
+                            </Form>
+                        </Col>
+                        <Col xs={4} md={2}></Col>
+                    </Row>
+                </Grid>
+
             </div>
         );
     }
