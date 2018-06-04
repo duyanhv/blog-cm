@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as next from 'next';
 import * as morgan from 'morgan';
+import * as path from 'path';
 
 type APIResponse = {
     success: boolean;
@@ -9,6 +10,9 @@ type APIResponse = {
 
 const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
     const handle = app.getRequestHandler();
+
+    server.use(express.static('public'));
+
     server.get('/_next/*', (req, res) => {
         return handle(req, res);
     });
@@ -21,7 +25,9 @@ const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
         return handle(req, res);
     });
 
-    server.use(express.static('public'));
+    server.get('/admin/*', (_req, res) => {
+        return res.sendFile(path.join(__dirname, '../../../public/admin_index.html'));
+    });
 };
 
 const setupPublicRoutes = (server: express.Express, app: next.Server) => {
