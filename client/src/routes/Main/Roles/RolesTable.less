@@ -1,0 +1,98 @@
+.roles-table {
+  width: 95%;
+  margin: 0 auto;
+  padding: 12px 0;
+}
+
+.action-buttons {
+  .button {
+    margin: 6px 6px;
+  }
+}
+
+.isDefault {
+  text-align: center !important;
+}
+
+.isDefault * {
+  cursor: default;
+}
+
+@media only screen and (max-width: 992px) {
+  .isDefault {
+    text-align: right !important;
+  }
+
+  .isDefault * {
+    cursor: default;
+  }
+
+  .roles-table {
+    .action-buttons {
+      display: inline-block;
+      margin-top: -8px;
+    }
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
+
+    thead tr {
+      height: 56px;
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    td {
+      border: none;
+      border-bottom: 1px solid gainsboro;
+      position: relative;
+      padding-left: 50%;
+      text-align: right;
+      height: 56px;
+      font-weight: bold;
+    }
+
+    td:before {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      padding-top: 6px;
+      white-space: nowrap;
+    }
+
+    td:nth-of-type(1) {
+      background: gainsboro;
+    }
+
+    td:nth-of-type(1):before {
+      content: 'Role Name';
+    }
+    td:nth-of-type(2):before {
+      content: 'Default';
+    }
+    td:nth-of-type(3):before {
+      content: 'Created By';
+    }
+    td:nth-of-type(4):before {
+      content: 'Created At';
+    }
+    td:nth-of-type(5):before {
+      content: 'Last Modified By';
+    }
+    td:nth-of-type(6):before {
+      content: 'Last Modified At';
+    }
+    td:nth-of-type(7):before {
+      content: 'Action';
+    }
+  }
+}

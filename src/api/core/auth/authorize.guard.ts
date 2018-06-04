@@ -8,17 +8,16 @@ import {
 import { Reflector } from '@nestjs/core';
 import { ReflectMedatataType, ApiResponseMessageConstants } from '../constants';
 import * as jwt from 'jsonwebtoken';
+import { Token } from '../../modules/auth/interfaces/token.interface';
 import { AuthorizedPermission } from './authorize.decorator';
 import config from '../../config';
-import { Observable } from 'rxjs';
 
 @Guard()
 export class AuthorizeGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
-  canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>  {
-    const req = context.switchToHttp().getRequest();
-    const handler = context.getHandler();
+  canActivate(req: any, context: ExecutionContext): boolean {
+    const { handler } = context;
     const permission = this.reflector.get<string>(
       ReflectMedatataType.Permission,
       handler,
@@ -33,7 +32,7 @@ export class AuthorizeGuard implements CanActivate {
         HttpStatus.UNAUTHORIZED,
       );
     }
-    let payload: any;
+    let payload: Token;
     try {
       const token = req.headers.authorization.split(' ')[1];
       payload = jwt.verify(token, config.auth.secret) as any;
