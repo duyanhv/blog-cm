@@ -53,7 +53,7 @@ const Map = compose(
         loadingElement: <div style={{ height: `100%` }} />,
         containerElement: <div style={{ height: `400px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
-        center: { lat: 21.0212581, lng: 105.8156615 },
+        center: { lat: 21.021796, lng: 105.815662 },
     }),
     withStateHandlers(() => (
         {
@@ -84,7 +84,7 @@ const Map = compose(
             </div>
         </InfoBox> */}
         <Marker
-            position={{ lat: 21.0212581, lng: 105.8156615 }}
+            position={{ lat: 21.021796, lng: 105.815662 }}
             onClick={props.onToggleOpen}
         >
             {/* {props.isOpen && <InfoBox

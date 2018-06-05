@@ -34,7 +34,6 @@
     "rootDir": ".",
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    // try disable strict mode
     "noImplicitUseStrict": true,
     "strict": false
   }
