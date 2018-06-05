@@ -101,7 +101,7 @@
     "build": "next build && tsc --project tsconfig.server.json",
     "deploy": "npm run deploy:now",
     "deploy:now": "now --public",
-    "dev": "npm run build && cross-env NODE_ENV=development node --inspect-brk server/server.js -p $PORT",
+    "dev": "npm run build && cross-env NODE_ENV=development node --inspect .next/production-server/server/server.js -p $PORT",
     "docker:down": "docker-compose down",
     "docker:nuke": "docker rmi -f $(docker images -q)",
     "docker:up": "docker-compose up -d && docker-compose logs -f",
