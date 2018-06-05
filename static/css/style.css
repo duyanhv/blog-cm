@@ -195,7 +195,7 @@ header .top ul.social-network li a {
 	-webkit-transition: width 0.3s;
 	-moz-transition: width 0.3s;
 	transition: width 0.3s;
-	-webkit-backface-visibility: hidden;
+	/* -webkit-backface-visibility: hidden; */
 }
 
 .sb-search-input {
@@ -262,7 +262,7 @@ header .top ul.social-network li a {
 	z-index: 90;
 	font-size: 14px;
 	font-family: 'FontAwesome';
-	speak: none;
+	/* speak: none; */
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
@@ -1403,6 +1403,15 @@ border: 1px solid #e6e6e6;
 14. Blog & article
 ================================ */
 
+.blog-post-content{
+	/* position: relative; */
+	width: 100%;
+	/* height: 10vh; */
+	overflow: hidden;
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+
 article{
 	margin-bottom:50px;
 	border-bottom: 1px solid #eee;
@@ -1941,9 +1950,9 @@ footer ul.social-network li i {
 	padding:0;
 }
 
-#sub-footer span{
+/* #sub-footer span{
 
-}
+} */
 
 .copyright {
 	text-align:left;

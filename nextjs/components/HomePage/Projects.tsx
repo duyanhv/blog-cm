@@ -13,23 +13,24 @@ class Projects extends React.Component {
                         <h4 className="heading">Recent Works</h4>
 
                         <div id="filters-container" className="cbp-l-filters-button">
-                            <div data-filter="*" className="cbp-filter-item-active cbp-filter-item">All
-								<div className="cbp-filter-counter"></div>
+                            <div data-filter="*" className="cbp-filter-item-active cbp-filter-item">
+                                All
+<div className="cbp-filter-counter">
+                                </div>
                             </div>
                             <div data-filter=".identity" className="cbp-filter-item">Identity
-								<div className="cbp-filter-counter"></div>
+<div className="cbp-filter-counter"></div>
                             </div>
                             <div data-filter=".web-design" className="cbp-filter-item">Web Design
-								<div className="cbp-filter-counter"></div>
+<div className="cbp-filter-counter"></div>
                             </div>
                             <div data-filter=".graphic" className="cbp-filter-item">Graphic
-								<div className="cbp-filter-counter"></div>
+<div className="cbp-filter-counter"></div>
                             </div>
                             <div data-filter=".logo" className="cbp-filter-item">Logo
-								<div className="cbp-filter-counter"></div>
+<div className="cbp-filter-counter"></div>
                             </div>
                         </div>
-
 
                         <div id="grid-container" className="cbp-l-grid-projects">
                             <ul>
@@ -41,7 +42,9 @@ class Projects extends React.Component {
                                         <div className="cbp-caption-activeWrap">
                                             <div className="cbp-l-caption-alignCenter">
                                                 <div className="cbp-l-caption-body">
-                                                    <a href="static/img/works/1big.jpg" className="cbp-lightbox cbp-l-caption-buttonRight" data-title="Dashboard<br>by Paul Flavius Nechita">view larger</a>
+                                                    <a href="static/img/works/1big.jpg" 
+                                                    className="cbp-lightbox cbp-l-caption-buttonRight" 
+                                                    data-title="Dashboard<br>by Paul Flavius Nechita">view larger</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -57,7 +60,9 @@ class Projects extends React.Component {
                                         <div className="cbp-caption-activeWrap">
                                             <div className="cbp-l-caption-alignCenter">
                                                 <div className="cbp-l-caption-body">
-                                                    <a href="img/works/2big.jpg" className="cbp-lightbox cbp-l-caption-buttonRight" data-title="World Clock Widget<br>by Paul Flavius Nechita">view larger</a>
+                                                    <a href="img/works/2big.jpg" 
+                                                    className="cbp-lightbox cbp-l-caption-buttonRight" 
+                                                    data-title="World Clock Widget<br>by Paul Flavius Nechita">view larger</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -74,7 +79,9 @@ class Projects extends React.Component {
                                             <div className="cbp-l-caption-alignCenter">
                                                 <div className="cbp-l-caption-body">
 
-                                                    <a href="http://vimeo.com/14912890" className="cbp-lightbox cbp-l-caption-buttonRight" data-title="To-Do Dashboard<br>by Tiberiu Neamu">view video</a>
+                                                    <a href="http://vimeo.com/14912890" 
+                                                    className="cbp-lightbox cbp-l-caption-buttonRight" 
+                                                    data-title="To-Do Dashboard<br>by Tiberiu Neamu">view video</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -91,7 +98,9 @@ class Projects extends React.Component {
                                             <div className="cbp-l-caption-alignCenter">
                                                 <div className="cbp-l-caption-body">
 
-                                                    <a href="static/img/works/4big.jpg" className="cbp-lightbox cbp-l-caption-buttonRight" data-title="Events and  More<br>by Tiberiu Neamu">view larger</a>
+                                                    <a href="static/img/works/4big.jpg" 
+                                                    className="cbp-lightbox cbp-l-caption-buttonRight"
+                                                     data-title="Events and  More<br>by Tiberiu Neamu">view larger</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +117,9 @@ class Projects extends React.Component {
                                             <div className="cbp-l-caption-alignCenter">
                                                 <div className="cbp-l-caption-body">
 
-                                                    <a href="img/works/5big.jpg" className="cbp-lightbox cbp-l-caption-buttonRight" data-title="WhereTO App<br>by Tiberiu Neamu">view larger</a>
+                                                    <a href="img/works/5big.jpg" 
+                                                    className="cbp-lightbox cbp-l-caption-buttonRight" 
+                                                    data-title="WhereTO App<br>by Tiberiu Neamu">view larger</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -125,7 +136,9 @@ class Projects extends React.Component {
                                             <div className="cbp-l-caption-alignCenter">
                                                 <div className="cbp-l-caption-body">
 
-                                                    <a href="static/img/works/6big.jpg" className="cbp-lightbox cbp-l-caption-buttonRight" data-title="Ski * Buddy<br>by Tiberiu Neamu">view larger</a>
+                                                    <a href="static/img/works/6big.jpg" 
+                                                    className="cbp-lightbox cbp-l-caption-buttonRight" 
+                                                    data-title="Ski * Buddy<br>by Tiberiu Neamu">view larger</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,7 +155,9 @@ class Projects extends React.Component {
                                             <div className="cbp-l-caption-alignCenter">
                                                 <div className="cbp-l-caption-body">
 
-                                                    <a href="static/img/works/7big.jpg" className="cbp-lightbox cbp-l-caption-buttonRight" data-title="Seemple* Music for iPad<br>by Tiberiu Neamu">view larger</a>
+                                                    <a href="static/img/works/7big.jpg"
+                                                     className="cbp-lightbox cbp-l-caption-buttonRight" 
+                                                     data-title="Seemple* Music for iPad<br>by Tiberiu Neamu">view larger</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +174,9 @@ class Projects extends React.Component {
                                             <div className="cbp-l-caption-alignCenter">
                                                 <div className="cbp-l-caption-body">
 
-                                                    <a href="static/img/works/8big.jpg" className="cbp-lightbox cbp-l-caption-buttonRight" data-title="Seemple* Music for iPad<br>by Tiberiu Neamu">view larger</a>
+                                                    <a href="static/img/works/8big.jpg" 
+                                                    className="cbp-lightbox cbp-l-caption-buttonRight" 
+                                                    data-title="Seemple* Music for iPad<br>by Tiberiu Neamu">view larger</a>
                                                 </div>
                                             </div>
                                         </div>

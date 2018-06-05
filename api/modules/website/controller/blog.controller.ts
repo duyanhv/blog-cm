@@ -299,4 +299,29 @@ export class BlogController {
   async getActivePost(): Promise<FindAllBlogPostsDto> {
     return await this.blogService.getActivePost();
   }
+
+  @Get('getpostpublic')
+  @ApiOperation({ title: 'getpostpublic', description: 'getpostpublic' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: `Posts has been fetched successfully.`,
+    type: FindAllBlogPostsDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: ApiResponseMessageConstants.FORBIDDEN,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: ApiResponseMessageConstants.BAD_REQUEST,
+  })
+  @ApiResponse({
+    status: HttpStatus.UNPROCESSABLE_ENTITY,
+    description: ApiResponseMessageConstants.EntityAlreadyExists(
+      BlogController.EntityName,
+    ),
+  })
+  async getpostpublic(): Promise<FindAllBlogPostsDto> {
+    return await this.blogService.getActivePost();
+  }
 }

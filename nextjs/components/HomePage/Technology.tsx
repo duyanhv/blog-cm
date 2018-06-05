@@ -14,7 +14,10 @@ class Technology extends React.Component {
                             <div className="text-center">
                                 {/* <h2>We use <span className="highlight">modern</span> infrastructure & technology</h2> */}
                                 <h2>Các mô hình lớp dạy tốt</h2>
-                                {/* <p>Lorem ipsum dolor sit amet, ne duis posse mei, ut cum vero nominati. Sed graece aeterno consectetuer te. Cu duo tota deleniti, vis ea fuisset nostrum. Meliore inciderint qui ne. Suas cotidieque vel ut ei eros perpetua qui. Ponderum lobortis reformidans</p> */}
+                                {/* <p>Lorem ipsum dolor sit amet, ne duis posse mei,
+                                 ut cum vero nominati. Sed graece aeterno consectetuer te. 
+                                 Cu duo tota deleniti, vis ea fuisset nostrum. Meliore inciderint qui ne.
+                                  Suas cotidieque vel ut ei eros perpetua qui. Ponderum lobortis reformidans</p> */}
                             </div>
                         </div>
                     </div>
