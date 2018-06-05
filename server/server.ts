@@ -9,7 +9,7 @@ const bootstrap = async () => {
   await bootstrapNextjs(server);
   const app = await bootstrapApi(server);
 
-  app.listen(port);
+  await app.listen(port);
 
   process.on('SIGINT', () => {
     /* tslint:disable-next-line:no-console */

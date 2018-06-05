@@ -1,9 +1,10 @@
 import App, { Props } from '../nextjs/layout/App';
+
 export interface Test extends Props {
   test: string;
 }
 
-export default props => {
+const Ping = props => {
   const mainHeading = props.title || 'PING';
 
   return (
@@ -31,3 +32,5 @@ export default props => {
     </App>
   );
 };
+
+export default Ping;
