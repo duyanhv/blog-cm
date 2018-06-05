@@ -83,7 +83,7 @@ class CreateNewPostForm extends React.Component<CreateNewPostFormProps> {
                 { required: true, message: 'Please input title' },
                 {
                   pattern: /^[a-zA-Z0-9]{6,30}$/,
-                  message: 'Title must be atleast 6 characters',
+                  message: 'Min: 6 characters, Max: 30 characters',
                 },
               ],
               validateTrigger: 'onBlur',
@@ -95,8 +95,8 @@ class CreateNewPostForm extends React.Component<CreateNewPostFormProps> {
               rules: [
                 { required: true, message: 'Please input subtitle' },
                 {
-                  pattern: /^[a-zA-Z0-9]{6,30}$/,
-                  message: 'Subtitle must be atleast 6 characters',
+                  pattern: /^[a-zA-Z0-9]{6,70}$/,
+                  message: 'Min: 6 characters, Max: 70 characters',
                 },
               ],
               validateTrigger: 'onBlur',

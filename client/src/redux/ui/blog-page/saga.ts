@@ -20,6 +20,22 @@ import {
   editBlogDetailInProgress,
   editBlogDetailSuccess,
   editBlogDetail,
+  SearchChange,
+  searchChange,
+  searchChangeSuccess,
+  searchChangeInProgress,
+  SearchByDateTime,
+  searchByDateTimeInProgress,
+  searchByDateTimeSuccess,
+  searchByDateTime,
+  ExcludeInactivePost,
+  excludeInactivePostInProgress,
+  includeInactivePostInProgress,
+  IncludeInactivePost,
+  includeInactivePostSuccess,
+  excludeInactivePostSuccess,
+  includeInactivePost,
+  excludeInactivePost,
   // GetAllPostTitle,
   // getAllPostTitleInProgress,
   // getAllPostTitleSuccess
@@ -27,6 +43,7 @@ import {
 import { put, takeEvery, all } from 'redux-saga/effects';
 import { message } from 'antd';
 import { getBlogService } from '../../../service-proxies/service.provider';
+// import { FindAllBlogPostsDto, FindBlogDetailDto, IFindBlogDetailDto } from '../../../service-proxies/service-proxies';
 
 function* fetchPostDetailWorker(action: FetchPostDetail): any {
   try {
@@ -43,7 +60,7 @@ function* createnewPostWorker(action: CreateNewPost): any {
   try {
     const blogService = getBlogService();
     yield put(createNewPostInProgress());
-    blogService.newpost(action.payload.newPost);
+    yield blogService.newpost(action.payload.newPost);
     yield put(createNewPostSuccess());
   } catch (error) {
     message.error(error, 1.5);
@@ -54,8 +71,11 @@ function* deactivatePostWorker(action: DeactivatePost): any {
   try {
     const blogService = getBlogService();
     yield put(deactivatePostInProgress());
-    blogService.deactivatePost(action.payload.id);
+    yield blogService.deactivatePost(action.payload.id);
     yield put(deactivatePostSuccess());
+    yield put(fetchPostDetailInProgress());
+    const listPosts = yield blogService.getpost();
+    yield put(fetchPostDetailSuccess(listPosts.data));
   } catch (error) {
     message.error(error, 1.5);
   }
@@ -65,8 +85,11 @@ function* activatePostWorker(action: ActivatePost): any {
   try {
     const blogService = getBlogService();
     yield put(activatePostInProgress());
-    blogService.activatePost(action.payload.id);
+    yield blogService.activatePost(action.payload.id);
     yield put(activatePostSuccess());
+    yield put(fetchPostDetailInProgress());
+    const listPosts = yield blogService.getpost();
+    yield put(fetchPostDetailSuccess(listPosts.data));
   } catch (error) {
     message.error(error, 1.5);
   }
@@ -76,8 +99,50 @@ function* editBlogDetailWorker(action: EditBlogDetail): any {
   try {
     const blogService = getBlogService();
     yield put(editBlogDetailInProgress());
-    blogService.edit(action.payload.id, action.payload.editedPost);
+    yield blogService.edit(action.payload.id, action.payload.editedPost);
     yield put(editBlogDetailSuccess());
+  } catch (error) {
+    message.error(error, 1.5);
+  }
+}
+
+function* searchChangeWorker(action: SearchChange): any {
+  try {
+    const blogService = getBlogService();
+    yield put(searchChangeInProgress());
+    const result = yield blogService.findPostByTitle(action.payload.searchInput);
+    yield put(searchChangeSuccess(result));
+  } catch (error) {
+    message.error(error, 1.5);
+  }
+}
+
+function* searchByDateTimeWorker(action: SearchByDateTime): any {
+  try {
+    const blogService = getBlogService();
+    yield put(searchByDateTimeInProgress());
+    const result = yield blogService.findPostByDate(action.payload.dateRangeInput);
+    yield put(searchByDateTimeSuccess(result));
+  } catch (error) {
+    message.error(error, 1.5);
+  }
+}
+
+function* excludeInactivePostWorker(action: ExcludeInactivePost): any {
+  try {
+    const blogService = getBlogService();
+    yield put(excludeInactivePostInProgress());
+    const listPosts = yield blogService.getActivePost();
+    yield put(excludeInactivePostSuccess(listPosts.data));
+  } catch (error) {
+    message.error(error, 1.5);
+  }
+}
+
+function* includeInactivePostWorker(action: IncludeInactivePost): any {
+  try {
+    yield put(includeInactivePostInProgress());
+    yield put(includeInactivePostSuccess());
   } catch (error) {
     message.error(error, 1.5);
   }
@@ -105,5 +170,9 @@ export default function* blogPageSaga(): any {
     takeEvery(deactivatePost, deactivatePostWorker),
     takeEvery(activatePost, activatePostWorker),
     takeEvery(editBlogDetail, editBlogDetailWorker),
+    takeEvery(searchChange, searchChangeWorker),
+    takeEvery(searchByDateTime, searchByDateTimeWorker),
+    takeEvery(includeInactivePost, includeInactivePostWorker),
+    takeEvery(excludeInactivePost, excludeInactivePostWorker),
   ]);
 }

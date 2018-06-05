@@ -6,6 +6,8 @@ import {
   IFindBlogDetailDto,
   CreateBlogInputDto,
   UpdateBlogDetailDto,
+  SearchInputDto,
+  DateRangeInputDto,
 } from '../../../service-proxies/service-proxies';
 import { AppState } from '../../../redux';
 import { Dispatch, connect } from 'react-redux';
@@ -14,6 +16,12 @@ import {
   fetchPostDetail,
   createNewPost,
   editBlogDetail,
+  searchChange,
+  searchByDateTime,
+  activatePost,
+  deactivatePost,
+  includeInactivePost,
+  excludeInactivePost,
 } from '../../../redux/ui/blog-page/action';
 import {
   // Button,
@@ -21,6 +29,7 @@ import {
 } from 'antd';
 import './BlogPage.less';
 import CreateNewPostForm from './CreateNewPostForm';
+import _ from 'lodash';
 // import CreateNewPostForm from './CreateNewPostForm';
 
 const RadioButton = Radio.Button;
@@ -36,9 +45,16 @@ interface BlogPageProps extends BlogPageState {
   data: IFindBlogDetailDto[];
   dispatch: Dispatch<any>;
   currentUsername: string;
+  searchByTitleData: IFindBlogDetailDto[];
   onFetchPostDetail: () => IFindBlogDetailDto[];
   onCreatePost: (newPost: CreateBlogInputDto) => void;
   onEditPostDetail: (id: string, editedPost: UpdateBlogDetailDto) => void;
+  onSearchChange: (data: SearchInputDto) => void;
+  onSearchPostByDate: (dateRangeInput: DateRangeInputDto) => void;
+  onActivatePost: (postId: string) => void;
+  onDeactivatePost: (postId: string) => void;
+  onIncludeInactivePost: () => void;
+  onExcludeInactivePost: () => void;
 }
 
 interface RadioButtonState {
@@ -55,26 +71,59 @@ class BlogPage extends React.Component<BlogPageProps, RadioButtonState> {
 
     this._onAddPost = this._onAddPost.bind(this);
   }
-  componentDidMount(): void {
+  async componentDidMount(): Promise<any> {
     this.props.onFetchPostDetail();
   }
 
-  handleFormSubmit = async (newPost: CreateBlogInputDto) => {
-    // tslint:disable-next-line:no-console
-    console.log(newPost);
+  handleFormSubmit = async (newPost: CreateBlogInputDto): Promise<any> => {
     this.props.onCreatePost(newPost);
   };
 
-  _onAddPost(e: any): void {
+  _onAddPost = async (e: any): Promise<any> => {
     this.setState({
       showComponent: e.target.value,
     });
   }
 
-  handleEditFormSubmit = (id: string, editedPost: UpdateBlogDetailDto) => {
+  handleEditFormSubmit = async (id: string, editedPost: UpdateBlogDetailDto): Promise<any> => {
     this.props.onEditPostDetail(id, editedPost);
     this.props.onFetchPostDetail();
   };
+
+  handleSearchChange = async (value: string): Promise<void> => {
+    const debounced = _.debounce(
+      // tslint:disable-next-line:no-console
+      () => this.props.onSearchChange({ searchInput: value.trim() } as SearchInputDto),
+      1000,
+    );
+    debounced();
+    // // tslint:disable-next-line:no-console
+    // console.log(this.props.searchByTitle);
+  };
+
+  searchPostByDate = async (dateRangeInput: string[]): Promise<void> => {
+    // tslint:disable-next-line:no-console
+    console.log(dateRangeInput);
+    const debounced = _.debounce(
+      () => this.props.onSearchPostByDate({ dateRangeInput } as DateRangeInputDto),
+      1000,
+    );
+    debounced();
+    // // tslint:disable-next-line:no-console
+    // console.log(this.props.searchByTitle);
+  };
+
+  deactivateOrActivatePost = async (deactivationStatus: boolean, postId: string) => {
+    deactivationStatus ?
+      this.props.onActivatePost(postId) :
+      this.props.onDeactivatePost(postId);
+  }
+
+  includeOrExcludeInactivePost = async (isInactivePostIncluded: boolean) => {
+    isInactivePostIncluded ?
+      this.props.onIncludeInactivePost() :
+      this.props.onExcludeInactivePost();
+  }
 
   render(): JSX.Element {
     return (
@@ -94,15 +143,19 @@ class BlogPage extends React.Component<BlogPageProps, RadioButtonState> {
         </div>
         {this.state.showComponent === staticRadioButtonValue.allposts ? (
           <ListPosts
+            includeOrExcludeInactivePost={this.includeOrExcludeInactivePost}
+            deactivateOrActivatePost={this.deactivateOrActivatePost}
+            searchPostByDate={this.searchPostByDate}
+            handleSearchChange={this.handleSearchChange}
             handleEditFormSubmit={this.handleEditFormSubmit}
             {...this.props}
           />
         ) : (
-          <CreateNewPostForm
-            handleFormSubmit={this.handleFormSubmit}
-            {...this.props}
-          />
-        )}
+            <CreateNewPostForm
+              handleFormSubmit={this.handleFormSubmit}
+              {...this.props}
+            />
+          )}
       </Card>
     );
   }
@@ -112,6 +165,7 @@ const mapStateToProps = (state: AppState) => ({
   data: state.ui.blogPage.data,
   isBusy: state.ui.blogPage.isBusy,
   currentUsername: state.profile.username,
+  searchByTitleData: state.ui.blogPage.searchByTitleData,
   ...state.ui.blogPage,
 });
 
@@ -121,6 +175,18 @@ const mapDispatchToProps = (dispatch: Dispatch<BlogPageAction>) => ({
     dispatch(createNewPost(newPost)),
   onEditPostDetail: (id: string, editPost: UpdateBlogDetailDto) =>
     dispatch(editBlogDetail(id, editPost)),
+  onSearchChange: (data: SearchInputDto) =>
+    dispatch(searchChange(data)),
+  onSearchPostByDate: (dateRangeInput: DateRangeInputDto) =>
+    dispatch(searchByDateTime(dateRangeInput)),
+  onActivatePost: (postId: string) =>
+    dispatch(activatePost(postId)),
+  onDeactivatePost: (postId: string) =>
+    dispatch(deactivatePost(postId)),
+  onIncludeInactivePost: () =>
+    dispatch(includeInactivePost()),
+    onExcludeInactivePost: () =>
+    dispatch(excludeInactivePost()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogPage);

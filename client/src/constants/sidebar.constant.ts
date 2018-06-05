@@ -54,6 +54,12 @@ const sidebarMenu: Submenu[] = [
         title: 'Sidebar.uploadImages',
         permissions: [],
       },
+      {
+        key: '/main/blog',
+        path: '/main/blog',
+        title: 'Sidebar.blog',
+        permissions: [],
+      },
     ],
   },
 ];

@@ -47,7 +47,8 @@ export const en = {
     roles: 'Roles',
     website: 'Website',
     companyInfo: 'Company Info',
-    uploadImages: 'Upload Images'
+    uploadImages: 'Upload Images',
+    blog: 'Blog',
   },
   Header: {
     profile: 'Profile',

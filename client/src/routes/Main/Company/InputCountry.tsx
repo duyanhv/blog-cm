@@ -1,8 +1,8 @@
 import { AutoComplete, Icon, Form } from 'antd';
 import React from 'react';
 import Input from 'antd/lib/input/Input';
-import { CompanyPageState } from '../../../redux/ui/company-page';
 import { FormComponentProps } from 'antd/lib/form';
+import { CreateCompanyInputDto } from '../../../service-proxies/service-proxies';
 
 const dataSource: string[] = [];
 
@@ -22,9 +22,8 @@ const logCountryNames = (names: {}) => {
 };
 
 interface InputCountryProps extends FormComponentProps {
-  companyPage: CompanyPageState;
-  formItemLayout: {};
-  countrynames: {};
+  data: CreateCompanyInputDto;
+  countriesname: {};
 }
 
 const formItemLayout = {
@@ -50,7 +49,7 @@ const onSearch = value => {
 };
 
 const InputCountry = (props: InputCountryProps) => {
-  const countryNamesArray = logCountryNames(props.countrynames);
+  const countryNamesArray = logCountryNames(props.countriesname);
   const { getFieldDecorator } = props.form;
   return (
     <Form.Item {...formItemLayout} label="Country">
@@ -64,7 +63,7 @@ const InputCountry = (props: InputCountryProps) => {
         ],
         validateTrigger: 'onBlur',
         validateFirst: true,
-        initialValue: props.companyPage.data.country,
+        initialValue: props.data.country,
       })(
         <AutoComplete
           dataSource={countryNamesArray}
