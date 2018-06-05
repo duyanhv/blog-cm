@@ -61,6 +61,8 @@ export default class extends Document {
             href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
           />
           {/* <link id="bodybg" href="static/bodybg/bg1.css" rel="stylesheet" type="text/css" /> */}
+
+          <script src="https://www.google.com/recaptcha/api.js"></script>
         </Head>
 
         <body>

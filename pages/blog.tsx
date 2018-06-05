@@ -4,11 +4,12 @@ import ContactButton from '../nextjs/components/ContactPage/ContactButton';
 import BlogAside from '../nextjs/components/Blog/BlogAside';
 import BlogArticle from '../nextjs/components/Blog/BlogArticle';
 
-class Blog extends React.Component<any, an> {
+class Blog extends React.Component {
   render() {
     return (
       <Layout>
         <ContactButton />
+
         <section id="content">
           <div className="container">
             <div className="row">

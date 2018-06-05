@@ -22,7 +22,7 @@ class About extends React.Component<any, AboutState> {
     date: new Date(),
   };
 
-  log(date: Date) {
+  log = (date: Date) => {
     this.setState({
       date: date
     });

@@ -9,7 +9,6 @@ import Projects from '../nextjs/components/HomePage/Projects';
 import Clients from '../nextjs/components/HomePage/Clients';
 import TeacherImage from '../nextjs/components/HomePage/TeacherImage';
 import News from '../nextjs/components/HomePage/News';
-import SignUpForTesting from '../nextjs/components/HomePage/SignUpForTesting';
 
 class Home extends React.Component {
   render() {
@@ -20,7 +19,6 @@ class Home extends React.Component {
         <News />
         <TeacherImage />
         <About />
-        <SignUpForTesting />
         <AboutStats />
         <Testimonials />
         <Projects />

@@ -2,10 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <header>
@@ -22,10 +18,11 @@ class Header extends React.Component {
                 <span className="icon-bar" />
                 <span className="icon-bar" />
               </button>
-              <a className="navbar-brand" href="index.html">
+              <a className="navbar-brand" href="/">
                 <img src="/static/img/favicon.ico" alt="" />
               </a>
             </div>
+        
             <div className="navbar-collapse collapse ">
               <ul className="nav navbar-nav">
                 <li>
@@ -33,6 +30,7 @@ class Header extends React.Component {
                     <a>HOME</a>
                   </Link>
                 </li>
+
                 <li className="dropdown">
                   <a
                     href="#"
@@ -42,7 +40,7 @@ class Header extends React.Component {
                     data-delay="0"
                     data-close-others="false"
                   >
-                    Features <i className="fa fa-angle-down" />
+                    Features &nbsp; <i className="fa fa-angle-down" />
                   </a>
                   <ul className="dropdown-menu">
                     <li>
@@ -92,14 +90,38 @@ class Header extends React.Component {
                     </li>
                   </ul>
                 </li>
-                <li>
-                  <a href="portfolio.html">Portfolio</a>
+
+                <li className="dropdown">
+                  <a
+                    href="#"
+                    className="dropdown-toggle "
+                    data-toggle="dropdown"
+                    data-hover="dropdown"
+                    data-delay="0"
+                    data-close-others="false"
+                  >
+                    Study Result &nbsp; <i className="fa fa-angle-down" />
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link href="/study-result/attendance-record">
+                        <a>Attendance Record</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/study-result/grade-book">
+                        <a>Grade Book</a>
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
+
                 <li>
                   <Link href="/blog">
                     <a>Blog</a>
                   </Link>
                 </li>
+
                 <li>
                   <Link href="/contact">
                     <a>Contact</a>
