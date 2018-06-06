@@ -6,16 +6,32 @@ import * as ejs from 'ejs';
 import * as requestPromise from 'request-promise';
 import { GetAttendanceRecordInputDto } from '../dto/get-attendance-record-input.dto';
 import { VerifyCaptchaResultDto } from '../dto/verify-captcha-result.dto';
-
-// Site key: 6Lf_SV0UAAAAABoRmARiDaHwQgC3UCNYaMO0dspa
-// Secret key: 6Lf_SV0UAAAAAPUThi0szwFyrRw-Z1_L6TtuxZRI
+import config from '../../../config';
 
 @Component()
 export class StudyResultService {
+  async checkInput(getAttendanceRecordInput: GetAttendanceRecordInputDto): Promise<void> {
+    const getAttendanceRecordSchema = Joi.object().keys({
+      studentCode: Joi.string().required(),
+      captchaResponse: Joi.string().required()
+    });
+    const validateOptions = {
+      allowUnknown: false
+    };
+    const { error } = Joi.validate(
+      getAttendanceRecordInput,
+      getAttendanceRecordSchema,
+      validateOptions
+    );
+    if (error) {
+      throw new HttpException(error.details[0].message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   async verifyCaptcha(captchaResponse: string, remotetip: string): Promise<VerifyCaptchaResultDto> {
     try {
-      const secretKey = '6Lf_SV0UAAAAAPUThi0szwFyrRw-Z1_L6TtuxZRI';
-      const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaResponse}&remotetip=${remotetip}`;
+      const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?
+        secret=${config.studyResultConfig.reCaptchaSecretKey}&response=${captchaResponse}&remotetip=${remotetip}`;
   
       const result = await requestPromise(verifyUrl);
     
@@ -35,7 +51,7 @@ export class StudyResultService {
       }
     });
 
-    ejs.renderFile(path.join(__dirname, '../../../../../../static/ejs/attendance-record.ejs'), (error, str) => {
+    ejs.renderFile(path.join(__dirname, '../../../../../../static/ejs/study-result.ejs'), (error, str) => {
       if (error) {
         throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
       }
@@ -59,28 +75,17 @@ export class StudyResultService {
     getAttendanceRecordInput: GetAttendanceRecordInputDto,
     req: any
   ): Promise<void> {
-    // Check Body
-    const getAttendanceRecordSchema = Joi.object().keys({
-      studentCode: Joi.string().required(),
-      captchaResponse: Joi.string().required()
-    });
-    const validateOptions = {
-      allowUnknown: false
-    };
-    const { error } = Joi.validate(
-      getAttendanceRecordInput,
-      getAttendanceRecordSchema,
-      validateOptions
-    );
-    if (error) {
-      throw new HttpException(error.details[0].message, HttpStatus.BAD_REQUEST);
-    }
+    // Check Input
+    await this.checkInput(getAttendanceRecordInput);
 
     // Verify captcha
     const result = await this.verifyCaptcha(getAttendanceRecordInput.captchaResponse, req.connection.remoteAddress);
-    if (!result.success) {
+    if (!result.success && result['error-codes']) {
       throw new HttpException(result['error-codes'][0], HttpStatus.BAD_REQUEST);
     }
+
+    // Send Email to Student's Parents
+    await this.sendMail();
 
     // Lookup 'Attendance Infomation' in db
       //  Mock data for now
@@ -90,8 +95,5 @@ export class StudyResultService {
       // Insert info to it
       // Generate a PDF after insert info
       // Return File path ??
-
-    // Send Email to Student's Parents
-    await this.sendMail();
   }
 }

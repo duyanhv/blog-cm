@@ -8,8 +8,22 @@ type APIResponse = {
   message: string;
 };
 
-const setupNextjsRoutes = (server: express.Express, _app: next.Server) => {
+const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
+  const handle = app.getRequestHandler();
+
   server.use(express.static('public'));
+
+  server.get('/_next/*', (req, res) => {
+    return handle(req, res);
+  });
+
+  server.get('/static/*', (req, res) => {
+    return handle(req, res);
+  });
+
+  server.get('/static/*', (req, res) => {
+    return handle(req, res);
+  });
 
   server.get('/admin/*', (_req, res) => {
     return res.sendFile(
@@ -19,8 +33,6 @@ const setupNextjsRoutes = (server: express.Express, _app: next.Server) => {
 };
 
 const setupPublicRoutes = (server: express.Express, app: next.Server) => {
-  const handle = app.getRequestHandler();
-
   server.get('/people', (req, res) => {
     const actualPage = '/ping';
     const queryParams = {};
@@ -39,11 +51,6 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     app.render(req, res, actualPage, queryParams);
   });
 
-  server.get('/ping', (req, res) => {
-    // SSR for the /ping page in NextJS
-    return app.render(req, res, '/ping', req.query);
-  });
-
   server.get('/test', (_, res) => {
     // Does not use NextJS app at all
     const result: APIResponse = {
@@ -53,8 +60,22 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     return res.json(result);
   });
 
-  server.get('*', (req, res) => {
-    return handle(req, res);
+  server.get('/', (req, res) => {
+    const actualPage = '/index';
+    const queryParams = { slug: req.params.slug, name: req.params.name };
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/blog', (req, res) => {
+    const actualPage = '/blog';
+    const queryParams = { slug: req.params.slug, name: req.params.name };
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/study-result/attendance-record', (req, res) => {
+    const actualPage = '/study-result/attendance-record';
+    const queryParams = {};
+    app.render(req, res, actualPage, queryParams);
   });
 };
 

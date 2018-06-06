@@ -40,6 +40,38 @@ import {
   EDIT_BLOG_DETAIL_IN_PROGRESS,
   EDIT_BLOG_DETAIL_SUCCESS,
   EDIT_BLOG_DETAIL_ERROR,
+  SearchChangeInProgress,
+  SearchChangeSuccess,
+  SearchChange,
+  SEARCH_CHANGE,
+  SearchChangeError,
+  SEARCH_CHANGE_IN_PROGRESS,
+  SEARCH_CHANGE_SUCCESS,
+  SEARCH_CHANGE_ERROR,
+  SearchByDateTime,
+  SearchByDateTimeInProgress,
+  SearchByDateTimeSuccess,
+  SearchByDateTimeError,
+  SEARCH_BY_DATE_TIME,
+  SEARCH_BY_DATE_TIME_IN_PROGRESS,
+  SEARCH_BY_DATE_TIME_SUCCESS,
+  SEARCH_BY_DATE_TIME_ERROR,
+  IncludeInactivePost,
+  IncludeInactivePostInProgress,
+  IncludeInactivePostSuccess,
+  IncludeInactivePostError,
+  INCLUDE_INACTIVE_POST,
+  INCLUDE_INACTIVE_POST_IN_PROGRESS,
+  INCLUDE_INACTIVE_POST_SUCCESS,
+  INCLUDE_INACTIVE_POST_ERROR,
+  ExcludeInactivePost,
+  ExcludeInactivePostInProgress,
+  ExcludeInactivePostSuccess,
+  ExcludeInactivePostError,
+  EXCLUDE_INACTIVE_POST_ERROR,
+  EXCLUDE_INACTIVE_POST_SUCCESS,
+  EXCLUDE_INACTIVE_POST_IN_PROGRESS,
+  EXCLUDE_INACTIVE_POST
 } from './action';
 import { handleActions } from 'redux-actions';
 import { message } from 'antd';
@@ -113,6 +145,7 @@ const fetchPostDetailSuccessReducer = (
   return {
     ...state,
     data: action.payload.data,
+    searchByTitleData: action.payload.data,
     errorMessage: '',
     isBusy: false,
   };
@@ -263,8 +296,202 @@ const editBlogDetailErrorReducer = (
   };
 };
 
+const searchChangeReducer = (
+  state: BlogPageState,
+  action: SearchChange
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+    isBusy: false,
+  };
+};
+
+const searchChangeInProgressReducer = (
+  state: BlogPageState,
+  action: SearchChangeInProgress,
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+    isBusy: true,
+  };
+};
+
+const searchChangeSuccessReducer = (
+  state: BlogPageState,
+  action: SearchChangeSuccess,
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+    isBusy: false,
+    searchByTitleData: action.payload.result.data,
+  };
+};
+
+const searchChangeErrorReducer = (
+  state: BlogPageState,
+  action: SearchChangeError,
+) => {
+  return {
+    ...state,
+    errorMessage: action.payload.errorMessage,
+    isBusy: false,
+  };
+};
+
+const searchByDateTimeReducer = (
+  state: BlogPageState,
+  action: SearchByDateTime
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+    isBusy: false,
+  };
+};
+
+const searchByDateTimeInProgressReducer = (
+  state: BlogPageState,
+  action: SearchByDateTimeInProgress,
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+    isBusy: true,
+  };
+};
+
+const searchByDateTimeSuccessReducer = (
+  state: BlogPageState,
+  action: SearchByDateTimeSuccess,
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+    isBusy: false,
+    searchByTitleData: action.payload.result.data,
+  };
+};
+
+const searchByDateTimeErrorReducer = (
+  state: BlogPageState,
+  action: SearchByDateTimeError,
+) => {
+  return {
+    ...state,
+    errorMessage: action.payload.errorMessage,
+    isBusy: false,
+  };
+};
+
+const includeInactivePostReducer = (
+  state: BlogPageState,
+  action: IncludeInactivePost,
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+  };
+};
+
+const includeInactivePostInProgressReducer = (
+  state: BlogPageState,
+  action: IncludeInactivePostInProgress,
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+    isBusy: true,
+  };
+};
+
+const includeInactivePostSuccessReducer = (
+  state: BlogPageState,
+  action: IncludeInactivePostSuccess,
+) => {
+  return {
+    ...state,
+    searchByTitleData: state.data,
+    errorMessage: '',
+    isBusy: false,
+  };
+};
+
+const includeInactivePostErrorReducer = (
+  state: BlogPageState,
+  action: IncludeInactivePostError,
+) => {
+  return {
+    ...state,
+    errorMessage: action.payload.errorMessage,
+    isBusy: false,
+  };
+};
+
+const excludeInactivePostReducer = (
+  state: BlogPageState,
+  action: ExcludeInactivePost,
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+  };
+};
+
+const excludeInactivePostInProgressReducer = (
+  state: BlogPageState,
+  action: ExcludeInactivePostInProgress,
+) => {
+  return {
+    ...state,
+    errorMessage: '',
+    isBusy: true,
+  };
+};
+
+const excludeInactivePostSuccessReducer = (
+  state: BlogPageState,
+  action: ExcludeInactivePostSuccess,
+) => {
+  return {
+    ...state,
+    searchByTitleData: action.payload.data,
+    errorMessage: '',
+    isBusy: false,
+  };
+};
+
+const excludeInactivePostErrorReducer = (
+  state: BlogPageState,
+  action: ExcludeInactivePostError,
+) => {
+  return {
+    ...state,
+    errorMessage: action.payload.errorMessage,
+    isBusy: false,
+  };
+};
+
 const blogPageReducer = handleActions<BlogPageState, any>(
   {
+    [EXCLUDE_INACTIVE_POST]: excludeInactivePostReducer,
+    [EXCLUDE_INACTIVE_POST_IN_PROGRESS]: excludeInactivePostInProgressReducer,
+    [EXCLUDE_INACTIVE_POST_SUCCESS]: excludeInactivePostSuccessReducer,
+    [EXCLUDE_INACTIVE_POST_ERROR]: excludeInactivePostErrorReducer,
+    [INCLUDE_INACTIVE_POST]: includeInactivePostReducer,
+    [INCLUDE_INACTIVE_POST_IN_PROGRESS]: includeInactivePostInProgressReducer,
+    [INCLUDE_INACTIVE_POST_SUCCESS]: includeInactivePostSuccessReducer,
+    [INCLUDE_INACTIVE_POST_ERROR]: includeInactivePostErrorReducer,
+    [SEARCH_BY_DATE_TIME_IN_PROGRESS]: searchByDateTimeInProgressReducer,
+    [SEARCH_BY_DATE_TIME_SUCCESS]: searchByDateTimeSuccessReducer,
+    [SEARCH_BY_DATE_TIME_ERROR]: searchByDateTimeErrorReducer,
+    [SEARCH_BY_DATE_TIME]: searchByDateTimeReducer,
+    [SEARCH_CHANGE_IN_PROGRESS]: searchChangeInProgressReducer,
+    [SEARCH_CHANGE_SUCCESS]: searchChangeSuccessReducer,
+    [SEARCH_CHANGE_ERROR]: searchChangeErrorReducer,
+    [SEARCH_CHANGE]: searchChangeReducer,
     [EDIT_BLOG_DETAIL]: editBlogDetailReducer,
     [EDIT_BLOG_DETAIL_IN_PROGRESS]: editBlogDetailInProgressReducer,
     [EDIT_BLOG_DETAIL_SUCCESS]: editBlogDetailSuccessReducer,
@@ -291,6 +518,7 @@ const blogPageReducer = handleActions<BlogPageState, any>(
     data: [],
     isBusy: false,
     deactivateStatus: '',
+    searchByTitleData: [],
   },
 );
 

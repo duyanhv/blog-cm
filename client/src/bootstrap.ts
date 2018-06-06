@@ -1,10 +1,11 @@
 import { TokenKey } from './redux';
 import { getAuthService } from './service-proxies/service.provider';
-import { RefreshTokenDto } from './service-proxies/service-proxies';
+// import { RefreshTokenDto } from './service-proxies/service-proxies';
 import { updateUrlSettings, loadAppSettings } from './redux/app-settings';
 import { updateUserProfile } from './redux/profile';
 import { store } from './redux/store';
 import loadInitialLanguage from './i18n';
+import { RefreshTokenDto } from './service-proxies/service-proxies';
 
 const bootstrap = async () => {
   try {

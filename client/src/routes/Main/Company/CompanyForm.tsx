@@ -1,21 +1,19 @@
 import * as React from 'react';
 import { FormComponentProps } from 'antd/lib/form';
 import { Form, Input, Icon, Button, Row, Col } from 'antd';
-import { CreateCompanyInputDto } from '../../../service-proxies/service-proxies';
-import { CompanyPageState } from '../../../redux/ui/company-page';
+import {
+  CreateCompanyInputDto,
+} from '../../../service-proxies/service-proxies';
 import InputCountry from './InputCountry';
 
 interface CompanyFormProps extends FormComponentProps {
-  handleSubmit: (company: CreateCompanyInputDto) => void;
   isBusy: boolean;
-  companyPage: CompanyPageState;
-  data: any;
-  formItemLayout: {};
-  countrynames: {};
+  data: CreateCompanyInputDto;
+  countriesname: {};
+  handleSubmit: (company: CreateCompanyInputDto) => void;
 }
 
 const CompanyForm = (props: CompanyFormProps) => {
-  // const Dragger = Upload.Dragger;
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
@@ -59,7 +57,7 @@ const CompanyForm = (props: CompanyFormProps) => {
                 ],
                 validateTrigger: 'onBlur',
                 validateFirst: true,
-                initialValue: props.companyPage.data.companyname,
+                initialValue: props.data.companyname,
               })(
                 <Input
                   prefix={<Icon type="meh-o" />}
@@ -79,7 +77,7 @@ const CompanyForm = (props: CompanyFormProps) => {
                 ],
                 validateTrigger: 'onBlur',
                 validateFirst: true,
-                initialValue: props.companyPage.data.telephone,
+                initialValue: props.data.telephone,
               })(
                 <Input
                   prefix={<Icon type="phone" />}
@@ -99,7 +97,7 @@ const CompanyForm = (props: CompanyFormProps) => {
                 ],
                 validateTrigger: 'onBlur',
                 validateFirst: true,
-                initialValue: props.companyPage.data.streetline1,
+                initialValue: props.data.streetline1,
               })(
                 <Input
                   prefix={<Icon type="idcard" />}
@@ -119,7 +117,7 @@ const CompanyForm = (props: CompanyFormProps) => {
                 ],
                 validateTrigger: 'onBlur',
                 validateFirst: true,
-                initialValue: props.companyPage.data.streetline2,
+                initialValue: props.data.streetline2,
               })(
                 <Input
                   prefix={<Icon type="idcard" />}
@@ -139,7 +137,7 @@ const CompanyForm = (props: CompanyFormProps) => {
                 ],
                 validateTrigger: 'onBlur',
                 validateFirst: true,
-                initialValue: props.companyPage.data.streetline2,
+                initialValue: props.data.streetline2,
               })(<Input prefix={<Icon type="global" />} placeholder="City" />)}
             </Form.Item>
 
@@ -154,7 +152,7 @@ const CompanyForm = (props: CompanyFormProps) => {
                 ],
                 validateTrigger: 'onBlur',
                 validateFirst: true,
-                initialValue: props.companyPage.data.state,
+                initialValue: props.data.state,
               })(<Input prefix={<Icon type="qq" />} placeholder="State" />)}
             </Form.Item>
           </Col>
@@ -171,7 +169,7 @@ const CompanyForm = (props: CompanyFormProps) => {
                 ],
                 validateTrigger: 'onBlur',
                 validateFirst: true,
-                initialValue: props.companyPage.data.zipcode,
+                initialValue: props.data.zipcode,
               })(
                 <Input prefix={<Icon type="slack" />} placeholder="Zipcode" />,
               )}
@@ -182,7 +180,7 @@ const CompanyForm = (props: CompanyFormProps) => {
             <Form.Item {...formItemLayout} label="Facebook">
               {getFieldDecorator('facebookurl', {
                 rules: [{ required: false }],
-                initialValue: props.companyPage.data.facebookurl,
+                initialValue: props.data.facebookurl,
               })(
                 <Input
                   prefix={<Icon type="facebook" />}
@@ -194,7 +192,7 @@ const CompanyForm = (props: CompanyFormProps) => {
             <Form.Item {...formItemLayout} label="Twitter">
               {getFieldDecorator('twitterurl', {
                 rules: [{ required: false }],
-                initialValue: props.companyPage.data.twitterurl,
+                initialValue: props.data.twitterurl,
               })(
                 <Input
                   prefix={<Icon type="twitter" />}
@@ -206,7 +204,7 @@ const CompanyForm = (props: CompanyFormProps) => {
             <Form.Item {...formItemLayout} label="Googleplus">
               {getFieldDecorator('googleplusurl', {
                 rules: [{ required: false }],
-                initialValue: props.companyPage.data.googleplusurl,
+                initialValue: props.data.googleplusurl,
               })(
                 <Input
                   prefix={<Icon type="google-plus" />}
@@ -218,7 +216,7 @@ const CompanyForm = (props: CompanyFormProps) => {
             <Form.Item {...formItemLayout} label="LinkedIn">
               {getFieldDecorator('linkedidurl', {
                 rules: [{ required: false }],
-                initialValue: props.companyPage.data.linkedidurl,
+                initialValue: props.data.linkedidurl,
               })(
                 <Input
                   prefix={<Icon type="linkedin" />}

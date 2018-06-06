@@ -1,37 +1,49 @@
 import * as React from 'react';
-import { Form, FormGroup, ControlLabel, FormControl, Button, Col } from 'react-bootstrap';
+import { Form, FormGroup, ControlLabel, FormControl, Button, Col, Alert } from 'react-bootstrap';
 import Recaptcha from 'react-recaptcha';
 import Layout from '../../nextjs/components/HomePage/Layout';
-
-// Site key: 6Lf_SV0UAAAAABoRmARiDaHwQgC3UCNYaMO0dspa
-// Secret key: 6Lf_SV0UAAAAAPUThi0szwFyrRw-Z1_L6TtuxZRI
+import config from '../../api/config';
 
 class AttendanceRecord extends React.Component {
   state = {
     studentCode: '',
     recaptcha: '',
+    isSuccess: undefined,
+    message: '',
   };
 
   onFormSubmit = async (e) => {
     e.preventDefault();
   
-    // if (fetch) {
-    //   await fetch(
-    //     '/api/study-result/attendance-record',
-    //     {
-    //       method: 'Post',
-    //       headers: new Headers({
-    //         'Content-Type': 'applicatio/json',
-    //       }),
-    //       body: JSON.stringify({
-    //         studentCode: this.state.studentCode,
-    //         captchaResponse: this.state.recaptcha,
-    //       }),
-    //     }
-    //   );
-    // }
+    try {
+      if (fetch) {
+        await fetch(
+          '/api/study-result/attendance-record',
+          {
+            method: 'Post',
+            headers: new Headers({
+              'Content-Type': 'application/json',
+            }),
+            body: JSON.stringify({
+              studentCode: this.state.studentCode,
+              captchaResponse: this.state.recaptcha,
+            }),
+          }
+        );
 
-    // After sending Email => Display a Success message
+        this.setState({
+          ...this.state,
+          isSuccess: true,
+          message: '',
+        });
+      }
+    } catch (error) {
+      this.setState({
+        ...this.state,
+        isSuccess: false,
+        message: error.message,
+      });
+    }
   }
 
   onInputChange = (e) => {
@@ -58,9 +70,31 @@ class AttendanceRecord extends React.Component {
 
           <div>
             <Form horizontal onSubmit={this.onFormSubmit}>
+              {this.state.isSuccess === undefined ? null : this.state.isSuccess === true ? (
+                <FormGroup>
+                  <Col sm={2} />
+                  <Col sm={8}>
+                    <Alert bsStyle="info">
+                      <strong>Tra Cứu Thành Công !</strong> Hãy Kiểm Tra Email Của Bạn.
+                    </Alert>
+                  </Col>
+                  <Col sm={2} />
+                </FormGroup>
+              ) : (
+                <FormGroup>
+                  <Col sm={2} />
+                  <Col sm={8}>
+                    <Alert bsStyle="warning">
+                      <strong>Đã Có Lỗi Xảy Ra !!</strong> Xin Hãy Thử Lại.
+                    </Alert>
+                  </Col>
+                  <Col sm={2} />
+                </FormGroup>
+              )}
+
               <FormGroup controlId="studentCode">
                 <Col componentClass={ControlLabel} sm={2}>
-                  Mã Học Sinh
+                  Mã Học Sinh:
                 </Col>
                 <Col sm={8}>
                   <FormControl type="text" placeholder="Nhập Mã Học Sinh" name="studentCode" onChange={this.onInputChange} />
@@ -72,7 +106,7 @@ class AttendanceRecord extends React.Component {
                 <Col sm={2} />
                 <Col sm={8}>
                   <Recaptcha
-                    sitekey="6Lf_SV0UAAAAABoRmARiDaHwQgC3UCNYaMO0dspa"
+                    sitekey={config.studyResultConfig.reCaptchaSiteKey}
                     verifyCallback={this.onCaptchaLoad}
                   />
                 </Col>

@@ -6,11 +6,8 @@ import {
 } from 'antd';
 import React from 'react';
 import Card from 'antd/lib/card';
-import { ProfileState } from '../../../redux/profile';
-import { AppSettingsState } from '../../../redux/app-settings';
 import { Dispatch } from 'redux';
 import {
-  CompanyPageState,
   uploadCompanyLogoSuccess,
 } from '../../../redux/ui/company-page';
 import './AvatarUploader.less';
@@ -21,24 +18,15 @@ const getBase64 = (img, callback) => {
   reader.readAsDataURL(img);
 };
 interface UploadButtonProps {
-  profile: ProfileState;
-  appSettings: AppSettingsState;
+  apiUrl: string;
   dispatch: Dispatch<any>;
-  companyPage: CompanyPageState;
-}
-interface UploadButtonState {
   imageSrc: string;
+  token: string;
 }
 
-class UploadButton extends React.Component<
-  UploadButtonProps,
-  UploadButtonState
-> {
+class UploadButton extends React.Component<UploadButtonProps> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      imageSrc: '',
-    };
   }
   onChangeUpload = (info: any) => {
     if (info.file.status === 'done') {
@@ -47,25 +35,18 @@ class UploadButton extends React.Component<
       );
     }
   };
-  componentDidMount(): void {
-    !this.props.companyPage.imageSrc
-      ? (this.props.companyPage.imageSrc = `${
-          this.props.appSettings.apiUrl
-        }/company/getCompanyLogo`)
-      : (this.props.companyPage.imageSrc = this.props.companyPage.imageSrc);
-  }
   render(): JSX.Element {
     return (
       <Card
         className="avatar-uploader"
         hoverable={true}
-        cover={<img src={this.props.companyPage.imageSrc} />}
+        cover={<img src={`${this.props.apiUrl}/company/getCompanyLogo`} />}
       >
         <Upload
           name="logo"
-          action={`${this.props.appSettings.apiUrl}/company/upload`}
+          action={`${this.props.apiUrl}/company/upload`}
           headers={{
-            Authorization: `Bearer ${this.props.profile.token}`,
+            Authorization: `Bearer ${this.props.token}`,
           }}
           onChange={this.onChangeUpload}
         >

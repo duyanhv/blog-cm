@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouterProps } from 'react-router';
+// import { RouterProps } from 'react-router';
 import { CreateCompanyInputDto } from '../../../service-proxies/service-proxies';
 import { Row, Col, Card } from 'antd';
 import CompanyForm from './CompanyForm';
@@ -11,21 +11,22 @@ import {
   fetchCompany,
   createNewCompany,
 } from '../../../redux/ui/company-page/action';
-import { AppSettingsState } from '../../../redux/app-settings';
 import UploadButton from './UploadButton';
 import { fetchProfile } from '../../../redux/ui/profile-page';
-import { ProfileState } from '../../../redux/profile';
-interface CompanyPageProps extends RouterProps, CompanyPageState {
-  onFetchCompanyData: Function;
+
+interface CompanyPageProps extends CompanyPageState {
   isBusy: boolean;
-  onCreateCompanyData: Function;
-  onUploadCompanyLogo: Function;
-  onFetchProfileData: Function;
-  appSettings: AppSettingsState;
-  profile: ProfileState;
+  apiUrl: string;
+  id: string;
   dispatch: Dispatch<any>;
-  companyPage: CompanyPageState;
-  formItemLayout: {};
+  countriesname: {};
+  imageSrc: string;
+  token: string;
+  data: CreateCompanyInputDto;
+  onFetchCompanyData: () => void;
+  onCreateCompanyData: (company: CreateCompanyInputDto) => void;
+  onUploadCompanyLogo: (file: any) => void;
+  onFetchProfileData: (id: string) => void;
 }
 
 class CompanyPage extends React.Component<CompanyPageProps> {
@@ -34,8 +35,8 @@ class CompanyPage extends React.Component<CompanyPageProps> {
   }
 
   componentDidMount(): void {
+    this.props.onFetchProfileData(this.props.id);
     this.props.onFetchCompanyData();
-    this.props.onFetchProfileData(this.props.profile.id);
   }
 
   handleSubmit = async (company: CreateCompanyInputDto) => {
@@ -67,9 +68,12 @@ class CompanyPage extends React.Component<CompanyPageProps> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  profile: state.profile,
-  appSettings: state.appSettings,
-  companyPage: state.ui.companyPage,
+  token: state.profile.token,
+  apiUrl: state.appSettings.apiUrl,
+  imageSrc: state.ui.profilePage.imageSrc,
+  id: state.profile.id,
+  data: state.ui.companyPage.data,
+  ...state.ui.companyPage,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<CompanyPageAction>) => ({

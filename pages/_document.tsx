@@ -8,7 +8,7 @@ import {
 } from '../nextjs/constants/env';
 
 export default class extends Document {
-  static getInitialProps = async (props) => {
+  static getInitialProps = async props => {
     const d = Document;
     const documentProps = await d.getInitialProps(props);
     const { renderPage } = props;
@@ -36,7 +36,7 @@ export default class extends Document {
           <meta name="twitter:description" content={SITE_DESCRIPTION} />
           <meta property="twitter:image" content={SITE_IMAGE} />
 
-          <link rel="shortcut icon" href="static/img/favicon.png" />
+          <link rel="shortcut icon" href="static/img/favicon.ico" />
           <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
           <link
             href="/static/plugins/flexslider/flexslider.css"
@@ -47,7 +47,7 @@ export default class extends Document {
           <link href="/static/css/style.css" rel="stylesheet" />
           <link
             id="t-colors"
-            href="static/skins/default.css"
+            href="/static/skins/default.css"
             rel="stylesheet"
           />
           <link
@@ -62,7 +62,7 @@ export default class extends Document {
           />
           {/* <link id="bodybg" href="static/bodybg/bg1.css" rel="stylesheet" type="text/css" /> */}
 
-          <script src="https://www.google.com/recaptcha/api.js"></script>
+          <script src="https://www.google.com/recaptcha/api.js" />
         </Head>
 
         <body>

@@ -10,7 +10,9 @@ import Clients from '../nextjs/components/HomePage/Clients';
 import TeacherImage from '../nextjs/components/HomePage/TeacherImage';
 import News from '../nextjs/components/HomePage/News';
 
-class Home extends React.Component {
+export interface HomeProps {}
+
+class Home extends React.Component<HomeProps> {
   render() {
     return (
       <Layout>

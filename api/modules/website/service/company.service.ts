@@ -3,21 +3,20 @@ import { Company } from '../interfaces';
 import { Model } from 'mongoose';
 import * as Joi from 'joi';
 import { CompanyConst } from '../constants/company.constant';
-import {
-  CreateCompanyInputDto,
-  UpdateCompanyInputDto,
-} from '../dto';
 import * as fs from 'fs';
 import * as path from 'path';
 import { processImage } from '../../../core/helpers';
-import { countries } from '../resources/countries';
-
+import { CreateCompanyInputDto, UpdateCompanyInputDto } from '../dto';
+const countrynames = path.join(
+  __dirname,
+  '../../../../client/src/resources/country-names.json'
+);
 @Component()
 export class CompanyService {
   constructor(
     @Inject(CompanyConst.CompanyModelToken)
     private readonly companyModel: Model<Company>,
-  ) {}
+  ) { }
 
   async upload(file: any, req: any): Promise<void> {
     if (!file) {
@@ -101,7 +100,7 @@ export class CompanyService {
               linkedidurl: company.linkedidurl,
             },
           },
-        )
+      )
         .exec();
     }
     const validationSchema = Joi.object().keys({
@@ -157,7 +156,7 @@ export class CompanyService {
         {
           upsert: true,
         },
-      )
+    )
       .exec();
   }
 
@@ -165,7 +164,7 @@ export class CompanyService {
     const company = await this.companyModel.findOne({}).exec();
     return {
       data: company,
-      countries,
+      countrynames,
     };
   }
 }

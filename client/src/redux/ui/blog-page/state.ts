@@ -5,5 +5,6 @@ interface BlogPageState {
   isBusy: boolean;
   errorMessage: string;
   deactivateStatus: string;
+  searchByTitleData: IFindBlogDetailDto[];
 }
 export default BlogPageState;
