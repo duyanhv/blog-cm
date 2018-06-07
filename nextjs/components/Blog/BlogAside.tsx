@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-// export interface BlogAsideProps {
-
-// }
+// export interface BlogAsideProps {}
 
 class BlogAside extends Component {
     render() {

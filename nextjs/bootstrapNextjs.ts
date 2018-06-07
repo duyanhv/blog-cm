@@ -33,8 +33,6 @@ const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
 };
 
 const setupPublicRoutes = (server: express.Express, app: next.Server) => {
-  // const handle = app.getRequestHandler();
-
   server.get('/people', (req, res) => {
     const actualPage = '/ping';
     const queryParams = {};
@@ -52,11 +50,6 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     const queryParams = { slug: req.params.slug, name: req.params.name };
     app.render(req, res, actualPage, queryParams);
   });
-
-  // server.get('/', (req, res) => {
-  //   // SSR for the /ping page in NextJS
-  //   return app.render(req, res, '/index', req.query);
-  // });
 
   server.get('/test', (_, res) => {
     // Does not use NextJS app at all
@@ -108,6 +101,11 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
       return res.redirect('/blog');
     }
     res.redirect(301, `/blog/${req.query.id}`);
+  });
+  server.get('/study-result/attendance-record', (req, res) => {
+    const actualPage = '/study-result/attendance-record';
+    const queryParams = {};
+    app.render(req, res, actualPage, queryParams);
   });
 };
 

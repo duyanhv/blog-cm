@@ -7,8 +7,7 @@ import TeacherImage from '../nextjs/components/HomePage/TeacherImage';
 import News from '../nextjs/components/HomePage/News';
 // import { BlogProps } from './blog';
 
-export interface HomeProps {
-}
+export interface HomeProps {}
 
 class Home extends React.Component<HomeProps> {
   render() {

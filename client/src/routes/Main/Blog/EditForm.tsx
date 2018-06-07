@@ -9,6 +9,26 @@ import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/braft.css';
 import './EditForm.less';
 const sanitizeHtml = require('sanitize-html');
+
+const saniTizeConfig = {
+  allowedTags: ['p', 'em', 'strong', 'span', 'img', 'br'],
+  allowedAttributes: {
+    p: ['style'],
+    span: ['style']
+  },
+  allowedStyles: {
+    '*': {
+      // Match HEX and RGB
+      color: [/^\#(0x)?[0-9a-f]+$/i, /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/],
+      'text-align': [/^left$/, /^right$/, /^center$/],
+      // Match any number with px, em, or %
+      'font-size': [/^\d+(?:px|em|%)$/]
+    },
+    p: {
+      'font-size': [/^\d+rem$/]
+    }
+  }
+};
 interface EditFormProps extends FormComponentProps {
   dataPerPost: IFindBlogDetailDto;
   isBusy: boolean;
@@ -49,7 +69,7 @@ class EditForm extends React.Component<EditFormProps> {
           title: sanitizeHtml(this.props.form.getFieldValue('title')),
           subtitle: sanitizeHtml(this.props.form.getFieldValue('subtitle')),
           author: sanitizeHtml(this.props.form.getFieldValue('author')),
-          content: sanitizeHtml(values.content),
+          content: sanitizeHtml(values.content, saniTizeConfig),
           tags: this.props.dataPerPost.tags,
           imageSrc: this.props.dataPerPost.imageSrc,
           viewCount: this.props.dataPerPost.viewCount,

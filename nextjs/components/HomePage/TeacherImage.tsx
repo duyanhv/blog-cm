@@ -1,13 +1,11 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { Row, Col, Grid } from 'react-bootstrap';
-// export interface TechnologyProps {
 
-// }
+export interface TechnologyProps { }
 
 class TeacherImage extends React.Component {
-
-    onClick() {
+    onClick = () => {
         // tslint:disable-next-line:no-console
         console.log('heyeh');
     }
