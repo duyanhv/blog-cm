@@ -21,7 +21,8 @@
     "react-scripts-ts-antd": "2.13.2",
     "redux": "^3.7.2",
     "redux-actions": "^2.3.0",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "sanitize-html": "^1.18.2"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
