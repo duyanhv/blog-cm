@@ -262,6 +262,16 @@
   dependencies:
     "@types/node" "*"
 
+"@types/google-maps@*":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@types/google-maps/-/google-maps-3.2.0.tgz#804a3ae9ac9265b4e0d1508b5b9b894867974f82"
+  dependencies:
+    "@types/googlemaps" "*"
+
+"@types/googlemaps@*", "@types/googlemaps@^3.30.9":
+  version "3.30.9"
+  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.9.tgz#893eb307bfcbff95ef6c9ce70f72e6f9a2068cc4"
+
 "@types/gridfs-stream@^0.5.30":
   version "0.5.30"
   resolved "https://registry.yarnpkg.com/@types/gridfs-stream/-/gridfs-stream-0.5.30.tgz#665dea97398182505de019717fb6d2b63ce76259"
@@ -272,12 +282,6 @@
 "@types/jest@^22.2.3":
   version "22.2.3"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.3.tgz#0157c0316dc3722c43a7b71de3fdf3acbccef10d"
-
-"@types/jimp@^0.2.28":
-  version "0.2.28"
-  resolved "https://registry.yarnpkg.com/@types/jimp/-/jimp-0.2.28.tgz#88dc2aae028eca50008d70c2f6926b2a2d4f30e7"
-  dependencies:
-    jimp "*"
 
 "@types/joi@^13.0.8":
   version "13.0.8"
@@ -297,21 +301,15 @@
   version "4.14.109"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.109.tgz#b1c4442239730bf35cabaf493c772b18c045886d"
 
-"@types/log4js@^2.3.5":
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/@types/log4js/-/log4js-2.3.5.tgz#4d1e56da53d3c1820c08e9cd5092e68c3e1e822f"
+"@types/markerclustererplus@2.1.29":
+  version "2.1.29"
+  resolved "https://registry.yarnpkg.com/@types/markerclustererplus/-/markerclustererplus-2.1.29.tgz#99367530c467678410e59c1c44266c60b3e963a4"
   dependencies:
-    log4js "*"
+    "@types/google-maps" "*"
 
 "@types/mime@*":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
-
-"@types/moment@^2.13.0":
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
-  dependencies:
-    moment "*"
 
 "@types/mongodb@*":
   version "3.0.18"
@@ -461,12 +459,6 @@
 "@types/tough-cookie@*":
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.3.tgz#7f226d67d654ec9070e755f46daebf014628e9d9"
-
-"@types/typescript@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@types/typescript/-/typescript-2.0.0.tgz#c433539c98bae28682b307eaa7a0fd2115b83c28"
-  dependencies:
-    typescript "*"
 
 "@zeit/check-updates@1.1.1":
   version "1.1.1"
@@ -5229,7 +5221,7 @@ jest@^22.4.3:
     import-local "^1.0.0"
     jest-cli "^22.4.4"
 
-jimp@*, jimp@^0.2.28:
+jimp@^0.2.28:
   version "0.2.28"
   resolved "https://registry.yarnpkg.com/jimp/-/jimp-0.2.28.tgz#dd529a937190f42957a7937d1acc3a7762996ea2"
   dependencies:
@@ -5669,12 +5661,13 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
-lodash.noop@~3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/lodash.noop/-/lodash.noop-3.0.1.tgz#38188f4d650a3a474258439b96ec45b32617133c"
 lodash.mergewith@^4.6.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.1.tgz#639057e726c3afbdb3e7d42741caa8d6e4335927"
+
+lodash.noop@~3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/lodash.noop/-/lodash.noop-3.0.1.tgz#38188f4d650a3a474258439b96ec45b32617133c"
 
 lodash.once@^4.0.0:
   version "4.1.1"
@@ -5700,7 +5693,7 @@ lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.2, l
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
-log4js@*, log4js@^2.8.0:
+log4js@^2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/log4js/-/log4js-2.8.0.tgz#9f42fcc4fe82004dfd136604dd7bc1c35d61d6c5"
   dependencies:
@@ -6041,10 +6034,6 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
-
-moment@*:
-  version "2.22.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
 moment@^2.11.2, moment@^2.22.1:
   version "2.22.1"
@@ -9218,10 +9207,6 @@ typescript-babel-jest@^1.0.5:
     app-root-path "2.0.1"
     babel-jest "20.0.3"
     typescript "^2.4.1"
-
-typescript@*:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.1.tgz#fdb19d2c67a15d11995fd15640e373e09ab09961"
 
 typescript@^2.4.1, typescript@^2.8.3:
   version "2.8.3"

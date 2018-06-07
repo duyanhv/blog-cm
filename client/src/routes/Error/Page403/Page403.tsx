@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button } from 'antd';
 import './Page403.less';
 import { Link } from 'react-router-dom';
+import { RouteUrls } from '../../routes.constant';
 
 const Page403 = () => {
   return (
@@ -14,7 +15,7 @@ const Page403 = () => {
         <h1>403 - Forbidden</h1>
         <p>Sorry, Your requested resource is forbidden.</p>
         <Button type="primary">
-          <Link to="/admin/main">Go to Home Page</Link>
+          <Link to={`${RouteUrls.BaseUrl}${RouteUrls.Main}`}>Go to Home Page</Link>
         </Button>
       </div>
     </div>

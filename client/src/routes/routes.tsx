@@ -18,16 +18,16 @@ const RedirectToHome = () => {
   return <Redirect to={`${RouteUrls.BaseUrl}${RouteUrls.Main}`} />;
 };
 
-const Routes = () => {
+const Routes = ({ appBaseUrl }: { appBaseUrl: string }) => {
   return (
     <Switch>
-      <Route exact={true} path={`${RouteUrls.BaseUrl}`} component={RedirectToHome} />
-      <Route path={`${RouteUrls.BaseUrl}${RouteUrls.Login}`} component={LoginPage} />
-      <Route path={`${RouteUrls.BaseUrl}${RouteUrls.Register}`} component={RegisterPage} />
-      <Route path={`${RouteUrls.BaseUrl}${RouteUrls.Page400}`} component={Page400} />
-      <Route path={`${RouteUrls.BaseUrl}${RouteUrls.Page403}`} component={Page403} />
-      <Route path={`${RouteUrls.BaseUrl}${RouteUrls.Page500}`} component={Page500} />
-      <Route path={`${RouteUrls.BaseUrl}${RouteUrls.Main}`} component={Authorize(MainPage)} />
+      <Route exact={true} path={appBaseUrl} component={RedirectToHome} />
+      <Route path={`${appBaseUrl}${RouteUrls.Login}`} component={LoginPage} />
+      <Route path={`${appBaseUrl}${RouteUrls.Register}`} component={RegisterPage} />
+      <Route path={`${appBaseUrl}${RouteUrls.Page400}`} component={Page400} />
+      <Route path={`${appBaseUrl}${RouteUrls.Page403}`} component={Page403} />
+      <Route path={`${appBaseUrl}${RouteUrls.Page500}`} component={Page500} />
+      <Route path={`${appBaseUrl}${RouteUrls.Main}`} component={Authorize(MainPage)} />
       <Route component={Page400} />
     </Switch>
   );

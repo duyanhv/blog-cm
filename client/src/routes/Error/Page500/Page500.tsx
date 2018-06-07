@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button } from 'antd';
 import './Page500.less';
 import { Link } from 'react-router-dom';
+import { RouteUrls } from '../../routes.constant';
 
 const Page500 = () => {
   return (
@@ -14,7 +15,7 @@ const Page500 = () => {
         <h1>500 - Server Error</h1>
         <p>Sorry, Some error may happen in our server.</p>
         <Button type="primary">
-          <Link to="/admin/main">Go to Home Page</Link>
+          <Link to={`${RouteUrls.BaseUrl}${RouteUrls.Main}`}>Go to Home Page</Link>
         </Button>
       </div>
     </div>
