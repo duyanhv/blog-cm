@@ -58,11 +58,8 @@
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2",
     "rxjs": "^5.5.6",
-<<<<<<< HEAD
     "sanitize-html": "^1.18.2",
     "tslint": "^5.10.0",
-=======
->>>>>>> 229f8a3f5e4e1af2f400b0a94dd377cc27882884
     "typescript": "^2.8.3",
     "typescript-babel-jest": "^1.0.5",
     "webpack-bundle-analyzer": "^2.12.0",
