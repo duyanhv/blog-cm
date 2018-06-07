@@ -26,36 +26,41 @@ const BlogData = (data: {
   postCreatedAt: string
 }) => {
   return (
-    <article key={data.title}>
-      <div className="post-image">
-        <div className="post-heading">
-          <h3>
-            <a href="#">{data.title}</a>
-          </h3>
-        </div>
-        <img
-          src="static/img/dummies/blog/img1.jpg"
-          alt=""
-          className="img-responsive"
-        />
-      </div>
-      <div className="blog-post-content">{data.content}</div>
-      <div className="bottom-article">
-        <ul className="meta-post">
-          <li>
-            <i className="fa fa-calendar" />
-            <a href="#"> {data.postCreatedAt.split('T')[0]}</a>
-          </li>
-          <li>
-            <i className="fa fa-user" />
-            <a href="#"> {data.author}</a>
-          </li>
-        </ul>
-        <a href="#" className="readmore pull-right">
-          Continue reading <i className="fa fa-angle-right" />
-        </a>
-      </div>
-    </article>
+    <Grid key={data.title}>
+      <Row>
+        <Col xs={6} md={4}>
+          <img src="static/img/dummies/blog/img1.jpg" alt="" className="img-responsive" />
+        </Col>
+        <Col xs={12} md={8} >
+          <div className="post-image">
+            <div className="post-heading">
+              <h3>
+                <Link href={`/blogpost?id=${data._id}`} as={`/blog/${data._id}`}>
+                  <a href="#">
+                    {data.title}
+                  </a>
+                </Link>
+              </h3>
+            </div>
+
+          </div>
+          <div className="blog-post-content">
+            <div dangerouslySetInnerHTML={convertStringToHtml(data.previewContent)}>
+
+            </div> [...]
+                    </div>
+          <div className="bottom-article">
+            <ul className="meta-post">
+              <li><i className="fa fa-calendar"></i><a href="#"> {data.postCreatedAt.split('T')[0]}</a></li>
+              <li><i className="fa fa-user"></i><a href="#"> {data.author}</a></li>
+              {/* <li><i className="fa fa-folder-open"></i><a href="#"> Blog</a></li>
+                            <li><i className="fa fa-comments"></i><a href="#">4 Comments</a></li> */}
+            </ul>
+            <a href="#" className="readmore pull-right">Continue reading <i className="fa fa-angle-right"></i></a>
+          </div>
+        </Col>
+      </Row>
+    </Grid>
   );
 };
 
@@ -67,41 +72,9 @@ class BlogArticle extends Component<BlogArticleProps> {
 
   render() {
     return (
-      <Grid key={data.title}>
-        <Row>
-          <Col xs={6} md={4}>
-            <img src="static/img/dummies/blog/img1.jpg" alt="" className="img-responsive" />
-          </Col>
-          <Col xs={12} md={8} >
-            <div className="post-image">
-              <div className="post-heading">
-                <h3>
-                  <Link href={`/blogpost?id=${data._id}`} as={`/blog/${data._id}`}>
-                    <a href="#">
-                      {data.title}
-                    </a>
-                  </Link>
-                </h3>
-              </div>
-
-            </div>
-            <div className="blog-post-content">
-              <div dangerouslySetInnerHTML={convertStringToHtml(data.previewContent)}>
-
-              </div> [...]
-                    </div>
-            <div className="bottom-article">
-              <ul className="meta-post">
-                <li><i className="fa fa-calendar"></i><a href="#"> {data.postCreatedAt.split('T')[0]}</a></li>
-                <li><i className="fa fa-user"></i><a href="#"> {data.author}</a></li>
-                {/* <li><i className="fa fa-folder-open"></i><a href="#"> Blog</a></li>
-                            <li><i className="fa fa-comments"></i><a href="#">4 Comments</a></li> */}
-              </ul>
-              <a href="#" className="readmore pull-right">Continue reading <i className="fa fa-angle-right"></i></a>
-            </div>
-          </Col>
-        </Row>
-      </Grid>
+      <div>
+        {this.props.data.map((data) => BlogData(data))}
+      </div>
     );
   }
 }

@@ -11,10 +11,13 @@ import './EditForm.less';
 const sanitizeHtml = require('sanitize-html');
 
 const saniTizeConfig = {
-  allowedTags: ['p', 'em', 'strong', 'span', 'img', 'br'],
+  allowedTags: ['h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
+    'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
+    'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre', 'iframe', 'img', 'span'],
   allowedAttributes: {
     p: ['style'],
-    span: ['style']
+    span: ['style'],
+    img: ['src']
   },
   allowedStyles: {
     '*': {
