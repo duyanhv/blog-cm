@@ -24,4 +24,7 @@ export class CreateBlogInputDto {
 
   @ApiModelProperty({ description: 'postRating' })
   readonly postRating: number;
+
+  @ApiModelProperty({ description: 'postRating' })
+  readonly previewContent: string;
 }

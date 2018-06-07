@@ -87,7 +87,7 @@ export class ListPosts extends React.Component<ListPostsProps, ListPostsState> {
   onDeactivateButtonClick = (
     deactivateStatus: boolean,
     postId: string,
-    e: any,
+    _e: any,
   ) => {
     if (!deactivateStatus) {
       this.props.dispatch(deactivatePost(postId));
@@ -109,7 +109,7 @@ export class ListPosts extends React.Component<ListPostsProps, ListPostsState> {
   //   ];
   // };
 
-  onEditItemClick = (item: IFindBlogDetailDto, e: any) => {
+  onEditItemClick = (item: IFindBlogDetailDto, _e: any) => {
     this.setState({
       showEditModal: true,
       dataPerPost: item,
@@ -133,7 +133,7 @@ export class ListPosts extends React.Component<ListPostsProps, ListPostsState> {
   //   this.listtitle = pushPropsToDataSource(this.props.data);
   // }
 
-  _onAutoCompleteChange(value: any): void {
+  _onAutoCompleteChange(_value: any): void {
     // // tslint:disable-next-line:no-console
     // console.log(this.props.data);
   }
@@ -171,7 +171,7 @@ export class ListPosts extends React.Component<ListPostsProps, ListPostsState> {
                   showTime={false}
                   format="YYYY-MM-DD"
                   placeholder={['Start Date', 'End Date']}
-                  onChange={(value: any, dateString: any) => this.props.searchPostByDate(dateString)}
+                  onChange={(_value: any, dateString: any) => this.props.searchPostByDate(dateString)}
                 />
               </Col>
             </Row>

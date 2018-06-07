@@ -1,50 +1,69 @@
 import React, { Component } from 'react';
-
+import { Grid, Col, Row } from 'react-bootstrap';
+import Link from 'next/link';
 export interface BlogArticleProps {
     data: [{
+        _id: string,
         title: string,
-        content: string,
+        previewContent: string,
         author: string,
         imageSrc: string,
         postCreatedAt: string
     }];
 }
+
+const convertStringToHtml = (content: string) => {
+    return {
+        __html: content
+    };
+};
 const BlogData = (data: {
+    _id: string,
     title: string,
-    content: string,
+    previewContent: string,
     author: string,
     imageSrc: string,
     postCreatedAt: string
 }) => {
     return (
-        <article key={data.title}>
-            <div className="post-image">
-                <div className="post-heading">
-                    <h3><a href="#">{data.title}</a></h3>
-                </div>
-                <img src="static/img/dummies/blog/img1.jpg" alt="" className="img-responsive" />
-            </div>
-            <div className="blog-post-content">
-                {data.content}
-            </div>
-            <div className="bottom-article">
-                <ul className="meta-post">
-                    <li><i className="fa fa-calendar"></i><a href="#"> {data.postCreatedAt.split('T')[0]}</a></li>
-                    <li><i className="fa fa-user"></i><a href="#"> {data.author}</a></li>
-                    <li><i className="fa fa-folder-open"></i><a href="#"> Blog</a></li>
-                    <li><i className="fa fa-comments"></i><a href="#">4 Comments</a></li>
-                </ul>
-                <a href="#" className="readmore pull-right">Continue reading <i className="fa fa-angle-right"></i></a>
-            </div>
-        </article>
+        <Grid key={data.title}>
+            <Row>
+                <Col xs={6} md={4}>
+                    <img src="static/img/dummies/blog/img1.jpg" alt="" className="img-responsive" />
+                </Col>
+                <Col xs={12} md={8} >
+                    <div className="post-image">
+                        <div className="post-heading">
+                            <h3>
+                                <Link href={`/blogpost?id=${data._id}`} as={`/blog/${data._id}`}>
+                                    <a href="#">
+                                        {data.title}
+                                    </a>
+                                </Link>
+                            </h3>
+                        </div>
+
+                    </div>
+                    <div className="blog-post-content">
+                        <div dangerouslySetInnerHTML={convertStringToHtml(data.previewContent)}>
+
+                        </div> [...]
+                    </div>
+                    <div className="bottom-article">
+                        <ul className="meta-post">
+                            <li><i className="fa fa-calendar"></i><a href="#"> {data.postCreatedAt.split('T')[0]}</a></li>
+                            <li><i className="fa fa-user"></i><a href="#"> {data.author}</a></li>
+                            {/* <li><i className="fa fa-folder-open"></i><a href="#"> Blog</a></li>
+                            <li><i className="fa fa-comments"></i><a href="#">4 Comments</a></li> */}
+                        </ul>
+                        <a href="#" className="readmore pull-right">Continue reading <i className="fa fa-angle-right"></i></a>
+                    </div>
+                </Col>
+            </Row>
+        </Grid>
     );
 };
 class BlogArticle extends Component<BlogArticleProps> {
-    componentDidMount() {
-        // tslint:disable-next-line:no-console
-        console.log(this.props.data);
-    }
-
     render() {
         return (
             <div className="col-lg-8">

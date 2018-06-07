@@ -62,6 +62,8 @@ function* createnewPostWorker(action: CreateNewPost): any {
     yield put(createNewPostInProgress());
     yield blogService.newpost(action.payload.newPost);
     yield put(createNewPostSuccess());
+    const listPosts = yield blogService.getpost();
+    yield put(fetchPostDetailSuccess(listPosts.data));
   } catch (error) {
     message.error(error, 1.5);
   }

@@ -7,8 +7,8 @@ import React, { Component } from 'react';
 class BlogAside extends Component {
     render() {
         return (
-            <div className="col-lg-4">
-                <aside className="left-sidebar">
+            <div>
+                <aside className="right-sidebar">
                     <div className="widget">
                         <form role="form">
                             <div className="form-group">

@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../nextjs/components/HomePage/Layout';
-import ContactButton from '../nextjs/components/ContactPage/ContactButton';
-import BlogAside from '../nextjs/components/Blog/BlogAside';
+// import ContactButton from '../nextjs/components/ContactPage/ContactButton';
+// import BlogAside from '../nextjs/components/Blog/BlogAside';
 import BlogArticle, { BlogArticleProps } from '../nextjs/components/Blog/BlogArticle';
 import fetch from 'isomorphic-unfetch';
 
@@ -20,11 +20,11 @@ class Blog extends React.Component<BlogProps> {
   render() {
     return (
       <Layout>
-        <ContactButton />
+        {/* <ContactButton /> */}
         <section id="content">
           <div className="container">
             <div className="row">
-              <BlogAside />
+              {/* <BlogAside /> */}
               <BlogArticle {...this.props.blogArticle} />
             </div>
           </div>

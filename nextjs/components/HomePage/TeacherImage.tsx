@@ -14,13 +14,13 @@ class TeacherImage extends React.Component {
 
     render() {
         var settings = {
-            dots: false,
+            dots: true,
             infinite: true,
             speed: 500,
             slidesToShow: 5,
             // adaptiveHeight: true,
             // slidesToScroll: 1
-            arrows: false,
+            // arrows: true,
             accessibility: true,
             autoplay: true,
             autoplaySpeed: 3000,
@@ -93,17 +93,19 @@ class TeacherImage extends React.Component {
                     <Row>
                         <Col>
                             <Slider {...settings}>
-                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+                                <img src="http://daytot.vn/files/giao-vien/co-thu-hoa.jpg" alt="" />
 
-                                <img onClick={this.onClick} src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+                                <img onClick={this.onClick}
+                                    src="http://daytot.vn/files/giao-vien/2015_06/co-tran-thi-huyen-an.jpg"
+                                    alt="" />
 
-                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+                                <img src="http://daytot.vn/files/giao-vien/2017_02/nguyen-thi-luong.jpg" alt="" />
 
-                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+                                <img src="http://daytot.vn/files/giao-vien/2017_02/nguyen-thi-luong.jpg" alt="" />
 
-                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+                                <img src="http://daytot.vn/files/giao-vien/2017_02/nguyen-thi-luong.jpg" alt="" />
 
-                                <img src="https://picsum.photos/200/300/?random" width="100%" alt="" />
+                                <img src="http://daytot.vn/files/giao-vien/2017_02/nguyen-thi-luong.jpg" alt="" />
                             </Slider>
                         </Col>
                     </Row>

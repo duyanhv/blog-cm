@@ -7,6 +7,7 @@ import { ObjectId, ObjectID } from 'bson';
 import { CreateBlogInputDto, UpdateBlogDetailDto } from '../dto/blog-dto';
 import { FindAllBlogPostsDto } from '../dto/blog-dto/find-all-blog-posts.dto';
 import { Blog } from '../interfaces/blog.interface';
+import { FindBlogDetailDto } from 'client/src/service-proxies/service-proxies';
 
 @Component()
 export class BlogService {
@@ -109,6 +110,9 @@ export class BlogService {
       {
         ...editedPost,
         $set: {
+          previewContent: editedPost.content.length > 345 ?
+            editedPost.content.match(/.{1,345}/g)![0] :
+            editedPost.content,
           lastModifiedBy: editedPost.lastModifiedBy,
           lastModifiedAt: editedPost.lastModifiedAt,
         },
@@ -165,8 +169,10 @@ export class BlogService {
         );
       }
     }
-
     const newpost = new this.blogModel({
+      previewContent: blog.content.length > 345 ?
+        blog.content.match(/.{1,345}/g)![0] :
+        blog.content,
       ...blog,
     });
     await newpost.save();
@@ -174,5 +180,48 @@ export class BlogService {
 
   async delete(postId: string): Promise<void> {
     await this.blogModel.findByIdAndRemove(new ObjectID(postId)).exec();
+  }
+
+  async getActiveAndPreviewContent(): Promise<FindAllBlogPostsDto> {
+    const data = await this.blogModel
+      .find(
+        {
+          deactivate: false
+        },
+        {
+          title: 1,
+          previewContent: 1,
+          author: 1,
+          imageSrc: 1,
+          postCreatedAt: 1,
+        }
+      )
+      .sort({
+        postCreatedAt: -1,
+      })
+      .exec();
+    return {
+      data,
+    };
+  }
+
+  async getpostbyid(postId: string): Promise<FindBlogDetailDto> {
+    const data = await this.blogModel
+      .findOne(
+        {
+          deactivate: false,
+          _id: postId,
+        },
+        {
+          title: 1,
+          content: 1,
+          author: 1,
+          imageSrc: 1,
+          postCreatedAt: 1,
+          subtitle: 1,
+        }
+      )
+      .exec();
+    return data!;
   }
 }
