@@ -14,7 +14,7 @@ const Page400 = () => {
         <h1>400 - Not Found</h1>
         <p>Sorry, Your requested resource is missing.</p>
         <Button type="primary">
-          <Link to="/">Go to Home Page</Link>
+          <Link to="/admin/main">Go to Home Page</Link>
         </Button>
       </div>
     </div>

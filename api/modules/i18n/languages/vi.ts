@@ -47,7 +47,8 @@ export const vi = {
     roles: 'Vai Trò',
     website: 'Website',
     companyInfo: 'Thông Tin Công Ty',
-    uploadImages: 'Tải Ảnh Lên'
+    uploadImages: 'Tải Ảnh Lên',
+    teacher: 'Thông Tin Giáo Viên'
   },
   Header: {
     profile: 'Thông Tin Cá Nhân',

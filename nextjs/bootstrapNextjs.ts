@@ -25,6 +25,12 @@ const setupNextjsRoutes = (server: express.Express, app: next.Server) => {
     return handle(req, res);
   });
 
+  server.get('/admin', (_req, res) => {
+    return res.sendFile(
+      path.join(__dirname, '../../../public/admin_index.html')
+    );
+  });
+
   server.get('/admin/*', (_req, res) => {
     return res.sendFile(
       path.join(__dirname, '../../../public/admin_index.html')
@@ -74,6 +80,24 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
 
   server.get('/study-result/attendance-record', (req, res) => {
     const actualPage = '/study-result/attendance-record';
+    const queryParams = {};
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/study-result/grade-book', (req, res) => {
+    const actualPage = '/study-result/grade-book';
+    const queryParams = {};
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/time-table/register', (req, res) => {
+    const actualPage = '/time-table/register';
+    const queryParams = {};
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/time-table/12', (req, res) => {
+    const actualPage = '/time-table/time-table-12';
     const queryParams = {};
     app.render(req, res, actualPage, queryParams);
   });

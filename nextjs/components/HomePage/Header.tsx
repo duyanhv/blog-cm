@@ -100,17 +100,72 @@ class Header extends React.Component {
                     data-delay="0"
                     data-close-others="false"
                   >
-                    Study Result &nbsp; <i className="fa fa-angle-down" />
+                    Sổ Liên Lạc &nbsp; <i className="fa fa-angle-down" />
                   </a>
                   <ul className="dropdown-menu">
                     <li>
                       <Link href="/study-result/attendance-record">
-                        <a>Attendance Record</a>
+                        <a>Điểm Danh</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/study-result/grade-book">
-                        <a>Grade Book</a>
+                        <a>Bảng Điểm</a>
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+
+                <li className="dropdown">
+                  <a
+                    href="#"
+                    className="dropdown-toggle "
+                    data-toggle="dropdown"
+                    data-hover="dropdown"
+                    data-delay="0"
+                    data-close-others="false"
+                  >
+                    Lịch Học &nbsp; <i className="fa fa-angle-down" />
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link href="/time-table/register">
+                        <a>Đăng Kí Học</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/time-table/12">
+                        <a>Lịch Học Lớp 12</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="#">
+                        <a>Lịch Học Lớp 11</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="#">
+                        <a>Lịch Học Lớp 10</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="#">
+                        <a>Lịch Học Lớp 9</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="#">
+                        <a>Lịch Học Lớp 8</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="#">
+                        <a>Lịch Học Lớp 7</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="#">
+                        <a>Lịch Học Lớp 6</a>
                       </Link>
                     </li>
                   </ul>

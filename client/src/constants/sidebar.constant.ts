@@ -60,6 +60,12 @@ const sidebarMenu: Submenu[] = [
         title: 'Sidebar.blog',
         permissions: [],
       },
+      {
+        key: '/main/teacher',
+        path: '/main/teacher',
+        title: 'Sidebar.teacher',
+        permissions: [],
+      },
     ],
   },
 ];

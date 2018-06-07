@@ -14,7 +14,7 @@ const Page403 = () => {
         <h1>403 - Forbidden</h1>
         <p>Sorry, Your requested resource is forbidden.</p>
         <Button type="primary">
-          <Link to="/">Go to Home Page</Link>
+          <Link to="/admin/main">Go to Home Page</Link>
         </Button>
       </div>
     </div>

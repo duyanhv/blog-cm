@@ -34,8 +34,7 @@ function* loginWorker(action: Login): any {
 
     yield put(updateUserProfile(tokenInfo.token, action.payload.rememberMe));
 
-    const callbackUrl = qs.parse(location.search, { ignoreQueryPrefix: true })
-      .callbackUrl;
+    const callbackUrl = qs.parse(location.search, { ignoreQueryPrefix: true }).callbackUrl;
     if (callbackUrl) {
       yield put(push(callbackUrl));
     } else {

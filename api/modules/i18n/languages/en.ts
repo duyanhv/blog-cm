@@ -49,6 +49,7 @@ export const en = {
     companyInfo: 'Company Info',
     uploadImages: 'Upload Images',
     blog: 'Blog',
+    teacher: 'Teacher'
   },
   Header: {
     profile: 'Profile',
