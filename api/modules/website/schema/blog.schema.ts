@@ -18,7 +18,8 @@ const BlogSchema = new mongoose.Schema(
     postCreatedAt: {
       type: Date,
       default: Date.now(),
-    }
+    },
+    previewContent: String,
   }),
 );
 

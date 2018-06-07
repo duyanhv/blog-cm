@@ -26,6 +26,9 @@ export class UpdateBlogDetailDto implements HasModificationAuditInfo {
   @ApiModelProperty({ description: 'postRating' })
   readonly postRating: number;
 
+  @ApiModelProperty({ description: 'postRating' })
+  readonly previewContent: string;
+
   readonly lastModifiedAt: Date;
   readonly lastModifiedBy: string;
 }

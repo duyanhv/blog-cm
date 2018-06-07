@@ -78,6 +78,36 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     app.render(req, res, actualPage, queryParams);
   });
 
+  server.get('/contact', (req, res) => {
+    const actualPage = '/contact';
+    const queryParams = { slug: req.params.slug, name: req.params.name };
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  // use pages/blogpost.jsx as /blog/:id
+  server.get('/blog/:id', (req, res) => {
+    const actualPage = '/blogpost';
+    app.render(
+      req,
+      res,
+      actualPage,
+      Object.assign(
+        {
+          id: req.params.id,
+          slug: req.params.slug, 
+          name: req.params.name
+        },
+        req.query,
+      )
+    );
+  });
+  // redirect from /blogpost to /blog or /blogpost?id to /blog/:id 
+  server.get('/blogpost', (req, res) => {
+    if (req.query.id) {
+      return res.redirect('/blog');
+    }
+    res.redirect(301, `/blog/${req.query.id}`);
+  });
   server.get('/study-result/attendance-record', (req, res) => {
     const actualPage = '/study-result/attendance-record';
     const queryParams = {};

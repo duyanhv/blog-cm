@@ -12,4 +12,5 @@ export interface Blog extends Document, IsAuditable {
   readonly postRating: number;
   readonly deactivate: boolean;
   readonly postCreatedAt: Date;
+  readonly previewContent: string;
 }

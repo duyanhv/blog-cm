@@ -35,47 +35,101 @@ class Technology extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-3 col-md-3 col-lg-3">
-                  <div className="box">
-                    <div className="aligncenter">
-                      <div className="icon">
-                        <img src="http://daytot.vn/uploads/glass6.png" alt="" />
-                        {/* <i className="fa fa-file-code-o fa-5x"></i> */}
+
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="row">
+                        <div className="col-sm-3 col-md-3 col-lg-3">
+                          <div className="box">
+                            <div className="aligncenter">
+                              <div className="icon">
+                                <img src="http://daytot.vn/uploads/glass1.png" />
+                                {/* <i className="fa fa-desktop fa-5x"></i> */}
+                              </div>
+                              <h4>Fully responsive</h4>
+                              <div className="box-description">
+                                Khóa học tiếng Anh chuyên biệt dành cho các học sinh theo từng học lực khác nhau
+                                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-sm-3 col-md-3 col-lg-3">
+                          <div className="box">
+                            <div className="aligncenter">
+                              <div className="icon">
+                                <img src="http://daytot.vn/uploads/glass6.png" alt="" />
+                                {/* <i className="fa fa-file-code-o fa-5x"></i> */}
+                              </div>
+                              <h4>Fully responsive</h4>
+                              <div className="box-description">
+                                Khóa học tiếng Anh chuyên biệt dành cho các học sinh theo từng học lực khác nhau
+                                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-sm-3 col-md-3 col-lg-3">
+                          <div className="box">
+                            <div className="aligncenter">
+                              <div className="icon">
+                                <img src="http://daytot.vn/uploads/glass20.png" alt="" />
+                                {/* <i className="fa fa-paper-plane-o fa-5x"></i> */}
+                              </div>
+                              <h4>Fully responsive</h4>
+                              <div className="box-description">
+                                Khóa học tiếng Anh chuyên biệt dành cho các học sinh theo từng học lực khác nhau
+                                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-sm-3 col-md-3 col-lg-3">
+                          <div className="box">
+                            <div className="aligncenter">
+                              <div className="icon">
+                                <img src="http://daytot.vn/uploads/khoa-tieng-anh.png" alt="" />
+                                {/* <i className="fa fa-cubes fa-5x"></i> */}
+                              </div>
+                              <h4>Fully responsive</h4>
+                              <div className="box-description">
+                                Khóa học tiếng Anh chuyên biệt dành cho các học sinh theo từng học lực khác nhau
+                                            </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <h4>Fully responsive</h4>
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-3 col-md-3 col-lg-3">
-                  <div className="box">
-                    <div className="aligncenter">
-                      <div className="icon">
-                        <img
-                          src="http://daytot.vn/uploads/glass20.png"
-                          alt=""
-                        />
-                        {/* <i className="fa fa-paper-plane-o fa-5x"></i> */}
-                      </div>
-                      <h4>Fully responsive</h4>
+              </div>
+              <div className="col-sm-3 col-md-3 col-lg-3">
+                <div className="box">
+                  <div className="aligncenter">
+                    <div className="icon">
+                      <img
+                        src="http://daytot.vn/uploads/glass20.png"
+                        alt=""
+                      />
+                      {/* <i className="fa fa-paper-plane-o fa-5x"></i> */}
                     </div>
+                    <h4>Fully responsive</h4>
                   </div>
                 </div>
-                <div className="col-sm-3 col-md-3 col-lg-3">
-                  <div className="box">
-                    <div className="aligncenter">
-                      <div className="icon">
-                        <img
-                          src="http://daytot.vn/uploads/khoa-tieng-anh.png"
-                          alt=""
-                        />
-                        {/* <i className="fa fa-cubes fa-5x"></i> */}
-                      </div>
-                      <h4>Fully responsive</h4>
-                      <div className="box-description">
-                        Khóa học tiếng Anh chuyên biệt dành cho các học sinh
-                        theo từng học lực khác nhau
-                      </div>
+              </div>
+              <div className="col-sm-3 col-md-3 col-lg-3">
+                <div className="box">
+                  <div className="aligncenter">
+                    <div className="icon">
+                      <img
+                        src="http://daytot.vn/uploads/khoa-tieng-anh.png"
+                        alt=""
+                      />
+                      {/* <i className="fa fa-cubes fa-5x"></i> */}
                     </div>
+                    <h4>Fully responsive</h4>
+                    <div className="box-description">
+                      Khóa học tiếng Anh chuyên biệt dành cho các học sinh
+                      theo từng học lực khác nhau
+                      </div>
                   </div>
                 </div>
               </div>
@@ -92,7 +146,7 @@ class Technology extends React.Component {
           </div>
         </div>
         {/* end divider */}
-      </section>
+      </section >
     );
   }
 }

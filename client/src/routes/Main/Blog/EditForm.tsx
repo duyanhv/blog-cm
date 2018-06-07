@@ -8,7 +8,27 @@ import {
 import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/braft.css';
 import './EditForm.less';
+const sanitizeHtml = require('sanitize-html');
 
+const saniTizeConfig = {
+  allowedTags: ['p', 'em', 'strong', 'span', 'img', 'br'],
+  allowedAttributes: {
+    p: ['style'],
+    span: ['style']
+  },
+  allowedStyles: {
+    '*': {
+      // Match HEX and RGB
+      color: [/^\#(0x)?[0-9a-f]+$/i, /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/],
+      'text-align': [/^left$/, /^right$/, /^center$/],
+      // Match any number with px, em, or %
+      'font-size': [/^\d+(?:px|em|%)$/]
+    },
+    p: {
+      'font-size': [/^\d+rem$/]
+    }
+  }
+};
 interface EditFormProps extends FormComponentProps {
   dataPerPost: IFindBlogDetailDto;
   isBusy: boolean;
@@ -31,18 +51,34 @@ class EditForm extends React.Component<EditFormProps> {
         } else if (values.content.length < 30) {
           message.error('Please fill the Editor (>= 27 words)', 1.5);
           return;
+        } else if (this.props.form.getFieldValue('title').length > 30 || this.props.form.getFieldValue('title').length < 6) {
+          message.error('Please fill title (6 < words < 30)', 1.5);
+          return;
+        } else if (this.props.form.getFieldValue('subtitle').length > 300 || this.props.form.getFieldValue('subtitle').length < 6) {
+          // tslint:disable-next-line:no-console
+          console.log(this.props.form.getFieldValue('subtitle').length);
+          message.error('Please fill subtitle (6 < words < 150)', 1.5);
+          return;
+        } else if (this.props.form.getFieldValue('author').length > 30 || this.props.form.getFieldValue('author').length < 6) {
+          message.error('Please fill author (<30 & >6 words)', 1.5);
+          return;
         }
+        // tslint:disable-next-line:no-console
+        console.log(values.content);
         const editedPost = {
-          title: this.props.form.getFieldValue('title'),
-          subtitle: this.props.form.getFieldValue('subtitle'),
-          author: this.props.form.getFieldValue('author'),
-          content: this.props.form.getFieldValue('content'),
+          title: sanitizeHtml(this.props.form.getFieldValue('title')),
+          subtitle: sanitizeHtml(this.props.form.getFieldValue('subtitle')),
+          author: sanitizeHtml(this.props.form.getFieldValue('author')),
+          content: sanitizeHtml(values.content, saniTizeConfig),
           tags: this.props.dataPerPost.tags,
           imageSrc: this.props.dataPerPost.imageSrc,
           viewCount: this.props.dataPerPost.viewCount,
           postRating: this.props.dataPerPost.postRating,
           lastModifiedBy: this.props.currentUsername,
           lastModifiedAt: Date.now(),
+          previewContent: sanitizeHtml(values.content).length > 345 ?
+            sanitizeHtml(values.content).match(/.{1,345}/g)[0] :
+            sanitizeHtml(values.content),
         };
         this.props.handleEditFormSubmit(this.props.dataPerPost._id, editedPost);
       }
@@ -55,7 +91,7 @@ class EditForm extends React.Component<EditFormProps> {
     return content;
   };
 
-  handleEditorRawChange = (rawContent: any) => {
+  handleEditorRawChange = (_rawContent: any) => {
     // tslint:disable-next-line:no-console
     // console.log(rawContent);
   };
@@ -86,11 +122,11 @@ class EditForm extends React.Component<EditFormProps> {
                   <Form.Item label="Title">
                     {getFieldDecorator('title', {
                       rules: [
-                        { required: true, message: 'Please input title' },
-                        {
-                          pattern: /^[a-zA-Z0-9]{6,30}$/,
-                          message: 'Title must be atleast 6 characters',
-                        },
+                        // { required: true, message: 'Please input title' },
+                        // {
+                        //   pattern: /\s*(?:[\w\W\d\.]\s*){6,30}$/,
+                        //   message: 'Title must be atleast 6 characters',
+                        // },
                       ],
                       validateTrigger: 'onBlur',
                       validateFirst: true,
@@ -102,27 +138,27 @@ class EditForm extends React.Component<EditFormProps> {
                   <Form.Item label="Author">
                     {getFieldDecorator('author', {
                       rules: [
-                        { required: true, message: 'Please input subtitle' },
-                        {
-                          pattern: /^[a-zA-Z0-9]{6,30}$/,
-                          message: 'Subtitle must be atleast 6 characters',
-                        },
+                        // { required: true, message: 'Please input Author' },
+                        // {
+                        //   pattern: /\s*(?:[\w\W\d\.]\s){6,70}$/,
+                        //   message: 'Author must be atleast 6 characters',
+                        // },
                       ],
                       validateTrigger: 'onBlur',
                       validateFirst: true,
                       initialValue: this.props.dataPerPost.author,
-                    })(<Input placeholder="Subtitle" />)}
+                    })(<Input placeholder="Author" />)}
                   </Form.Item>
                 </Col>
               </Row>
               <Form.Item label="Subtitle">
                 {getFieldDecorator('subtitle', {
                   rules: [
-                    { required: true, message: 'Please input subtitle' },
-                    {
-                      pattern: /^[a-zA-Z0-9]{6,30}$/,
-                      message: 'Subtitle must be atleast 6 characters',
-                    },
+                    // { required: true, message: 'Please input subtitle' },
+                    // {
+                    //   pattern: /^[a-zA-Z0-9]{6,30}$/,
+                    //   message: 'Subtitle must be atleast 6 characters',
+                    // },
                   ],
                   validateTrigger: 'onBlur',
                   validateFirst: true,

@@ -18,7 +18,7 @@ import { ApiResponseMessageConstants } from '../../../core/constants';
 import UserPermissions from '../../auth/constants/user-permissions.constant';
 import { Authorize } from '../../../core/auth/authorize.decorator';
 import { BlogService } from '../service/blog.service';
-import { CreateBlogInputDto, UpdateBlogDetailDto, SearchInputDto } from '../dto/blog-dto';
+import { CreateBlogInputDto, UpdateBlogDetailDto, SearchInputDto, FindBlogDetailDto } from '../dto/blog-dto';
 import { FindAllBlogPostsDto } from '../dto/blog-dto/find-all-blog-posts.dto';
 import { DateRangeInputDto } from '../dto/blog-dto/daterange-input-dto';
 @ApiUseTags('blog')
@@ -322,6 +322,30 @@ export class BlogController {
     ),
   })
   async getpostpublic(): Promise<FindAllBlogPostsDto> {
-    return await this.blogService.getActivePost();
+    return await this.blogService.getActiveAndPreviewContent();
+  }
+
+  @Get('getpostbyid/:id')
+  @ApiOperation({ title: 'getpostbyid', description: 'getpostbyid' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: `Post has been successfully fetched.`,
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: ApiResponseMessageConstants.FORBIDDEN,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: ApiResponseMessageConstants.BAD_REQUEST,
+  })
+  @ApiResponse({
+    status: HttpStatus.UNPROCESSABLE_ENTITY,
+    description: ApiResponseMessageConstants.EntityAlreadyExists(
+      BlogController.EntityName,
+    ),
+  })
+  async getpostbyid(@Param('id') postId: string): Promise<FindBlogDetailDto> {
+    return await this.blogService.getpostbyid(postId);
   }
 }

@@ -4420,6 +4420,8 @@ export class CreateBlogInputDto implements ICreateBlogInputDto {
   viewCount!: number;
   /** postRating */
   postRating!: number;
+  /** postRating */
+  previewContent!: string;
 
   constructor(data?: ICreateBlogInputDto) {
       if (data) {
@@ -4449,6 +4451,7 @@ export class CreateBlogInputDto implements ICreateBlogInputDto {
           this.imageSrc = data["imageSrc"];
           this.viewCount = data["viewCount"];
           this.postRating = data["postRating"];
+          this.previewContent = data["previewContent"];
       }
   }
 
@@ -4475,6 +4478,7 @@ export class CreateBlogInputDto implements ICreateBlogInputDto {
       data["imageSrc"] = this.imageSrc;
       data["viewCount"] = this.viewCount;
       data["postRating"] = this.postRating;
+      data["previewContent"] = this.previewContent;
       return data; 
   }
 }
@@ -4496,6 +4500,8 @@ export interface ICreateBlogInputDto {
   viewCount: number;
   /** postRating */
   postRating: number;
+  /** postRating */
+  previewContent: string;
 }
 
 export class UpdateBlogDetailDto implements IUpdateBlogDetailDto {
@@ -4515,6 +4521,8 @@ export class UpdateBlogDetailDto implements IUpdateBlogDetailDto {
   viewCount!: number;
   /** postRating */
   postRating!: number;
+  /** postRating */
+  previewContent!: string;
 
   constructor(data?: IUpdateBlogDetailDto) {
       if (data) {
@@ -4544,6 +4552,7 @@ export class UpdateBlogDetailDto implements IUpdateBlogDetailDto {
           this.imageSrc = data["imageSrc"];
           this.viewCount = data["viewCount"];
           this.postRating = data["postRating"];
+          this.previewContent = data["previewContent"];
       }
   }
 
@@ -4570,6 +4579,7 @@ export class UpdateBlogDetailDto implements IUpdateBlogDetailDto {
       data["imageSrc"] = this.imageSrc;
       data["viewCount"] = this.viewCount;
       data["postRating"] = this.postRating;
+      data["previewContent"] = this.previewContent;
       return data; 
   }
 }
@@ -4591,6 +4601,8 @@ export interface IUpdateBlogDetailDto {
   viewCount: number;
   /** postRating */
   postRating: number;
+  /** postRating */
+  previewContent: string;
 }
 
 export class FindBlogDetailDto implements IFindBlogDetailDto {

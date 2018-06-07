@@ -299,7 +299,7 @@ header .top ul.social-network li a {
 /* -- end top area */
 
 header .navbar {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .navbar-default {
@@ -837,6 +837,31 @@ ul.breadcrumb li a:hover {
 11. Forms
 ============================= */
 
+.contact-card{
+	border: 1px solid #D8D8D8;
+	border-radius: 5px;
+	text-align: left;
+}
+
+.contact-card-header{
+	border-bottom: 1px solid #D8D8D8;
+	background-color: #F7F7F7;
+	text-align: center;
+}
+
+.contact-card-header p{
+	margin: 0 auto;
+	font-weight: 900;
+}
+
+.contact-card-body{
+	padding: 2vh;
+}
+
+.contact-card-body p{
+	display: inline-block;
+}
+
 /* --- contact form  ---- */
 form#contactform input[type="text"] {
   width: 100%;
@@ -1006,10 +1031,16 @@ form.register-form .row {
 /* testimonial slide */
 .slider-div{
 	margin-bottom: 2vh;
+	text-align: center;
 }
 
 .slider-div img{
 	cursor: pointer;
+	padding: 0px;
+	border-radius: 50%;
+	max-width: 128px;
+	max-height: 128px;
+	transform: translateY(15%);
 }
 
 .testimonialslide {
@@ -1131,6 +1162,23 @@ footer ul.link-list li a{
 footer ul.link-list li a:hover {
 	color:#333;
 }
+
+.footer-div{
+	border-top: 3px solid black;
+}
+
+.footer-col-2{
+	padding: 30px;
+	font-weight:500;
+}
+
+.footer-col-2 p:first-child{
+	text-align: center;
+	font-weight: 900;
+	font-size: 2em;
+	padding-bottom: 10px;
+}
+
 /* --- Heading style --- */
 
 h2.error {
@@ -1190,6 +1238,84 @@ footer .widget .social-network {
 }
 
 /* --- Map --- */
+
+
+  
+	.placecard__container {
+	  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+	  max-width: 330px;
+	  width: 100%;
+	  background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+	  border-radius: 2px 2px 2px 2px;
+	  font: normal normal normal normal 11px / normal Roboto, Arial, sans-serif;
+	  margin: 10px;
+	  padding: 9px 4px 9px 11px;
+	  overflow: hidden;
+	}
+	
+	.placecard__left {
+	  float: left;
+	  width: 75%;
+	}
+	
+	.placecard__right {
+	  text-align: center;
+	  float: left;
+	  width: 25%;
+	}
+	
+	.placecard__business-name {
+	  cursor: default;
+	  height: 19px;
+	  text-overflow: ellipsis;
+	  white-space: nowrap;
+	  width: 200px;
+	  perspective-origin: 100px 9.5px;
+	  transform-origin: 100px 9.5px;
+	  font: normal normal 500 normal 14px / normal Roboto, Arial;
+	  overflow: hidden;
+	  margin: 0;
+	}
+	
+	.placecard__info {
+	  color: rgb(91, 91, 91);
+	  cursor: default;
+	  height: 32px;
+	  width: 200px;
+	  column-rule-color: rgb(91, 91, 91);
+	  perspective-origin: 100px 16px;
+	  transform-origin: 100px 16px;
+	  border: 0px none rgb(91, 91, 91);
+	  font: normal normal normal normal 12px / normal Roboto, Arial;
+	  margin: 6px 0px 0px;
+	  outline: rgb(91, 91, 91) none 0px;
+	}
+	
+	.placecard__direction-icon {
+	  background: rgba(0, 0, 0, 0) url("https://maps.gstatic.com/mapfiles/embed/images/entity11.png") repeat scroll 0px 0px / 70px 210px padding-box border-box;
+	  height: 22px;
+	  width: 22px;
+	  margin-right: auto;
+	  margin-left: auto;
+	}
+	
+	.placecard__direction-link {
+	  color: rgb(58, 132, 223);
+	  display: block;
+	  height: 43px;
+	  text-decoration: none;
+	  width: 54.7344px;
+	}
+	
+	.placecard__view-large {
+	  display: block;
+	  margin-top: 10px;
+	  color: rgb(58, 132, 223);
+	  text-decoration: none;
+	}
+	
+
+
 .map{
 	position:relative;
 	margin-top:-50px;
@@ -1402,14 +1528,29 @@ border: 1px solid #e6e6e6;
 /* ===============================
 14. Blog & article
 ================================ */
+.blog-post-content p{
+	display: inline;
+}
 
-.blog-post-content{
+.blog-post-content div{
 	/* position: relative; */
-	width: 100%;
+	/* width: 100%; */
 	/* height: 10vh; */
 	overflow: hidden;
 	text-overflow: ellipsis; 
-	white-space: nowrap;
+	/* white-space: nowrap; */
+	color: #848383;
+	font-style: italic;
+	/* display: inline-block; */
+}
+
+.blog-post-content{
+	padding: 10px;
+}
+
+.img-responsive{
+	max-width: 50vh;
+	max-height: 50vh;
 }
 
 article{
@@ -1581,8 +1722,8 @@ ul.meta-post li a{
 /* --- single post --- */
 .bottom-article{
 	overflow: hidden;
-	padding:10px 0 10px 0;
-	margin-top:20px;
+	/* padding:10px 0 10px 0;
+	margin-top:20px; */
 }
 
 /* --- author info --- */
@@ -1645,6 +1786,105 @@ ul.meta-post li a{
 	font-weight: 600;
 }
 
+/* ===============================
+14. Blog Post
+================================ */
+.blog-post-header{
+	/* height: 100vh;
+	width: 100%;
+	background-color: #545A5F; */
+	/* margin-top: -20px; */
+	text-align: left;
+	position: relative;
+	
+}
+
+.blog-post-wrapper{
+	border: 1px solid #DDDDDD;
+	border-radius: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 20px;
+	overflow: hidden;
+}
+
+.blog-post-header-content{
+	position: relative;
+	/* top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 60%;
+	height: 60%; */
+	text-align: left;
+	width: 100%;
+	height: max-content;
+	margin-top:20px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.blog-post-header-content p{
+	color: #000000;
+	font-weight: 500;
+	font-size: 20px;
+	/* padding: 10px;	 */
+	overflow-wrap: break-word;
+  	word-wrap: break-word;
+  	hyphens: auto;
+	/* line-height: 70px; */
+	
+}
+
+.blog-post-header-content p:nth-child(2){
+	font-size: 15px;
+	font-style: italic;
+	color: #A5A5A5;
+}
+
+/* .blog-post-by-id-content{
+	width: 100%;
+	height: max-content;
+}
+
+.blog-post-by-id-content div{
+	font-size: 40px;
+	font-weight: 500;
+	overflow-wrap: break-word;
+  	word-wrap: break-word;
+  	hyphens: auto;
+	line-height: 70px;
+	padding: 30px;
+} */
+
+.blog-post-content-wrapper{
+	padding-right: 35px;
+}
+
+.blog-post-by-id-content{
+	margin-top: 10px;
+}
+
+.blog-post-by-id-content p{
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.blog-post-content-img{
+	width: 150px;
+	height: 150px;
+	border: 2px solid black;
+	padding: 16px;
+	float:right;
+	background-image: url('http://daytot.vn/files/giao-vien/co-thu-hoa.jpg');
+	background-size: cover;
+}
+
+.blog-post-content-content{
+	overflow-wrap: break-word;
+  	word-wrap: break-word;
+  	hyphens: auto;
+	line-height: 24px;
+}
+
 /* --- pagination --- */
 
 #pagination a,
@@ -1695,8 +1935,8 @@ aside{
 
 
 .left-sidebar{
-	border-right:1px solid #f5f5f5;
-	padding:0 30px 0 0;
+	border-left:1px solid #f5f5f5;
+	padding:0 0 0 30px;
 }
 
 
@@ -2070,7 +2310,7 @@ a.scrollup i:hover {
 	position: relative;
 }
 .news-table{
-	margin: 0 100px;
+	margin: 0 2%;
 }
 
 .newsCard-div{
@@ -2255,7 +2495,7 @@ article img.pull-right, article .align-right{
 		margin:0 auto;	
 	}
 	.navbar-brand {
-		margin-top: 10px;
+		margin: 0 auto;
 		border-bottom: none;
 	}
 	.navbar-header {
