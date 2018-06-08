@@ -4,6 +4,7 @@ export const vi = {
   profile: 'Thông Tin Cá Nhân',
   users: 'Người Dùng',
   roles: 'Vai Trò',
+  teacher: 'Thông Tin Giáo Viên',
   company: 'Công Ty',
   firstName: 'Họ',
   middleName: 'Tên Đệm',

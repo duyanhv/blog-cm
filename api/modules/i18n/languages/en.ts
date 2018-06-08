@@ -4,6 +4,7 @@ export const en = {
   profile: 'Profile',
   users: 'Users',
   roles: 'Roles',
+  teacher: 'Teachers',
   company: 'Company',
   firstName: 'First Name',
   middleName: 'Middle Name',

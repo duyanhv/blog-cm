@@ -139,7 +139,7 @@ const createNewUserSuccessReducer = (
   };
 };
 
-const updateUserSuccess = (
+const updateUserSuccessReducer = (
   state: UserListPageState,
   action: UpdateUserSuccess,
 ) => {
@@ -163,7 +163,7 @@ const updateUserSuccess = (
   };
 };
 
-const userInfoChange = (state: UserListPageState, action: UserInfoChange) => {
+const userInfoChangeReducer = (state: UserListPageState, action: UserInfoChange) => {
   return {
     ...state,
     currentUser: {
@@ -183,8 +183,8 @@ const userListPageReducer = handleActions<UserListPageState, any>(
     [FETCHING_ERROR]: fetchingErrorReducer,
     [ADD_USER_TAB_CHANGE]: addUserTabChangeReducer,
     [CREATE_NEW_USER_SUCCESS]: createNewUserSuccessReducer,
-    [UPDATE_USER_SUCCESS]: updateUserSuccess,
-    [USER_INFO_CHANGE]: userInfoChange,
+    [UPDATE_USER_SUCCESS]: updateUserSuccessReducer,
+    [USER_INFO_CHANGE]: userInfoChangeReducer,
   },
   initialState,
 );
