@@ -57,7 +57,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
 
   handleTableChange = async (
     pagination: any,
-    filters: any,
+    _filters: any,
     sorter: any,
   ): Promise<void> => {
     this.props.dispatch(

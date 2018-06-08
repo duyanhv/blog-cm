@@ -10,6 +10,8 @@ import { FindTeachersResultDto } from './find-teachers-result.dto';
 import { FindTeachersDetailDto } from './find-teachers-detail.dto';
 import { FindTeachersInputDto } from './find-teachers-input.dto';
 import { CreateTeacherInputDto } from './create-teacher-input.dto';
+import { ActivateTeacherDto } from './activate-teacher.dto';
+import { UpdateTeacherInfoDto } from './update-teacher-info.dto';
 
 export {
   // create company
@@ -27,4 +29,6 @@ export {
   FindTeachersDetailDto,
   FindTeachersInputDto,
   CreateTeacherInputDto,
+  ActivateTeacherDto,
+  UpdateTeacherInfoDto,
 };
