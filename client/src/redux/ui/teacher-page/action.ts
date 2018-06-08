@@ -29,7 +29,7 @@ export type TEACHER_INFO_CHANGE = typeof TEACHER_INFO_CHANGE;
 export interface OpenAddTeacherModal {
   type: OPEN_ADD_TEACHER_MODAL;
   payload: {
-    currentTeacher: FindAllTeachersDetailDto;
+    currentTeacher: any;
   };
 }
 
@@ -47,28 +47,28 @@ export interface SearchChange {
 export interface CreateNewTeacher {
   type: CREATE_NEW_TEACHER;
   payload: {
-    teacherInfo: CreateTeacherInputDto;
+    teacherInfo: any;
   };
 }
 
 export interface CreateNewTeacherSuccess {
   type: CREATE_NEW_TEACHER_SUCCESS;
   payload: {
-    teacherInfo: FindAllTeachersDetailDto;
+    teacherInfo: any;
   };
 }
 
 export interface UpdateTeacher {
   type: UPDATE_TEACHER;
   payload: {
-    teacherInfo: UpdateTeacherInputDto;
+    teacherInfo: any;
   };
 }
 
 export interface UpdateTeacherSuccess {
   type: UPDATE_TEACHER_SUCCESS;
   payload: {
-    teacherInfo: FindAllTeachersDetailDto;
+    teacherInfo: any;
   };
 }
 
@@ -82,7 +82,7 @@ export interface TeacherInfoChange {
 // Payload Creator
 export const openAddTeacherModal = createAction(
   OPEN_ADD_TEACHER_MODAL,
-  (currentTeacher: FindAllTeachersDetailDto) => ({
+  (currentTeacher: any) => ({
     currentTeacher,
   }),
 );
@@ -95,28 +95,28 @@ export const searchChange = createAction(SEARCH_CHANGE, (search: string) => ({
 
 export const createNewTeacher = createAction(
   CREATE_NEW_TEACHER,
-  (teacherInfo: CreateTeacherInputDto) => ({
+  (teacherInfo: any) => ({
     teacherInfo,
   }),
 );
 
 export const createNewTeacherSuccess = createAction(
   CREATE_NEW_TEACHER_SUCCESS,
-  (teacherInfo: FindAllTeachersDetailDto) => ({
+  (teacherInfo: any) => ({
     teacherInfo,
   }),
 );
 
 export const updateTeacher = createAction(
   UPDATE_TEACHER,
-  (userInfo: UpdateTeacherInputDto) => ({
+  (userInfo: any) => ({
     userInfo,
   }),
 );
 
 export const updateTeacherSuccess = createAction(
   UPDATE_TEACHER_SUCCESS,
-  (teacherInfo: FindAllTeachersDetailDto) => ({
+  (teacherInfo: any) => ({
     teacherInfo,
   }),
 );

@@ -23,7 +23,7 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
     console.log(currentTeacher);
   }
 
-  handleTableChange = (pagination: any, filters: any, sorter: any) => {
+  handleTableChange = (_pagination: any, _filters: any, _sorter: any) => {
     // tslint:disable-next-line:no-console
     console.log('Table Change');
   }

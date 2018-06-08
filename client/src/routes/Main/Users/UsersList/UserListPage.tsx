@@ -57,7 +57,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
 
   handleTableChange = async (
     pagination: any,
-    filters: any,
+    _filters: any,
     sorter: any,
   ): Promise<void> => {
     this.props.dispatch(
@@ -206,7 +206,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
                 multiple={true}
                 defaultExpandAll={true}
                 checkedKeys={this.props.userListPage.currentUser.permissions}
-                onCheck={(checkedKeys, event: any) =>
+                onCheck={(checkedKeys, _event: any) =>
                   this.props.dispatch(
                     userInfoChange({
                       permissions: checkedKeys.filter(
