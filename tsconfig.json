@@ -34,7 +34,6 @@
     "rootDir": ".",
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noImplicitUseStrict": true,
-    "strict": false
+    "noImplicitUseStrict": true
   }
 }

@@ -33,5 +33,8 @@ export class GoogleAuthService extends Strategy {
       const user = await this.usersService.findById(id);
       done(null, user);
     });
+
+    // tslint:disable-next-line:no-console
+    console.log(config.swagger.title);
   }
 }

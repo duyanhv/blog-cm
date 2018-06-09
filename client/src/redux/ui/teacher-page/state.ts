@@ -1,7 +1,7 @@
 interface TeacherPageState {
   addTeacherModalVisible: boolean;
   isBusy: boolean;
-  data: FindAllTeachersDetailDto[];
+  data: any; // FindAllTeachersDetailDto[];
   total: number;
   pageNumber: number;
   pageSize: number;
@@ -9,7 +9,7 @@ interface TeacherPageState {
   search?: string;
   sortBy: string;
   asc: boolean;
-  currentTeacher: FindAllTeachersDetailDto;
+  currentTeacher: any; // FindAllTeachersDetailDto;
 }
 
 export {
