@@ -2,17 +2,17 @@ import { Component } from '@nestjs/common';
 import * as passport from 'passport';
 import { Strategy } from 'passport-google-oauth20';
 import { UsersService } from '../users.service';
-import { User } from '../interfaces';
 import config from '../../../config';
+import { User } from '../interfaces';
 
 @Component()
 export class GoogleAuthService extends Strategy {
   constructor(private readonly usersService: UsersService) {
     super(
       {
-        clientID: config.auth.googleOauth.clientID,
         clientSecret: config.auth.googleOauth.clientSecret,
         callbackURL: config.auth.googleOauth.callbackURL,
+        clientID: config.auth.googleOauth.clientID,
       },
       async (_token, _refreshToken, profile, done) => {
         const authInfo = await this.usersService.createWithExternalCredentials(
@@ -22,6 +22,9 @@ export class GoogleAuthService extends Strategy {
         return done(null, authInfo.user, authInfo.info);
       },
     );
+
+    // tslint:disable-next-line:no-console
+    console.log(config);
 
     passport.use(this as any);
 

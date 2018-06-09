@@ -58,7 +58,7 @@ export class AuthService {
     let oldTokenData: Token;
     try {
       oldTokenData = jwt.verify(token, config.auth.secret) as any;
-    } catch {
+    } catch (error) {
       throw new HttpException('Invalid token', HttpStatus.BAD_REQUEST);
     }
 
