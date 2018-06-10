@@ -35,6 +35,6 @@ export class GoogleAuthService extends Strategy {
     });
 
     // tslint:disable-next-line:no-console
-    console.log(config.swagger.title);
+    // console.log(config.swagger.title);
   }
 }
