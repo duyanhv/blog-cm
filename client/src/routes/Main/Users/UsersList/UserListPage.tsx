@@ -74,7 +74,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
     );
   };
 
-  handleSearchChange = async (value: any): Promise<void> => {
+  handleSearchChange = (value: any) => {
     const debounced = _.debounce(
       () => this.props.dispatch(searchChange(value)),
       1000,
@@ -82,7 +82,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
     debounced();
   };
 
-  handleFilterChange = async (value: any) => {
+  handleFilterChange = (value: any) => {
     this.props.dispatch(filterChange(value));
   };
 
@@ -258,4 +258,4 @@ const mapStateToProps = (appState: AppState) => ({
   profile: appState.profile,
 });
 
-export default connect(mapStateToProps)(translate()(UserListPage));
+export default connect(mapStateToProps)(translate()(UserListPage) as any);

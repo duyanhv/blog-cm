@@ -115,11 +115,11 @@ export class CompanyController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('logo', { dest: 'temporary/' }))
   @ApiOperation({ title: 'Upload Image', description: 'Upload Image' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Upload Successful',
-    type: String,
-  })
+  // @ApiResponse({
+  //   status: HttpStatus.OK,
+  //   description: 'Upload Successful',
+  //   type: String,
+  // })
   @ApiResponse({
     status: HttpStatus.FORBIDDEN,
     description: ApiResponseMessageConstants.FORBIDDEN,
@@ -135,11 +135,11 @@ export class CompanyController {
 
   @Get('getCompanyLogo')
   @ApiOperation({ title: 'Upload Image', description: 'Upload Image' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Upload Successful',
-    type: String,
-  })
+  // @ApiResponse({
+  //   status: HttpStatus.OK,
+  //   description: 'Upload Successful',
+  //   type: String,
+  // })
   @ApiResponse({
     status: HttpStatus.FORBIDDEN,
     description: ApiResponseMessageConstants.FORBIDDEN,

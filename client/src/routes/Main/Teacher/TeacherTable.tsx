@@ -3,8 +3,9 @@ import { Table, Tooltip, Button } from 'antd';
 import './TeacherTable.less';
 import { TranslationFunction } from 'react-i18next';
 import { AppSettingsState } from '../../../redux/app-settings';
+import { TeacherPageState } from '../../../redux/ui/teacher-page';
 
-interface TeacherTableProps {
+interface TeacherTableProps extends TeacherPageState {
   t: TranslationFunction;
   appSettings: AppSettingsState;
   handleTableChange: any;
@@ -57,18 +58,18 @@ const TeacherTable = (props: TeacherTableProps) => {
     <div className="teacher-table">
       <Table
         size="middle"
-        loading={false} // props.userListPage.isBusy
+        loading={props.isBusy}
         columns={columns}
-        dataSource={[{fullName: 'Test', email: 'test@email.com', phone: '0123456789'}]} // props.userListPage.data
+        dataSource={props.data}
         rowKey={record => (record as any).fullname}
         onChange={(pagination, filters, sorter) =>
           props.handleTableChange(pagination, filters, sorter)
         }
         pagination={{
-          total: 10, // props.userListPage.total
-          current: 1, // props.userListPage.pageNumber
+          total: props.total,
+          current: props.pageNumber,
           showSizeChanger: true,
-          pageSize: 5, // props.userListPage.pageSize
+          pageSize: props.pageSize,
           pageSizeOptions: props.appSettings.gridPage.pageSizes.map(item =>
             String(item),
           ),

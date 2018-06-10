@@ -20,6 +20,7 @@ import { companyPageReducer } from './ui/company-page';
 import { profilePageReducer } from './ui/profile-page';
 import { uploadImgPageReducer } from './ui/upload-image-page';
 import { blogPageReducer } from './ui/blog-page';
+import { teacherPageReducer } from './ui/teacher-page';
 
 const composeEnhancers =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -43,6 +44,7 @@ const store = reduxCreateStore<AppState>(
       profilePage: profilePageReducer,
       uploadImgPage: uploadImgPageReducer,
       blogPage: blogPageReducer,
+      teacherPage: teacherPageReducer,
     }),
     router: routerReducer,
   }),

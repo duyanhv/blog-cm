@@ -3,17 +3,23 @@ import * as Joi from 'joi';
 import { TeacherConst } from '../constants/teacher.constant';
 import { Model, Query } from 'mongoose';
 import { Teacher } from '../interfaces';
-import { FindTeachersResultDto, FindTeachersInputDto, CreateTeacherInputDto, FindTeachersDetailDto, UpdateTeacherInfoDto } from '../dto';
+import {
+  FindTeachersResultDto,
+  FindTeachersInputDto,
+  CreateTeacherInputDto,
+  FindTeachersDetailDto,
+  UpdateTeacherInfoDto
+} from '../dto';
 import * as _ from 'lodash';
 import * as path from 'path';
 import * as fs from 'fs';
 import { processImage } from '../../../core/helpers';
 
 @Component()
-export class TeacherService {
+export class TeachersService {
   constructor(
     @Inject(TeacherConst.TeacherModelToken)
-    private readonly teacherModel: Model<Teacher>,
+    private readonly teacherModel: Model<Teacher>
   ) {}
 
   addFullName = (teacher: CreateTeacherInputDto) => {
@@ -24,7 +30,7 @@ export class TeacherService {
     return {
       ...teacher,
       normalizedFullName,
-      fullName,
+      fullName
     };
   }
 
@@ -33,10 +39,13 @@ export class TeacherService {
       ? this.teacherModel
           .find(
             query.name
-              ? {  
-                  normalizedFullName: {$regex: `^${query.name}`, $options: 'i'},
+              ? {
+                  normalizedFullName: {
+                    $regex: `^${query.name}`,
+                    $options: 'i'
+                  }
                 }
-              : {},
+              : {}
           )
           .where({ subject: query.subject })
       : this.teacherModel.find(
@@ -44,18 +53,18 @@ export class TeacherService {
             ? {
                 normalizedFullName: {
                   $regex: `^${query.name}`,
-                  $options: 'i',
-                },
+                  $options: 'i'
+                }
               }
-            : {},
+            : {}
         );
   }
 
   async find(query: FindTeachersInputDto): Promise<FindTeachersResultDto> {
     try {
       const totalPromise = await this.addQuery(query)
-      .count()
-      .exec();
+        .count()
+        .exec();
 
       const teachersPromise = await this.addQuery(query)
         .sort((query.asc as any) === 'true' ? query.sortBy : `-${query.sortBy}`)
@@ -65,10 +74,10 @@ export class TeacherService {
         .exec();
 
       const [total, data] = await Promise.all([totalPromise, teachersPromise]);
-      
+
       return {
         total,
-        data,
+        data
       };
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -80,13 +89,15 @@ export class TeacherService {
     const validationSchema = Joi.object().keys({
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
-      email: Joi.string().email().required(),
+      email: Joi.string()
+        .email()
+        .required(),
       phone: Joi.string().required(),
       dob: Joi.string().required(),
-      subject: Joi.string().required(),
+      subject: Joi.string().required()
     });
     const { error } = Joi.validate(body, validationSchema, {
-      allowUnknown: true,
+      allowUnknown: true
     });
     if (error) {
       throw new HttpException(error.details[0].message, HttpStatus.BAD_REQUEST);
@@ -95,7 +106,7 @@ export class TeacherService {
     // check email exist
     const existedEmail = await this.teacherModel
       .findOne({
-        email: body.email,
+        email: body.email
       })
       .exec();
     if (existedEmail) {
@@ -119,22 +130,32 @@ export class TeacherService {
     if (!teacherId) {
       throw new HttpException('ID not found', HttpStatus.BAD_REQUEST);
     }
-    
+
     // check if teacher exist
-    const existedTeacher = await this.teacherModel.findOne({_id: teacherId}).exec();
+    const existedTeacher = await this.teacherModel
+      .findOne({ _id: teacherId })
+      .exec();
     if (!existedTeacher) {
       throw new HttpException('Teacher Not Found', HttpStatus.BAD_REQUEST);
     }
 
     // activate teacher
     if (existedTeacher && existedTeacher.isActive) {
-      throw new HttpException('Teacher Has Already Activated', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Teacher Has Already Activated',
+        HttpStatus.BAD_REQUEST
+      );
     } else if (existedTeacher && !existedTeacher.isActive) {
       try {
-        await this.teacherModel.updateOne({_id: teacherId}, {isActive: true}).exec();
+        await this.teacherModel
+          .updateOne({ _id: teacherId }, { isActive: true })
+          .exec();
       } catch (error) {
-        throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-      }  
+        throw new HttpException(
+          error.message,
+          HttpStatus.INTERNAL_SERVER_ERROR
+        );
+      }
     }
   }
 
@@ -143,21 +164,31 @@ export class TeacherService {
     if (!teacherId) {
       throw new HttpException('ID not found', HttpStatus.BAD_REQUEST);
     }
-    
+
     // check if teacher exist
-    const existedTeacher = await this.teacherModel.findOne({_id: teacherId}).exec();
+    const existedTeacher = await this.teacherModel
+      .findOne({ _id: teacherId })
+      .exec();
     if (!existedTeacher) {
       throw new HttpException('Teacher Not Found', HttpStatus.BAD_REQUEST);
     }
 
     // deactivate teacher
     if (existedTeacher && !existedTeacher.isActive) {
-      throw new HttpException('Teacher Has Already Deactivated', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Teacher Has Already Deactivated',
+        HttpStatus.BAD_REQUEST
+      );
     } else if (existedTeacher && existedTeacher.isActive) {
       try {
-        await this.teacherModel.updateOne({_id: teacherId}, {isActive: false}).exec();
+        await this.teacherModel
+          .updateOne({ _id: teacherId }, { isActive: false })
+          .exec();
       } catch (error) {
-        throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new HttpException(
+          error.message,
+          HttpStatus.INTERNAL_SERVER_ERROR
+        );
       }
     }
   }
@@ -168,13 +199,15 @@ export class TeacherService {
       _id: Joi.string().required(),
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
-      email: Joi.string().email().required(),
+      email: Joi.string()
+        .email()
+        .required(),
       phone: Joi.string().required(),
       dob: Joi.string().required(),
-      subject: Joi.string().required(),
+      subject: Joi.string().required()
     });
     const { error } = Joi.validate(body, validationSchema, {
-      allowUnknown: true,
+      allowUnknown: true
     });
     if (error) {
       throw new HttpException(error.details[0].message, HttpStatus.BAD_REQUEST);
@@ -186,17 +219,31 @@ export class TeacherService {
     }
 
     // check if teacher exist
-    const existedTeacher = await this.teacherModel.findOne({_id: body._id}).exec();
+    const existedTeacher = await this.teacherModel
+      .findOne({ _id: body._id })
+      .exec();
     if (!existedTeacher) {
       throw new HttpException('Teacher Not Found', HttpStatus.BAD_REQUEST);
     }
 
     // updateinfo
     try {
-      await this.teacherModel.updateOne({_id: body._id}, _.pick(body, ['firstName', 'lastName', 'email', 'phone', 'dob', 'subject'])).exec();
+      await this.teacherModel
+        .updateOne(
+          { _id: body._id },
+          _.pick(body, [
+            'firstName',
+            'lastName',
+            'email',
+            'phone',
+            'dob',
+            'subject'
+          ])
+        )
+        .exec();
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }  
+    }
   }
 
   async uploadProfilePicture(file: any, req: any): Promise<void> {
@@ -210,7 +257,9 @@ export class TeacherService {
       // Generate new filename
       const newFilePath: string = path.join(
         __dirname,
-        `../../../../../static/img/teacher-profile-pictures/${req.body.teacherId}.jpg`,
+        `../../../../../static/img/teacher-profile-pictures/${
+          req.body.teacherId
+        }.jpg`
       );
 
       // Resize image and save image to public folder

@@ -50,4 +50,4 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-export default connect(mapStateToProps)(translate()(ProfilePage));
+export default connect(mapStateToProps)(translate()(ProfilePage) as any);

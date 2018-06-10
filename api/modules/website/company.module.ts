@@ -9,17 +9,22 @@ import { UploadImageService } from './service/upload-images.service';
 import { blogProviders } from './providers/blog.provider';
 import { BlogService } from './service/blog.service';
 import { BlogController } from '.';
+import { TeachersController } from './controller/teacher.controller';
+import { TeachersService } from './service/teacher.service';
+import { teacherProviders } from './providers/teacher.provider';
 
 @Module({
   components: [
     ...companyProviders,
     ...imageProviders,
     ...blogProviders,
+    ...teacherProviders,
     CompanyService,
     UploadImageService,
     BlogService,
+    TeachersService,
   ],
-  controllers: [CompanyController, UploadImagesController, BlogController],
+  controllers: [CompanyController, UploadImagesController, BlogController, TeachersController],
   imports: [DatabaseModule],
 })
 export class CompanyModule {}

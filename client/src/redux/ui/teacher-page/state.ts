@@ -5,11 +5,13 @@ interface TeacherPageState {
   total: number;
   pageNumber: number;
   pageSize: number;
-  filter?: string;
-  search?: string;
+  subject: string;
+  name: string;
   sortBy: string;
   asc: boolean;
   currentTeacher: any; // FindAllTeachersDetailDto;
+  imageSrc: string;
+  errorMessage: string;
 }
 
 export {

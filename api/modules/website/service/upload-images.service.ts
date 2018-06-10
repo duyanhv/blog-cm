@@ -1,4 +1,4 @@
-import { Component, Inject, HttpStatus, HttpException } from '@nestjs/common';
+import { Component, HttpStatus, HttpException, Inject } from '@nestjs/common';
 import { ImageConst } from '../constants/image.constant';
 import { Model } from 'mongoose';
 import { Image } from '../interfaces';

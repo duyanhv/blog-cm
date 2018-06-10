@@ -7,6 +7,12 @@ import {
   CLOSE_ADD_TEACHER_MODAL,
   TeacherInfoChange,
   TEACHER_INFO_CHANGE,
+  SearchChange,
+  SEARCH_CHANGE,
+  FilterChange,
+  FILTER_CHANGE,
+  ErrorHappen,
+  ERROR_HAPPEN,
 } from './action';
 
 const initialState = {
@@ -16,11 +22,13 @@ const initialState = {
   total: 0,
   pageNumber: 1,
   pageSize: 10,
-  filter: undefined,
-  search: undefined,
+  subject: '',
+  name: '',
   sortBy: 'fullName',
   asc: true,
   currentTeacher: {},
+  imageSrc: '',
+  errorMessage: '',
 };
 
 const openAddTeacherModalReducer = (
@@ -58,11 +66,44 @@ const teacherInfoChangeReducer = (
   };
 };
 
+const searchChangeReducer = (
+  state: TeacherPageState,
+  action: SearchChange,
+) => {
+  return {
+    ...state,
+    name: action.payload.search,
+  };
+};
+
+const filterChangeReducer = (
+  state: TeacherPageState,
+  action: FilterChange,
+) => {
+  return {
+    ...state,
+    subject: action.payload.filter,
+  };
+};
+
+const errorHappenReducer = (
+  state: TeacherPageState,
+  action: ErrorHappen,
+) => {
+  return {
+    ...state,
+    errorMessage: action.payload.errorMessage
+  };
+};
+
 const teacherPageReducer = handleActions<TeacherPageState, any>(
   {
     [OPEN_ADD_TEACHER_MODAL]: openAddTeacherModalReducer,
     [CLOSE_ADD_TEACHER_MODAL]: closeAddUserModalReducer,
     [TEACHER_INFO_CHANGE]: teacherInfoChangeReducer,
+    [SEARCH_CHANGE]: searchChangeReducer,
+    [FILTER_CHANGE]: filterChangeReducer,
+    [ERROR_HAPPEN]: errorHappenReducer,
   },
   initialState,
 );

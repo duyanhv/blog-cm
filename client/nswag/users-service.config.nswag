@@ -10,7 +10,7 @@
       "className": "{controller}ServiceProxy",
       "moduleName": "",
       "namespace": "",
-      "typeScriptVersion": 2.8,
+      "typeScriptVersion": 2.9,
       "template": "Fetch",
       "promiseType": "Promise",
       "dateTimeType": "MomentJS",
