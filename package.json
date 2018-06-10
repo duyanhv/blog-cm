@@ -130,7 +130,6 @@
     "prebuild": "rimraf .next/ ",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production && node .next/production-server/server/server.js -p $PORT",
-    "start:production": "yarn build:admin && yarn start",
     "start:dev": "nodemon",
     "start:test": "ts-node -r tsconfig-paths/register src/main.ts",
     "test": "./node_modules/.bin/jest --no-cache",
@@ -140,9 +139,9 @@
     "test:verbose": "./node_modules/.bin/jest --verbose",
     "test:watch": "./node_modules/.bin/jest --watch",
     "tslint": "./node_modules/.bin/tslint -c tslint.json -p tsconfig.json",
-    "admin": "cd client && npm install && npm run build && cd .. && rimraf ./public/**/* && copyfiles -u 2 client/build/**/* public/ && cd public && mv index.html admin_index.html && cd ..",
+    "build:admin": "cd client && npm run build && cd .. && rimraf ./public/**/* && copyfiles -u 2 client/build/**/* public/ && cd public && ren index.html admin_index.html && cd ..",
     "run:production": "cross-env NODE_ENV=production && node .next/production-server/server/server.js -p $PORT",
-    "production": "npm run admin && npm run build"
+    "build:production": "npm run build:admin && npm run build"
   },
   "version": "0.1.0"
 }
