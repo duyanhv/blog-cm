@@ -23,9 +23,6 @@ export class GoogleAuthService extends Strategy {
       },
     );
 
-    // tslint:disable-next-line:no-console
-    console.log(config);
-
     passport.use(this as any);
 
     passport.serializeUser((user: User, done) => {
