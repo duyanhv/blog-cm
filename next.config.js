@@ -16,6 +16,9 @@ module.exports = withTypeScript(withCSS(withLess({
       }
   
       return config
-    }
+    },
+    onDemandEntries: {
+      maxInactiveAge: 1000 * 60 * 60 * 24,
+    },
   }
 )))
