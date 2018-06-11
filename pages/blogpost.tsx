@@ -1,9 +1,8 @@
 import { Component } from 'react';
-import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
 import Layout from '../nextjs/components/HomePage/Layout';
-import BlogAside from '../nextjs/components/Blog/BlogAside';
 import { Grid, Col, Row } from 'react-bootstrap';
+import BlogAside, { BlogAsideProps } from '../nextjs/components/Blog/BlogAside';
 
 export interface BlogPostProps {
     data: {
@@ -15,6 +14,8 @@ export interface BlogPostProps {
         imageSrc: string,
         postCreatedAt: string
     };
+
+    blogAside: BlogAsideProps;
 }
 
 const convertStringToHtml = (content: string) => {
@@ -31,8 +32,12 @@ export default class BlogPost extends Component<BlogPostProps> {
     static async getInitialProps({ query }) {
         const blogData = await fetch(`http://localhost:3000/api/blog/getpostbyid/${query.id}`);
         const jsonBlogData = await blogData.json();
+
+        const lastestBlogPostData = await fetch(`http://localhost:3000/api/blog/getlastestpost`);
+        const jsonLastestBlogPostData = await lastestBlogPostData.json();
         return {
-            data: jsonBlogData
+            data: jsonBlogData,
+            blogAside: jsonLastestBlogPostData
         };
     }
 
@@ -80,7 +85,7 @@ export default class BlogPost extends Component<BlogPostProps> {
                                 </div>
                             </Col>
                             <Col xs={6} md={4}>
-                                <BlogAside />
+                                <BlogAside {...this.props.blogAside} />
                             </Col>
                         </Row>
                     </Grid>

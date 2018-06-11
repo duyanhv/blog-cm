@@ -4,7 +4,7 @@ import { Row, Col, Grid } from 'react-bootstrap';
 
 export interface TechnologyProps { }
 
-class TeacherImage extends React.Component {
+export default class TeacherImage extends React.Component {
     onClick = () => {
         // tslint:disable-next-line:no-console
         console.log('heyeh');
@@ -122,5 +122,3 @@ class TeacherImage extends React.Component {
         );
     }
 }
-
-export default TeacherImage;

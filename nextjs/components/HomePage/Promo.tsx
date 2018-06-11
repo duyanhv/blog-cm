@@ -2,7 +2,7 @@ import React from 'react';
 
 // interface PromoProps {}
 
-class Promo extends React.Component {
+export default class Promo extends React.Component {
   render() {
     return (
       <section className="callaction">
@@ -33,5 +33,3 @@ class Promo extends React.Component {
     );
   }
 }
-
-export default Promo;

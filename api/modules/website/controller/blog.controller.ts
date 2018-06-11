@@ -348,4 +348,28 @@ export class BlogController {
   async getpostbyid(@Param('id') postId: string): Promise<FindBlogDetailDto> {
     return await this.blogService.getpostbyid(postId);
   }
+
+  @Get('getlastestpost')
+  @ApiOperation({ title: 'getlastestpost', description: 'getlastestpost' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: `Post has been successfully fetched.`,
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: ApiResponseMessageConstants.FORBIDDEN,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: ApiResponseMessageConstants.BAD_REQUEST,
+  })
+  @ApiResponse({
+    status: HttpStatus.UNPROCESSABLE_ENTITY,
+    description: ApiResponseMessageConstants.EntityAlreadyExists(
+      BlogController.EntityName,
+    ),
+  })
+  async getlastestpost(): Promise<FindAllBlogPostsDto> {
+    return await this.blogService.getlastestpost();
+  }
 }

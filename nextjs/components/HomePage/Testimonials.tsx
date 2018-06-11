@@ -2,7 +2,7 @@ import React from 'react';
 
 // export interface TestimonialsProps {}
 
-class Testimonials extends React.Component {
+export default class Testimonials extends React.Component {
   render() {
     return (
       <section id="content">
@@ -124,4 +124,3 @@ class Testimonials extends React.Component {
     );
   }
 }
-export default Testimonials;

@@ -2,7 +2,7 @@ import React from 'react';
 
 // export interface TechnologyProps {}
 
-class Technology extends React.Component {
+export default class Technology extends React.Component {
   render() {
     return (
       <section id="content">
@@ -106,5 +106,3 @@ class Technology extends React.Component {
     );
   }
 }
-
-export default Technology;

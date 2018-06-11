@@ -66,8 +66,6 @@ class EditForm extends React.Component<EditFormProps> {
           message.error('Please fill author (<30 & >6 words)', 1.5);
           return;
         }
-        // tslint:disable-next-line:no-console
-        console.log(values.content);
         const editedPost = {
           title: sanitizeHtml(this.props.form.getFieldValue('title')),
           subtitle: sanitizeHtml(this.props.form.getFieldValue('subtitle')),

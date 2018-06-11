@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-class Header extends React.Component {
+export default class Header extends React.Component {
   render() {
     return (
       <header>
@@ -26,7 +26,7 @@ class Header extends React.Component {
             <div className="navbar-collapse collapse ">
               <ul className="nav navbar-nav">
                 <li>
-                  <Link href="/">
+                  <Link prefetch href="/">
                     <a>HOME</a>
                   </Link>
                 </li>
@@ -104,7 +104,7 @@ class Header extends React.Component {
                   </a>
                   <ul className="dropdown-menu">
                     <li>
-                      <Link href="/study-result/attendance-record">
+                      <Link prefetch href="/study-result/attendance-record">
                         <a>Attendance Record</a>
                       </Link>
                     </li>
@@ -117,13 +117,13 @@ class Header extends React.Component {
                 </li>
 
                 <li>
-                  <Link href="/blog">
+                  <Link prefetch href="/blog">
                     <a>Blog</a>
                   </Link>
                 </li>
 
                 <li>
-                  <Link href="/contact">
+                  <Link prefetch href="/contact">
                     <a>Contact</a>
                   </Link>
                 </li>
@@ -135,5 +135,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;

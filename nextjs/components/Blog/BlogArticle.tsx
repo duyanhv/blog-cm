@@ -64,7 +64,7 @@ const BlogData = (data: {
   );
 };
 
-class BlogArticle extends Component<BlogArticleProps> {
+export default class BlogArticle extends Component<BlogArticleProps> {
   componentDidMount() {
     // tslint:disable-next-line:no-console
     console.log(this.props.data);
@@ -175,5 +175,3 @@ class BlogArticle extends Component<BlogArticleProps> {
 //     );
 //   }
 // }
-
-export default BlogArticle;

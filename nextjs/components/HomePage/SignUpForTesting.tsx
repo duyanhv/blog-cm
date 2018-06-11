@@ -11,12 +11,12 @@ import {
   Grid
 } from 'react-bootstrap';
 
-interface SignUpForTestingState {
+export interface SignUpForTestingState {
   value: string;
   date: Date;
 }
 
-class SignUpForTesting extends React.Component<any, SignUpForTestingState> {
+export default class SignUpForTesting extends React.Component<any, SignUpForTestingState> {
   state = {
     value: '',
     date: new Date(),
@@ -159,5 +159,3 @@ class SignUpForTesting extends React.Component<any, SignUpForTestingState> {
     );
   }
 }
-
-export default SignUpForTesting;
