@@ -11,6 +11,12 @@ import {
   FETCH_DATA,
   FILTER_CHANGE,
   ERROR_HAPPEN,
+  STARTING,
+  FETCH_DATA_SUCCESS,
+  ACTIVATE_TEACHER,
+  DEACTIVATE_TEACHER,
+  ACTIVATE_TEACHER_SUCCESS,
+  DEACTIVATE_TEACHER_SUCCESS,
   openAddTeacherModal,
   closeAddTeacherModal,
   searchChange,
@@ -22,8 +28,15 @@ import {
   fetchData,
   filterChange,
   errorHappen,
+  starting,
+  fetchDataSuccess,
+  activateTeacher,
+  deactivateTeacher,
+  activateTeacherSuccess,
+  deactivateTeacherSuccess,
 } from './action';
 import { teacherPageReducer } from './reducer';
+import teacherPageSaga from './saga';
 
 export {
   // State
@@ -41,6 +54,12 @@ export {
   FETCH_DATA,
   FILTER_CHANGE,
   ERROR_HAPPEN,
+  STARTING,
+  FETCH_DATA_SUCCESS,
+  ACTIVATE_TEACHER,
+  DEACTIVATE_TEACHER,
+  ACTIVATE_TEACHER_SUCCESS,
+  DEACTIVATE_TEACHER_SUCCESS,
   openAddTeacherModal,
   closeAddTeacherModal,
   searchChange,
@@ -52,9 +71,16 @@ export {
   fetchData,
   filterChange,
   errorHappen,
+  starting,
+  fetchDataSuccess,
+  activateTeacher,
+  deactivateTeacher,
+  activateTeacherSuccess,
+  deactivateTeacherSuccess,
 
   // Saga
+  teacherPageSaga,
 
   // Reducer
-  teacherPageReducer
+  teacherPageReducer,
 };

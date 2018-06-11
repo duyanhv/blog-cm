@@ -1,4 +1,4 @@
-import { Component, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as path from 'path';
 import * as Joi from 'joi';
 import * as nodemailer from 'nodemailer';
@@ -8,7 +8,7 @@ import { GetAttendanceRecordInputDto } from '../dto/get-attendance-record-input.
 import { VerifyCaptchaResultDto } from '../dto/verify-captcha-result.dto';
 import config from '../../../config';
 
-@Component()
+@Injectable()
 export class StudyResultService {
   async checkInput(getAttendanceRecordInput: GetAttendanceRecordInputDto): Promise<void> {
     const getAttendanceRecordSchema = Joi.object().keys({

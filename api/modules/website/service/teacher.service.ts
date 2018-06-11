@@ -1,4 +1,4 @@
-import { Component, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import { Inject, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as Joi from 'joi';
 import { TeacherConst } from '../constants/teacher.constant';
 import { Model, Query } from 'mongoose';
@@ -15,7 +15,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { processImage } from '../../../core/helpers';
 
-@Component()
+@Injectable()
 export class TeachersService {
   constructor(
     @Inject(TeacherConst.TeacherModelToken)

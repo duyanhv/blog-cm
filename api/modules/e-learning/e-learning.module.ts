@@ -5,7 +5,7 @@ import { TimeTableController } from './controllers/time-table.controller';
 import { TimeTableService } from './services/time-table.service';
 
 @Module({
-  components: [StudyResultService, TimeTableService],
+  providers: [StudyResultService, TimeTableService],
   controllers: [StudyResultController, TimeTableController],
   imports: [],
   exports: [],

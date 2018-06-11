@@ -1,9 +1,9 @@
-import { Component, HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { GetLanguageResultDto } from './dto/get-language-result.dto';
 import { en } from './languages/en';
 import { vi } from './languages/vi';
 
-@Component()
+@Injectable()
 export class I18nService {
   async getLanguage(query: any): Promise<GetLanguageResultDto> {
     try {

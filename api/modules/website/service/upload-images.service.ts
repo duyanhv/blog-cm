@@ -1,4 +1,4 @@
-import { Component, HttpStatus, HttpException, Inject } from '@nestjs/common';
+import { HttpStatus, HttpException, Inject, Injectable } from '@nestjs/common';
 import { ImageConst } from '../constants/image.constant';
 import { Model } from 'mongoose';
 import { Image } from '../interfaces';
@@ -7,7 +7,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { promisify } from 'util';
 
-@Component()
+@Injectable()
 export class UploadImageService {
   private readonly baseHyperlink: string = `/static/img/upload`;
 

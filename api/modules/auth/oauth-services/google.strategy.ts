@@ -1,11 +1,11 @@
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as passport from 'passport';
 import { Strategy } from 'passport-google-oauth20';
 import { UsersService } from '../users.service';
 import config from '../../../config';
 import { User } from '../interfaces';
 
-@Component()
+@Injectable()
 export class GoogleAuthService extends Strategy {
   constructor(private readonly usersService: UsersService) {
     super(

@@ -131,6 +131,24 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     const queryParams = {};
     app.render(req, res, actualPage, queryParams);
   });
+
+  server.get('/introduction/material-facilities', (req, res) => {
+    const actualPage = '/introduction/material-facilities';
+    const queryParams = {};
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/introduction/activities', (req, res) => {
+    const actualPage = '/introduction/activities';
+    const queryParams = {};
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/introduction/teachers', (req, res) => {
+    const actualPage = '/introduction/teachers';
+    const queryParams = {};
+    app.render(req, res, actualPage, queryParams);
+  });
 };
 
 const bootstrapNextjs = async (server: express.Express) => {

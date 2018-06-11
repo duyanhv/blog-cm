@@ -74,11 +74,12 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
   onCreateTeacherFormSubmit = () => {
     if (this.props.currentTeacher._id) {
       if (
-        !this.props.currentTeacher.username ||
         !this.props.currentTeacher.firstName ||
-        !this.props.currentTeacher.middleName ||
         !this.props.currentTeacher.lastName ||
-        !this.props.currentTeacher.email
+        !this.props.currentTeacher.email ||
+        !this.props.currentTeacher.phone ||
+        !this.props.currentTeacher.dob ||
+        !this.props.currentTeacher.subject
       ) {
         this.props.dispatch(
           errorHappen(this.props.t('TeacherPage.fillInAllFields')),
@@ -88,12 +89,12 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
       }
     } else {
       if (
-        !this.props.currentTeacher.username ||
-        !this.props.currentTeacher.password ||
         !this.props.currentTeacher.firstName ||
-        !this.props.currentTeacher.middleName ||
         !this.props.currentTeacher.lastName ||
-        !this.props.currentTeacher.email
+        !this.props.currentTeacher.email ||
+        !this.props.currentTeacher.phone ||
+        !this.props.currentTeacher.dob ||
+        !this.props.currentTeacher.subject
       ) {
         this.props.dispatch(
           errorHappen(this.props.t('UserListPage.fillInAllFields')),

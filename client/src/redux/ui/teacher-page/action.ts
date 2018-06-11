@@ -31,8 +31,26 @@ export type TEACHER_INFO_CHANGE = typeof TEACHER_INFO_CHANGE;
 export const FETCH_DATA = 'TEACHER_PAGE/FETCH_DATA';
 export type FETCH_DATA = typeof FETCH_DATA;
 
+export const FETCH_DATA_SUCCESS = 'TEACHER_PAGE/FETCH_DATA_SUCCESS';
+export type FETCH_DATA_SUCCESS = typeof FETCH_DATA_SUCCESS;
+
 export const ERROR_HAPPEN = 'TEACHER_PAGE/ERROR_HAPPEN';
 export type ERROR_HAPPEN = typeof ERROR_HAPPEN;
+
+export const STARTING = 'TEACHER_PAGE/STARTING';
+export type STARTING = typeof STARTING;
+
+export const ACTIVATE_TEACHER = 'TEACHER_PAGE/ACTIVATE_TEACHER';
+export type ACTIVATE_TEACHER = typeof ACTIVATE_TEACHER;
+
+export const ACTIVATE_TEACHER_SUCCESS = 'TEACHER_PAGE/ACTIVATE_TEACHER_SUCCESS';
+export type ACTIVATE_TEACHER_SUCCESS = typeof ACTIVATE_TEACHER_SUCCESS;
+
+export const DEACTIVATE_TEACHER = 'TEACHER_PAGE/DEACTIVATE_TEACHER';
+export type DEACTIVATE_TEACHER = typeof DEACTIVATE_TEACHER;
+
+export const DEACTIVATE_TEACHER_SUCCESS = 'TEACHER_PAGE/DEACTIVATE_TEACHER_SUCCESS';
+export type DEACTIVATE_TEACHER_SUCCESS = typeof DEACTIVATE_TEACHER_SUCCESS;
 
 // Action Interface
 export interface OpenAddTeacherModal {
@@ -70,7 +88,7 @@ export interface CreateNewTeacher {
 export interface CreateNewTeacherSuccess {
   type: CREATE_NEW_TEACHER_SUCCESS;
   payload: {
-    teacherInfo: any; // FindAllTeachersDetailDto;
+    teacherInfo: any; // FindTeachersDetailDto;
   };
 }
 
@@ -107,10 +125,47 @@ export interface FetchData {
   };
 }
 
+export interface FetchDataSuccess {
+  type: FETCH_DATA_SUCCESS;
+  payload: any; // FindTeachersDetailDto
+}
+
 export interface ErrorHappen {
   type: ERROR_HAPPEN;
   payload: {
     errorMessage: string;
+  };
+}
+
+export interface Starting {
+  type: STARTING;
+}
+
+export interface ActivateTeacher {
+  type: ACTIVATE_TEACHER;
+  payload: {
+    teacherId: string;
+  };
+}
+
+export interface ActivateTeacherSuccess {
+  type: ACTIVATE_TEACHER_SUCCESS;
+  payload: {
+    teacherId: string;
+  };
+}
+
+export interface DeactivateTeacher {
+  type: DEACTIVATE_TEACHER;
+  payload: {
+    teacherId: string;
+  };
+}
+
+export interface DeactivateTeacherSuccess {
+  type: DEACTIVATE_TEACHER_SUCCESS;
+  payload: {
+    teacherId: string;
   };
 }
 
@@ -155,7 +210,7 @@ export const updateTeacher = createAction(
 
 export const updateTeacherSuccess = createAction(
   UPDATE_TEACHER_SUCCESS,
-  (teacherInfo: any) => ({ // FindAllTeachersDetailDto
+  (teacherInfo: any) => ({ // FindAllTeachersResultDto
     teacherInfo,
   }),
 );
@@ -178,6 +233,28 @@ export const fetchData = createAction(
   }),
 );
 
+export const fetchDataSuccess = createAction(FETCH_DATA_SUCCESS, (result: any) => ({
+  result,
+}));
+
 export const errorHappen = createAction(ERROR_HAPPEN, errorMessage => ({
   errorMessage,
+}));
+
+export const starting = createAction(STARTING);
+
+export const activateTeacher = createAction(ACTIVATE_TEACHER, (teacherId: string) => ({
+  teacherId,
+}));
+
+export const activateTeacherSuccess = createAction(ACTIVATE_TEACHER_SUCCESS, (teacherId: string) => ({
+  teacherId,
+}));
+
+export const deactivateTeacher = createAction(DEACTIVATE_TEACHER, (teacherId: string) => ({
+  teacherId,
+}));
+
+export const deactivateTeacherSuccess = createAction(DEACTIVATE_TEACHER_SUCCESS, (teacherId: string) => ({
+  teacherId,
 }));

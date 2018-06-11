@@ -1,8 +1,7 @@
 import {
   Module,
   NestModule,
-  RequestMethod,
-  MiddlewaresConsumer,
+  MiddlewareConsumer,
 } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
@@ -21,7 +20,7 @@ import { ProfileService } from './profile.service';
 import { RolesController } from './roles.controller';
 
 @Module({
-  components: [
+  providers: [
     ...usersProviders,
     ...rolesProviders,
     UsersService,
@@ -38,9 +37,10 @@ import { RolesController } from './roles.controller';
     RolesController,
   ],
   imports: [DatabaseModule],
+  exports: [],
 })
 export class AuthModule implements NestModule {
-  public configure(consumer: MiddlewaresConsumer): void {
+  public configure(consumer: MiddlewareConsumer): void {
     consumer
       .apply(
         session({
@@ -54,26 +54,20 @@ export class AuthModule implements NestModule {
       .apply([passport.initialize(), passport.session()])
       .forRoutes(UsersController)
       .apply(passport.authenticate('facebook'))
-      .forRoutes({ path: '/users/auth/facebook', method: RequestMethod.GET })
+      .forRoutes('/users/auth/facebook')
       .apply((req, res, next) => {
         passport.authenticate('facebook', (_error, _user, _info) => {
           res.send('Success');
         })(req, res, next);
       })
-      .forRoutes({
-        path: '/users/auth/facebookCallback',
-        method: RequestMethod.GET,
-      })
+      .forRoutes('/users/auth/facebookCallback')
       .apply(passport.authenticate('google', { scope: ['profile', 'email'] }))
-      .forRoutes({ path: '/users/auth/google', method: RequestMethod.GET })
+      .forRoutes('/users/auth/google')
       .apply((req, res, next) => {
         passport.authenticate('google', (_error, _user, _info) => {
           res.send('Success');
         })(req, res, next);
       })
-      .forRoutes({
-        path: '/users/auth/googleCallback',
-        method: RequestMethod.GET,
-      });
+      .forRoutes('/users/auth/googleCallback');
   }
 }

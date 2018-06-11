@@ -1,8 +1,8 @@
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import config from '../../config';
 import { AppSettingsDto } from './dto/app-settings.dto';
 
-@Component()
+@Injectable()
 export class AppSettingsService {
   async getAppSettings(): Promise<AppSettingsDto> {
     return {

@@ -14,7 +14,7 @@ import { TeachersService } from './service/teacher.service';
 import { teacherProviders } from './providers/teacher.provider';
 
 @Module({
-  components: [
+  providers: [
     ...companyProviders,
     ...imageProviders,
     ...blogProviders,
@@ -26,5 +26,6 @@ import { teacherProviders } from './providers/teacher.provider';
   ],
   controllers: [CompanyController, UploadImagesController, BlogController, TeachersController],
   imports: [DatabaseModule],
+  exports: [],
 })
 export class CompanyModule {}

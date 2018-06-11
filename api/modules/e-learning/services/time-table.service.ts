@@ -1,10 +1,10 @@
-import { Component, HttpException, HttpStatus } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as GoogleSpreadsheet from 'google-spreadsheet';
 import * as Joi from 'joi';
 import config from '../../../config';
 import { RegisterInputDto } from '../dto/register-input.dto';
 
-@Component()
+@Injectable()
 export class TimeTableService {
   async verifyRegisterInfo(registerInput: RegisterInputDto): Promise<void> {
     const registerSchema = Joi.object().keys({
