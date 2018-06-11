@@ -2,7 +2,7 @@ import React from 'react';
 
 // export interface ProjectsProps {}
 
-class Projects extends React.Component {
+export default class Projects extends React.Component {
   render() {
     return (
       <div className="container marginbot50">
@@ -251,5 +251,3 @@ class Projects extends React.Component {
     );
   }
 }
-
-export default Projects;

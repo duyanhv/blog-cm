@@ -204,6 +204,28 @@ export class BlogService {
     };
   }
 
+  async getlastestpost(): Promise<FindAllBlogPostsDto> {
+    const data = await this.blogModel
+      .find(
+        {
+          deactivate: false
+        },
+        {
+          title: 1,
+          imageSrc: 1,
+        }
+      )
+      .sort({
+        postCreatedAt: -1,
+      })
+      .limit(3)
+      .exec();
+
+    return {
+      data,
+    };
+  }
+
   async getpostbyid(postId: string): Promise<FindBlogDetailDto> {
     const data = await this.blogModel
       .findOne(

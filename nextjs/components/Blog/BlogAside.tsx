@@ -1,8 +1,34 @@
 import React, { Component } from 'react';
+import Link from 'next/link';
+export interface BlogAsideProps {
+    data: [{
+        _id: string,
+        title: string,
+        imageSrc: string,
+    }];
+}
 
-// export interface BlogAsideProps {}
+const LastestPostData = (data: {
+    _id: string,
+    title: string,
+    imageSrc: string,
+}) => {
+    return (
+        <div key={data._id}>
+            <img src="/static/img/dummies/blog/65x65/thumb1.jpg"
+                className="pull-left" alt="" />
+            <h6>
+                <Link href={`/blogpost?id=${data._id}`} as={`/blog/${data._id}`}>
+                <a href="#">
+                    {data.title}
+                </a>
+                </Link>
+            </h6>
+        </div>
+    );
+};
 
-class BlogAside extends Component {
+export default class BlogAside extends Component<BlogAsideProps> {
     render() {
         return (
             <div>
@@ -10,7 +36,7 @@ class BlogAside extends Component {
                     <div className="widget">
                         <form role="form">
                             <div className="form-group">
-                                <input type="text" className="form-control" id="s" placeholder="Search.." />
+                                {/* <input type="text" className="form-control" id="s" placeholder="Search.." /> */}
                             </div>
                         </form>
                     </div>
@@ -18,42 +44,22 @@ class BlogAside extends Component {
                         <h5 className="widgetheading">Categories</h5>
                         <ul className="cat">
                             <li><i className="fa fa-angle-right"></i><a href="#">
-                            Web design</a><span> (20)</span></li>
+                                Web design</a><span> (20)</span></li>
                             <li><i className="fa fa-angle-right"></i><a href="#">
-                            Online business</a><span> (11)</span></li>
+                                Online business</a><span> (11)</span></li>
                             <li><i className="fa fa-angle-right"></i><a href="#">
-                            Marketing strategy</a><span> (9)</span></li>
+                                Marketing strategy</a><span> (9)</span></li>
                             <li><i className="fa fa-angle-right"></i><a href="#">
-                            Technology</a><span> (12)</span></li>
+                                Technology</a><span> (12)</span></li>
                             <li><i className="fa fa-angle-right"></i><a href="#">
-                            About finance</a><span> (18)</span></li>
+                                About finance</a><span> (18)</span></li>
                         </ul>
                     </div>
                     <div className="widget">
                         <h5 className="widgetheading">Latest posts</h5>
-                        <ul className="recent">
-                            <li>
-                                <img src="static/img/dummies/blog/65x65/thumb1.jpg" 
-                                className="pull-left" alt="" />
-                                <h6><a href="#">Lorem ipsum dolor sit</a></h6>
-                                <p>
-                                    Mazim alienum appellantur eu cu ullum officiis pro pri</p>
-                            </li>
-                            <li>
-                                <a href="#"><img src="static/img/dummies/blog/65x65/thumb2.jpg" 
-                                className="pull-left" alt="" /></a>
-                                <h6><a href="#">Maiorum ponderum eum</a></h6>
-                                <p>
-                                    Mazim alienum appellantur eu cu ullum officiis pro pri</p>
-                            </li>
-                            <li>
-                                <a href="#"><img src="static/img/dummies/blog/65x65/thumb3.jpg" 
-                                className="pull-left" alt="" /></a>
-                                <h6><a href="#">Et mei iusto dolorum</a></h6>
-                                <p>
-                                    Mazim alienum appellantur eu cu ullum officiis pro pri</p>
-                            </li>
-                        </ul>
+                        <div className="recent-blog-post">
+                            {this.props.data.map((data) => LastestPostData(data))}
+                        </div>
                     </div>
                     <div className="widget">
                         <h5 className="widgetheading">Popular tags</h5>
@@ -71,5 +77,3 @@ class BlogAside extends Component {
         );
     }
 }
-
-export default BlogAside;

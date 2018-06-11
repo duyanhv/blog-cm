@@ -16,7 +16,7 @@ export interface AboutState {
   date: Date;
 }
 
-class About extends React.Component<any, AboutState> {
+export default class About extends React.Component<any, AboutState> {
   state = {
     value: '',
     date: new Date(),
@@ -339,5 +339,3 @@ class About extends React.Component<any, AboutState> {
     );
   }
 }
-
-export default About;

@@ -2,7 +2,7 @@ import React from 'react';
 
 // export interface AboutStatsProps {}
 
-class AboutStats extends React.Component {
+export default class AboutStats extends React.Component {
   render() {
     return (
       <section id="content">
@@ -68,5 +68,3 @@ class AboutStats extends React.Component {
     );
   }
 }
-
-export default AboutStats;

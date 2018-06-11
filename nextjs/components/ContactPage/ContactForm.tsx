@@ -5,7 +5,7 @@ import { Grid, Row, Col, Alert } from 'react-bootstrap';
 
 // }
 
-class ContactForm extends React.Component {
+export default class ContactForm extends React.Component {
     render() {
         return (
             <Grid>
@@ -72,5 +72,3 @@ class ContactForm extends React.Component {
         );
     }
 }
-
-export default ContactForm;
