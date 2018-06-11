@@ -7,6 +7,7 @@ import { userListPageSaga } from './ui/user-list-page';
 import { companyPageSaga } from './ui/company-page';
 import { profilePageSaga } from './ui/profile-page';
 import { uploadImgPageSaga } from './ui/upload-image-page';
+import { teacherPageSaga } from './ui/teacher-page';
 import blogPageSaga from './ui/blog-page/saga';
 const runSagas = (sagaMiddleware: SagaMiddleware<{}>) => {
   sagaMiddleware.run(profileSaga);
@@ -18,6 +19,7 @@ const runSagas = (sagaMiddleware: SagaMiddleware<{}>) => {
   sagaMiddleware.run(profilePageSaga);
   sagaMiddleware.run(uploadImgPageSaga);
   sagaMiddleware.run(blogPageSaga);
+  sagaMiddleware.run(teacherPageSaga);
 };
 
 export default runSagas;

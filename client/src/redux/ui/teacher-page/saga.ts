@@ -1,4 +1,4 @@
-import { put, all, takeEvery } from 'redux-saga/effects';
+import { put, all, takeEvery, select } from 'redux-saga/effects';
 import {
   FetchData,
   starting,
@@ -15,108 +15,134 @@ import {
   ActivateTeacher,
   activateTeacher,
   deactivateTeacher,
+  fetchDataSuccess,
+  createNewTeacherSuccess,
+  updateTeacherSuccess,
+  activateTeacherSuccess,
+  deactivateTeacherSuccess,
 } from './action';
 import { getErrorMessage, message } from '../../../helpers';
+import { getTeacherService } from '../../../service-proxies/service.provider';
+import { TeacherPageState } from '.';
+import { AppState } from '../..';
 
-function* fetchDataWorker(_action: FetchData): any {
+const getState = () => select<AppState>(state => state.ui.teacherPage);
+
+function* fetchDataWorker(action: FetchData): any {
   try {
     yield put(starting());
 
-    // Get teacher-service
+    const teacherService = getTeacherService();
+    const result = yield teacherService.find(
+      action.payload.name,
+      action.payload.subject,
+      action.payload.pageNumber,
+      action.payload.pageSize,
+      action.payload.sortBy,
+      action.payload.asc
+    );
 
-    // Call teacher-service.find(name, subject, pageNumber, pageSize, sortBy, asc)
-
-    // yield put(fetchDataSuccess());
+    yield put(fetchDataSuccess(result));
   } catch (error) {
     yield put(errorHappen(getErrorMessage(error)));
     message.error(getErrorMessage(error), 1.5);
   }
 }
 
-function* filterChangeWorker(_action: FilterChange): any {
+function* filterChangeWorker(action: FilterChange): any {
+  const state: TeacherPageState = yield getState();
   try {
     yield put(starting());
 
-    // Get teacher-service
+    const teacherService = getTeacherService();
+    const result = yield teacherService.find(
+      state.name,
+      action.payload.filter,
+      state.pageNumber,
+      state.pageSize,
+      state.sortBy,
+      state.asc
+    );
 
-    // Call teacher-service.find(name, subject, pageNumber, pageSize, sortBy, asc)
-
-    // yield put(fetchDataSuccess());
+    yield put(fetchDataSuccess(result));
   } catch (error) {
     yield put(errorHappen(getErrorMessage(error)));
     message.error(getErrorMessage(error), 1.5);
   }
 }
 
-function* searchChangeWorker(_action: SearchChange): any {
+function* searchChangeWorker(action: SearchChange): any {
+  const state: TeacherPageState = yield getState();
   try {
     yield put(starting());
 
-    // Get teacher-service
+    const teacherService = getTeacherService();
+    const result = yield teacherService.find(
+      action.payload.search,
+      state.subject,
+      state.pageNumber,
+      state.pageSize,
+      state.sortBy,
+      state.asc
+    );
 
-    // Call teacher-service.find(name, subject, pageNumber, pageSize, sortBy, asc)
-
-    // yield put(fetchDataSuccess());
+    yield put(fetchDataSuccess(result));
   } catch (error) {
     yield put(errorHappen(getErrorMessage(error)));
     message.error(getErrorMessage(error), 1.5);
   }
 }
 
-function* createNewTeacherWorker(_action: CreateNewTeacher): any {
+function* createNewTeacherWorker(action: CreateNewTeacher): any {
   try {
     yield put(starting());
 
-    // Get teacher-service
+    const teacherService = getTeacherService();
+    const result = yield teacherService.create(action.payload.teacherInfo);
 
-    // Call teacher-service.create(teacherInfo: CreateTeacherInputDto)
-
-    // yield put(createNewTeacherSuccess());
+    yield put(createNewTeacherSuccess(result));
     message.success('Create New Teacher Success', 1);
   } catch (error) {
     yield put(errorHappen(getErrorMessage(error)));
   }
 }
 
-function* updateTeacherWorker(_action: UpdateTeacher): any {
+function* updateTeacherWorker(action: UpdateTeacher): any {
   try {
     yield put(starting());
 
-    // Get teacher-service
+    const teacherService = getTeacherService();
+    const result = yield teacherService.update(action.payload.teacherInfo);
 
-    // Call teacher-service.create(teacherInfo: CreateTeacherInputDto)
-
-    // yield put(updateTeacherSuccess());
+    yield put(updateTeacherSuccess(result));
     message.success('Create New Teacher Success', 1);
   } catch (error) {
     yield put(errorHappen(getErrorMessage(error)));
   }
 }
 
-function* activateTeacherWorker(_action: ActivateTeacher): any {
+function* activateTeacherWorker(action: ActivateTeacher): any {
   try {
     yield put(starting());
 
-    // Get teacher-service
+    const teacherService = getTeacherService();
+    yield teacherService.activate(action.payload.teacherId);
 
-    // Call teacher-service.activate(teacherId)
-
-    // yield put(activateTeacherSuccess());
+    yield put(activateTeacherSuccess(action.payload.teacherId));
     message.success('Activate Teacher Success', 1);
   } catch (error) {
     yield put(errorHappen(getErrorMessage(error)));
   }
 }
 
-function* deactivateTeacherWorker(_action: ActivateTeacher): any {
+function* deactivateTeacherWorker(action: ActivateTeacher): any {
   try {
     yield put(starting());
 
-    // Get teacher-service
+    const teacherService = getTeacherService();
+    yield teacherService.deactivate(action.payload.teacherId);
 
-    // Call teacher-service.deactivate(teacherId)
-
-    // yield put(deactivateTeacherSuccess());
+    yield put(deactivateTeacherSuccess(action.payload.teacherId));
     message.success('Deactivate Teacher Success', 1);
   } catch (error) {
     yield put(errorHappen(getErrorMessage(error)));

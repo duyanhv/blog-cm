@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import { FindTeachersDetailDto, CreateTeacherInputDto, UpdateTeacherInfoDto, FindTeachersResultDto } from '../../../service-proxies/service-proxies';
 
 // Actions
 export const OPEN_ADD_TEACHER_MODAL = 'TEACHER_PAGE/OPEN_ADD_TEACHER_MODAL';
@@ -56,7 +57,7 @@ export type DEACTIVATE_TEACHER_SUCCESS = typeof DEACTIVATE_TEACHER_SUCCESS;
 export interface OpenAddTeacherModal {
   type: OPEN_ADD_TEACHER_MODAL;
   payload: {
-    currentTeacher: any; // FindAllTeachersDetailDto;
+    currentTeacher: FindTeachersDetailDto;
   };
 }
 
@@ -81,28 +82,28 @@ export interface FilterChange {
 export interface CreateNewTeacher {
   type: CREATE_NEW_TEACHER;
   payload: {
-    teacherInfo: any; // CreateTeacherInputDto;
+    teacherInfo: CreateTeacherInputDto;
   };
 }
 
 export interface CreateNewTeacherSuccess {
   type: CREATE_NEW_TEACHER_SUCCESS;
   payload: {
-    teacherInfo: any; // FindTeachersDetailDto;
+    teacherInfo: FindTeachersDetailDto;
   };
 }
 
 export interface UpdateTeacher {
   type: UPDATE_TEACHER;
   payload: {
-    teacherInfo: any; // UpdateTeacherInputDto;
+    teacherInfo: UpdateTeacherInfoDto;
   };
 }
 
 export interface UpdateTeacherSuccess {
   type: UPDATE_TEACHER_SUCCESS;
   payload: {
-    teacherInfo: any; // FindAllTeachersDetailDto;
+    teacherInfo: FindTeachersDetailDto;
   };
 }
 
@@ -127,7 +128,9 @@ export interface FetchData {
 
 export interface FetchDataSuccess {
   type: FETCH_DATA_SUCCESS;
-  payload: any; // FindTeachersDetailDto
+  payload: {
+    result: FindTeachersResultDto;
+  };
 }
 
 export interface ErrorHappen {
@@ -172,7 +175,7 @@ export interface DeactivateTeacherSuccess {
 // Payload Creator
 export const openAddTeacherModal = createAction(
   OPEN_ADD_TEACHER_MODAL,
-  (currentTeacher: any ) => ({ // FindAllTeachersDetailDto
+  (currentTeacher: FindTeachersDetailDto ) => ({
     currentTeacher,
   }),
 );
@@ -189,28 +192,27 @@ export const filterChange = createAction(FILTER_CHANGE, (filter: string) => ({
 
 export const createNewTeacher = createAction(
   CREATE_NEW_TEACHER,
-  (teacherInfo: any) => ({ // CreateTeacherInputDto
+  (teacherInfo: CreateTeacherInputDto) => ({
     teacherInfo,
   }),
 );
 
 export const createNewTeacherSuccess = createAction(
   CREATE_NEW_TEACHER_SUCCESS,
-  (teacherInfo: any) => ({ // FindAllTeachersDetailDto
-    teacherInfo,
+  (teacherInfo: FindTeachersDetailDto) => ({
   }),
 );
 
 export const updateTeacher = createAction(
   UPDATE_TEACHER,
-  (userInfo: any) => ({ // UpdateTeacherInputDto
+  (userInfo: UpdateTeacherInfoDto) => ({
     userInfo,
   }),
 );
 
 export const updateTeacherSuccess = createAction(
   UPDATE_TEACHER_SUCCESS,
-  (teacherInfo: any) => ({ // FindAllTeachersResultDto
+  (teacherInfo: FindTeachersDetailDto) => ({
     teacherInfo,
   }),
 );
@@ -233,11 +235,11 @@ export const fetchData = createAction(
   }),
 );
 
-export const fetchDataSuccess = createAction(FETCH_DATA_SUCCESS, (result: any) => ({
+export const fetchDataSuccess = createAction(FETCH_DATA_SUCCESS, (result: FindTeachersResultDto) => ({
   result,
 }));
 
-export const errorHappen = createAction(ERROR_HAPPEN, errorMessage => ({
+export const errorHappen = createAction(ERROR_HAPPEN, (errorMessage: string) => ({
   errorMessage,
 }));
 

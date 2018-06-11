@@ -8,7 +8,17 @@ import { AppSettingsState } from '../../../redux/app-settings';
 import { AppState } from '../../../redux';
 import { connect } from 'react-redux';
 import { Modal, Alert } from 'antd';
-import { TeacherPageState, openAddTeacherModal, closeAddTeacherModal, fetchData, searchChange, filterChange, errorHappen, updateTeacher, createNewTeacher } from '../../../redux/ui/teacher-page';
+import {
+  TeacherPageState,
+  openAddTeacherModal,
+  closeAddTeacherModal,
+  fetchData,
+  searchChange,
+  filterChange,
+  errorHappen,
+  updateTeacher,
+  createNewTeacher,
+} from '../../../redux/ui/teacher-page';
 import { ProfileState } from '../../../redux/profile';
 import { Dispatch } from 'redux';
 import * as _ from 'lodash';
@@ -40,19 +50,19 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
       1000,
     );
     debounced();
-  }
+  };
 
   handleFilterChange = (value: string) => {
     this.props.dispatch(filterChange(value));
-  }
+  };
 
   showAddTeacherModal = (currentTeacher: any) => {
     this.props.dispatch(openAddTeacherModal(currentTeacher));
-  }
+  };
 
   closeAddTeacherModal = () => {
     this.props.dispatch(closeAddTeacherModal());
-  }
+  };
 
   handleTableChange = (pagination: any, _filters: any, sorter: any) => {
     this.props.dispatch(
@@ -69,7 +79,7 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
           : this.props.asc,
       }),
     );
-  }
+  };
 
   onCreateTeacherFormSubmit = () => {
     if (this.props.currentTeacher._id) {
@@ -103,7 +113,7 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
         this.props.dispatch(createNewTeacher(this.props.currentTeacher));
       }
     }
-  }
+  };
 
   render(): JSX.Element {
     return (
@@ -138,9 +148,7 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
             />
           ) : null}
 
-          <AddNewTeacherForm
-            {...this.props}
-          />
+          <AddNewTeacherForm {...this.props} />
         </Modal>
       </div>
     );

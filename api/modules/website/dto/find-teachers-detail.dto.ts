@@ -1,6 +1,9 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
 export class FindTeachersDetailDto {
+  @ApiModelProperty({ description: 'teacher id' })
+  readonly _id: string;
+
   @ApiModelProperty({ description: 'teacher first name' })
   readonly firstName: string;
 

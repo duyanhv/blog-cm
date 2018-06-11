@@ -4672,6 +4672,8 @@ export interface IDateRangeInputDto {
 }
 
 export class FindTeachersDetailDto implements IFindTeachersDetailDto {
+    /** teacher id */
+    _id!: string;
     /** teacher first name */
     firstName!: string;
     /** teacher last name */
@@ -4702,6 +4704,7 @@ export class FindTeachersDetailDto implements IFindTeachersDetailDto {
 
     init(data?: any) {
         if (data) {
+            this._id = data["_id"];
             this.firstName = data["firstName"];
             this.lastName = data["lastName"];
             this.fullName = data["fullName"];
@@ -4728,6 +4731,7 @@ export class FindTeachersDetailDto implements IFindTeachersDetailDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["_id"] = this._id;
         data["firstName"] = this.firstName;
         data["lastName"] = this.lastName;
         data["fullName"] = this.fullName;
@@ -4747,6 +4751,8 @@ export class FindTeachersDetailDto implements IFindTeachersDetailDto {
 }
 
 export interface IFindTeachersDetailDto {
+    /** teacher id */
+    _id: string;
     /** teacher first name */
     firstName: string;
     /** teacher last name */

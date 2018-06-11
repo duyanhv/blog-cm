@@ -69,7 +69,7 @@ export class TeachersService {
       const teachersPromise = await this.addQuery(query)
         .sort((query.asc as any) === 'true' ? query.sortBy : `-${query.sortBy}`)
         .skip((query.pageNumber - 1) * query.pageSize)
-        .limit(query.pageSize)
+        .limit(Number(query.pageSize))
         .select('_id firstName lastName email phone dob subject isActive')
         .exec();
 

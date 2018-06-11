@@ -47,7 +47,7 @@ const TeacherTable = (props: TeacherTableProps) => {
       key: 'phone',
     },
     {
-      title: props.t('UserTable.actions'),
+      title: props.t('TeacherTable.actions'),
       dataIndex: 'actions',
       key: 'actions',
       render: (value, record, index) => actionButtons(record),

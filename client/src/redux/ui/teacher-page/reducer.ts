@@ -26,6 +26,7 @@ import {
   ACTIVATE_TEACHER_SUCCESS,
   DEACTIVATE_TEACHER_SUCCESS,
 } from './action';
+import { FindTeachersDetailDto } from '../../../service-proxies/service-proxies';
 
 const initialState = {
   addTeacherModalVisible: false,
@@ -38,7 +39,7 @@ const initialState = {
   name: '',
   sortBy: 'fullName',
   asc: true,
-  currentTeacher: {},
+  currentTeacher: {} as FindTeachersDetailDto,
   imageSrc: '',
   errorMessage: '',
 };
@@ -61,7 +62,7 @@ const closeAddUserModalReducer = (
   return {
     ...state,
     addTeacherModalVisible: false,
-    currentTeacher: {},
+    currentTeacher: {} as FindTeachersDetailDto,
   };
 };
 
@@ -124,6 +125,7 @@ const fetchDataSuccessReducer = (
 ) => {
   return {
     ...state,
+    isBusy: false,
     total: action.payload.result.total,
     data: action.payload.result.data,
   };
@@ -135,6 +137,7 @@ const createNewTeacherSuccessReducer = (
 ) => {
   return {
     ...state,
+    isBusy: false,
     total: state.total + 1,
     data: [action.payload.teacherInfo, ...state.data],
   };
@@ -146,6 +149,7 @@ const updateTeacherSuccessReducer = (
 ) => {
   return {
     ...state,
+    isBusy: false,
     data: state.data.map((item) => {
       if (item._id === state.currentTeacher._id) {
         return state.currentTeacher;
@@ -165,6 +169,7 @@ const activateTeacherSuccessReducer = (
 
   return {
     ...state,
+    isBusy: false,
     data: state.data.map((item) => {
       if (item._id === action.payload.teacherId) {
         return activatedTeacher;
@@ -184,6 +189,7 @@ const deactivateTeacherSuccessReducer = (
 
   return {
     ...state,
+    isBusy: false,
     data: state.data.map((item) => {
       if (item._id === action.payload.teacherId) {
         return deactivatedTeacher;

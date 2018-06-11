@@ -121,6 +121,7 @@ const AddNewTeacherForm = (props: AddNewTeacherFormProps) => {
                     name="email"
                     placeholder={props.t('email')}
                     value={props.currentTeacher.email}
+                    onChange={onTeacherInfoChange}
                   />
                 </Form.Item>
               </Col>
@@ -134,6 +135,7 @@ const AddNewTeacherForm = (props: AddNewTeacherFormProps) => {
                     name="phone"
                     placeholder={props.t('phone')}
                     value={props.currentTeacher.phone}
+                    onChange={onTeacherInfoChange}
                   />
                 </Form.Item>
               </Col>
@@ -147,6 +149,7 @@ const AddNewTeacherForm = (props: AddNewTeacherFormProps) => {
                     name="subject"
                     placeholder={props.t('subject')}
                     value={props.currentTeacher.subject}
+                    onChange={onTeacherInfoChange}
                   />
                 </Form.Item>
               </Col>
