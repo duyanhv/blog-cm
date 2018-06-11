@@ -3,7 +3,7 @@ const defaultConfig = {
     port: 3001,
     prefix: 'api',
     defaultItemPerPageCount: 10,
-    corsUrls: ['http://localhost:3001'],
+    corsUrls: ['https://elearning.techkids.io'],
     maxPageSize: 50,
     gridPage: {
       defaultPageSize: 10,
