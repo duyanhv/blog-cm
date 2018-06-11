@@ -7,6 +7,7 @@ import { UserListPageState } from './ui/user-list-page';
 import { CompanyPageState } from './ui/company-page';
 import { ProfilePageState } from './ui/profile-page';
 import { UploadImagePageState } from './ui/upload-image-page';
+import { TeacherPageState } from './ui/teacher-page';
 import BlogPageState from './ui/blog-page/state';
 
 interface AppState {
@@ -21,6 +22,7 @@ interface AppState {
     profilePage: ProfilePageState;
     uploadImgPage: UploadImagePageState;
     blogPage: BlogPageState;
+    teacherPage: TeacherPageState;
   };
 }
 

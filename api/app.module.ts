@@ -6,8 +6,9 @@ import { CompanyModule } from './modules/website/company.module';
 import { ELearningModule } from './modules/e-learning/e-learning.module';
 
 @Module({
-  components: [],
+  providers: [],
   controllers: [],
   imports: [AuthModule, AppSettingsModule, I18nModule, CompanyModule, ELearningModule],
+  exports: []
 })
 export class AppModule {}

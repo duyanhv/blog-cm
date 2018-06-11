@@ -22,7 +22,7 @@ interface NestedProfileFormProps
 }
 
 const NestedProfileForm = (props: NestedProfileFormProps) => {
-  const validateConfirmPassword = (rule: any, value: any, callback: any) => {
+  const validateConfirmPassword = (_rule: any, value: any, callback: any) => {
     if (value !== props.form.getFieldValue('password')) {
       callback('Confirm Password Didnt Match');
     }

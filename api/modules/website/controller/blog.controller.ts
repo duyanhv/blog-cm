@@ -192,11 +192,11 @@ export class BlogController {
     title: 'Get all post title',
     description: 'Get all post title',
   })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: `Post title has been successfully fetched.`,
-    type: Array,
-  })
+  // @ApiResponse({
+  //   status: HttpStatus.OK,
+  //   description: `Post title has been successfully fetched.`,
+  //   type: Array,
+  // })
   @ApiResponse({
     status: HttpStatus.FORBIDDEN,
     description: ApiResponseMessageConstants.FORBIDDEN,

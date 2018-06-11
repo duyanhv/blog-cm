@@ -36,7 +36,7 @@ export default class extends Document {
           <meta name="twitter:description" content={SITE_DESCRIPTION} />
           <meta property="twitter:image" content={SITE_IMAGE} />
 
-          <link rel="shortcut icon" href="static/img/favicon.ico" />
+          <link rel="shortcut icon" href="/static/img/favicon.ico" />
           <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
           <link
             href="/static/plugins/flexslider/flexslider.css"

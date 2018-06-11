@@ -1,4 +1,4 @@
-import { Component, Inject, HttpStatus, HttpException } from '@nestjs/common';
+import { HttpStatus, HttpException, Inject, Injectable } from '@nestjs/common';
 import { ImageConst } from '../constants/image.constant';
 import { Model } from 'mongoose';
 import { Image } from '../interfaces';
@@ -7,9 +7,9 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { promisify } from 'util';
 
-@Component()
+@Injectable()
 export class UploadImageService {
-  private readonly baseHyperlink: string = `/static/images/upload`;
+  private readonly baseHyperlink: string = `/static/img/upload`;
 
   constructor(
     @Inject(ImageConst.ImageModelToken)
@@ -28,7 +28,7 @@ export class UploadImageService {
       // If user upload folder is not exist => create one
       const uploadFolder = path.join(
         __dirname,
-        `../../../../../../static/images/upload/${req.body.album}`,
+        `../../../../../../static/img/upload/${req.body.album}`,
       );
       if (!fs.existsSync(uploadFolder)) {
         const mkdir = promisify(fs.mkdir);
@@ -39,7 +39,7 @@ export class UploadImageService {
       const temporaryFolder = path.join(__dirname, `../../../../../../${file.path}`);
       const targetFolder = path.join(
         __dirname,
-        `../../../../../../static/images/upload/${req.body.album}/${
+        `../../../../../../static/img/upload/${req.body.album}/${
           file.originalname
         }`,
       );
@@ -98,7 +98,7 @@ export class UploadImageService {
 
       const readdir = promisify(fs.readdir);
       const albumList = await readdir(
-        path.join(__dirname, `../../../../../../static/images/upload`),
+        path.join(__dirname, `../../../../../../static/img/upload`),
       );
 
       return { result, albums: albumList };
@@ -122,13 +122,13 @@ export class UploadImageService {
       if (imageInfo && imageInfo.album) {
         const oldFile = path.join(
           __dirname,
-          `../../../../../../static/images/upload/${imageInfo.album}/${
+          `../../../../../../static/img/upload/${imageInfo.album}/${
             imageInfo.filename
           }`,
         );
         const newFile = path.join(
           __dirname,
-          `../../../../../../static/images/upload/${imageInfo.album}/${newName}`,
+          `../../../../../../static/img/upload/${imageInfo.album}/${newName}`,
         );
         const rename = promisify(fs.rename);
         await rename(oldFile, newFile);
@@ -153,7 +153,7 @@ export class UploadImageService {
       if (imageInfo && imageInfo.filename) {
         const filePath = path.join(
           __dirname,
-          `../../../../../../static/images/upload/default/${imageInfo.filename}`,
+          `../../../../../../static/img/upload/default/${imageInfo.filename}`,
         );
         const unlink = promisify(fs.unlink);
         await unlink(filePath);
@@ -171,7 +171,7 @@ export class UploadImageService {
     try {
       const albumFolder = path.join(
         __dirname,
-        `../../../../../../static/images/upload/${albumName}`,
+        `../../../../../../static/img/upload/${albumName}`,
       );
 
       if (fs.existsSync(albumFolder)) {

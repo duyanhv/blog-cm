@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button } from 'antd';
 import './Page400.less';
 import { Link } from 'react-router-dom';
+import { RouteUrls } from '../../routes.constant';
 
 const Page400 = () => {
   return (
@@ -14,7 +15,7 @@ const Page400 = () => {
         <h1>400 - Not Found</h1>
         <p>Sorry, Your requested resource is missing.</p>
         <Button type="primary">
-          <Link to="/">Go to Home Page</Link>
+          <Link to={`${RouteUrls.BaseUrl}${RouteUrls.Main}`}>Go to Home Page</Link>
         </Button>
       </div>
     </div>

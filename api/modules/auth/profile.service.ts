@@ -1,4 +1,4 @@
-import { Component, HttpStatus, Inject, HttpException } from '@nestjs/common';
+import { HttpStatus, Inject, HttpException, Injectable } from '@nestjs/common';
 import { UsersConst } from './constants/users.constant';
 import { Model } from 'mongoose';
 import { User } from './interfaces';
@@ -10,9 +10,9 @@ import * as Joi from 'joi';
 import * as bcrypt from 'bcrypt';
 import config from '../../config';
 
-@Component()
+@Injectable()
 export class ProfileService {
-  private readonly baseHyperlink: string = `/static/profile-pictures`;
+  private readonly baseHyperlink: string = `/static/img/profile-pictures`;
 
   constructor(
     @Inject(UsersConst.UserModelToken) private readonly userModel: Model<User>,
@@ -49,7 +49,7 @@ export class ProfileService {
         const profilePictureHyperlink = `${this.baseHyperlink}/${id}.jpg`;
         const profilePictureLocation = path.join(
           __dirname,
-          `../../../../../static/profile-pictures/${id}.jpg`,
+          `../../../../../static/img/profile-pictures/${id}.jpg`,
         );
 
         profileInfo.imageSrc = fs.existsSync(profilePictureLocation)
@@ -71,7 +71,6 @@ export class ProfileService {
   ): Promise<void> {
     const validateUpdateProfileSchema = Joi.object().keys({
       firstName: Joi.string().required(),
-      middleName: Joi.string(),
       lastName: Joi.string().required(),
       password: Joi.string().regex(config.usersModuleConfig.passwordRegex),
     });
@@ -124,7 +123,7 @@ export class ProfileService {
       // Generate new filename
       const newFilePath: string = path.join(
         __dirname,
-        `../../../../../static/profile-pictures/${req.userId}.jpg`,
+        `../../../../../static/img/profile-pictures/${req.userId}.jpg`,
       );
 
       // Resize image and save image to public folder

@@ -23,6 +23,7 @@ import { TranslationFunction } from 'react-i18next';
 import { I18nextProviderProps } from 'react-i18next/src/I18nextProvider';
 import { UploadImagePageState } from '../../redux/ui/upload-image-page';
 import BlogPage from './Blog/BlogPage';
+import TeacherPage from './Teacher/TeacherPage';
 
 interface MainPageProps extends RouteComponentProps<any>, I18nextProviderProps {
   appSettings: AppSettingsState;
@@ -84,6 +85,10 @@ class MainPage extends React.Component<MainPageProps, any> {
                 <Route
                   path={`${match.url}/blog`}
                   component={Authorize(BlogPage, UserPermissions.USERS_VIEW)}
+                />
+                <Route
+                  path={`${match.url}/teacher`}
+                  component={TeacherPage}
                 />
                 <Route component={RedirectNotFound} />
               </Switch>

@@ -4,6 +4,7 @@ export const en = {
   profile: 'Profile',
   users: 'Users',
   roles: 'Roles',
+  teacher: 'Teachers',
   company: 'Company',
   firstName: 'First Name',
   middleName: 'Middle Name',
@@ -49,6 +50,7 @@ export const en = {
     companyInfo: 'Company Info',
     uploadImages: 'Upload Images',
     blog: 'Blog',
+    teacher: 'Teacher'
   },
   Header: {
     profile: 'Profile',

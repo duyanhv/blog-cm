@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 const RedirectToHome = () => {
-  return <Redirect to={RouteUrls.Main} />;
+  return <Redirect to={`${RouteUrls.BaseUrl}${RouteUrls.Main}`} />;
 };
 
 const Routes = ({ appBaseUrl }: { appBaseUrl: string }) => {

@@ -28,7 +28,7 @@ import {
 } from '../dto';
 import { UploadImageService } from '../service/upload-images.service';
 
-@ApiUseTags('uploadImages')
+@ApiUseTags('Upload Images')
 @ApiBearerAuth()
 @Controller('uploadImages')
 export class UploadImagesController {

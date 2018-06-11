@@ -3,7 +3,7 @@ import { AppSettingsController } from './appSettings.controller';
 import { AppSettingsService } from './appSettings.service';
 
 @Module({
-  components: [AppSettingsService],
+  providers: [AppSettingsService],
   controllers: [AppSettingsController],
   imports: [],
   exports: [],

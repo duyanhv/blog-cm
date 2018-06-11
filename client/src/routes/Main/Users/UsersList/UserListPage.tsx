@@ -57,7 +57,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
 
   handleTableChange = async (
     pagination: any,
-    filters: any,
+    _filters: any,
     sorter: any,
   ): Promise<void> => {
     this.props.dispatch(
@@ -74,7 +74,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
     );
   };
 
-  handleSearchChange = async (value: any): Promise<void> => {
+  handleSearchChange = (value: any) => {
     const debounced = _.debounce(
       () => this.props.dispatch(searchChange(value)),
       1000,
@@ -82,7 +82,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
     debounced();
   };
 
-  handleFilterChange = async (value: any) => {
+  handleFilterChange = (value: any) => {
     this.props.dispatch(filterChange(value));
   };
 
@@ -206,7 +206,7 @@ class UserListPage extends React.Component<UserListPageProps, any> {
                 multiple={true}
                 defaultExpandAll={true}
                 checkedKeys={this.props.userListPage.currentUser.permissions}
-                onCheck={(checkedKeys, event: any) =>
+                onCheck={(checkedKeys, _event: any) =>
                   this.props.dispatch(
                     userInfoChange({
                       permissions: checkedKeys.filter(
@@ -258,4 +258,4 @@ const mapStateToProps = (appState: AppState) => ({
   profile: appState.profile,
 });
 
-export default connect(mapStateToProps)(translate()(UserListPage));
+export default connect(mapStateToProps)(translate()(UserListPage) as any);

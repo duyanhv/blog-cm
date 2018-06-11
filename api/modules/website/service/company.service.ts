@@ -1,4 +1,4 @@
-import { Component, Inject, HttpStatus, HttpException } from '@nestjs/common';
+import { Inject, HttpStatus, HttpException, Injectable } from '@nestjs/common';
 import { Company } from '../interfaces';
 import { Model } from 'mongoose';
 import * as Joi from 'joi';
@@ -11,7 +11,7 @@ const countrynames = path.join(
   __dirname,
   '../../../../client/src/resources/country-names.json'
 );
-@Component()
+@Injectable()
 export class CompanyService {
   constructor(
     @Inject(CompanyConst.CompanyModelToken)

@@ -4,6 +4,7 @@ export const vi = {
   profile: 'Thông Tin Cá Nhân',
   users: 'Người Dùng',
   roles: 'Vai Trò',
+  teacher: 'Thông Tin Giáo Viên',
   company: 'Công Ty',
   firstName: 'Họ',
   middleName: 'Tên Đệm',
@@ -47,7 +48,8 @@ export const vi = {
     roles: 'Vai Trò',
     website: 'Website',
     companyInfo: 'Thông Tin Công Ty',
-    uploadImages: 'Tải Ảnh Lên'
+    uploadImages: 'Tải Ảnh Lên',
+    teacher: 'Thông Tin Giáo Viên'
   },
   Header: {
     profile: 'Thông Tin Cá Nhân',
