@@ -66,8 +66,8 @@ const BlogData = (data: {
 
 export default class BlogArticle extends Component<BlogArticleProps> {
   componentDidMount() {
-    // tslint:disable-next-line:no-console
-    console.log(this.props.data);
+    // tslint:disable-next-line:no-console 
+    // console.log(this.props.data);
   }
 
   render() {

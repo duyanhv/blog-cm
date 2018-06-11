@@ -30,10 +30,10 @@ export default class BlogPost extends Component<BlogPostProps> {
     }
 
     static async getInitialProps({ query }) {
-        const blogData = await fetch(`http://localhost:3000/api/blog/getpostbyid/${query.id}`);
+        const blogData = await fetch(`/api/blog/getpostbyid/${query.id}`);
         const jsonBlogData = await blogData.json();
 
-        const lastestBlogPostData = await fetch(`http://localhost:3000/api/blog/getlastestpost`);
+        const lastestBlogPostData = await fetch(`/api/blog/getlastestpost`);
         const jsonLastestBlogPostData = await lastestBlogPostData.json();
         return {
             data: jsonBlogData,
