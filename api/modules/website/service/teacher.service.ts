@@ -10,26 +10,27 @@ import {
   FindTeachersDetailDto,
   UpdateTeacherInfoDto
 } from '../dto';
-import * as _ from 'lodash';
 import * as path from 'path';
 import * as fs from 'fs';
 import { processImage } from '../../../core/helpers';
 
 @Injectable()
 export class TeachersService {
+  private readonly baseHyperlink: string = `/static/img/teacher-profile-pictures`;
+
   constructor(
     @Inject(TeacherConst.TeacherModelToken)
     private readonly teacherModel: Model<Teacher>
   ) {}
 
   addFullName = (teacher: CreateTeacherInputDto) => {
-    const normalizedFullName = [teacher.firstName, teacher.lastName]
+    const normalizedFullname = [teacher.firstName, teacher.lastName]
       .join(' ')
       .toLocaleLowerCase();
     const fullName = [teacher.firstName, teacher.lastName].join(' ');
     return {
       ...teacher,
-      normalizedFullName,
+      normalizedFullname,
       fullName
     };
   }
@@ -40,7 +41,7 @@ export class TeachersService {
           .find(
             query.name
               ? {
-                  normalizedFullName: {
+                  normalizedFullname: {
                     $regex: `^${query.name}`,
                     $options: 'i'
                   }
@@ -51,7 +52,7 @@ export class TeachersService {
       : this.teacherModel.find(
           query.name
             ? {
-                normalizedFullName: {
+                normalizedFullname: {
                   $regex: `^${query.name}`,
                   $options: 'i'
                 }
@@ -70,7 +71,7 @@ export class TeachersService {
         .sort((query.asc as any) === 'true' ? query.sortBy : `-${query.sortBy}`)
         .skip((query.pageNumber - 1) * query.pageSize)
         .limit(Number(query.pageSize))
-        .select('_id firstName lastName email phone dob subject isActive')
+        .select('_id firstName lastName fullName email phone dob subject isActive description imgSrc')
         .exec();
 
       const [total, data] = await Promise.all([totalPromise, teachersPromise]);
@@ -79,6 +80,23 @@ export class TeachersService {
         total,
         data
       };
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async getTeacherDetail(teacherId: string): Promise<FindTeachersDetailDto> {
+    if (!teacherId) {
+      throw new HttpException('Invalid Teacher ID', HttpStatus.BAD_REQUEST);
+    }
+
+    try {
+      const teacher =  await this.teacherModel.findOne({_id: teacherId}).exec();
+      if (teacher) {
+        return teacher;
+      } else {
+        throw new HttpException('Teacher Not Found', HttpStatus.NOT_FOUND);
+      }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -118,7 +136,10 @@ export class TeachersService {
       const teacherWithFullname = this.addFullName(body);
 
       // save to db
-      const newTeacher = new this.teacherModel(teacherWithFullname);
+      const newTeacher = new this.teacherModel({
+        ...teacherWithFullname,
+        imgSrc: `${this.baseHyperlink}/default-avatar.png`,
+      });
       return await newTeacher.save();
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -203,7 +224,7 @@ export class TeachersService {
         .email()
         .required(),
       phone: Joi.string().required(),
-      dob: Joi.string().required(),
+      dob: Joi.required(),
       subject: Joi.string().required()
     });
     const { error } = Joi.validate(body, validationSchema, {
@@ -231,14 +252,11 @@ export class TeachersService {
       await this.teacherModel
         .updateOne(
           { _id: body._id },
-          _.pick(body, [
-            'firstName',
-            'lastName',
-            'email',
-            'phone',
-            'dob',
-            'subject'
-          ])
+          { $set: {
+            ...body,
+            fullName: [body.firstName, body.lastName].join(' '),
+            normalizedFullname: [body.firstName, body.lastName].join(' ').toLocaleLowerCase(),
+          } }
         )
         .exec();
     } catch (error) {
@@ -249,15 +267,16 @@ export class TeachersService {
   async uploadProfilePicture(file: any, req: any): Promise<void> {
     if (!file) {
       throw new HttpException('File Not Found', HttpStatus.BAD_REQUEST);
-    } else if (!req.userId) {
-      throw new HttpException('User Not Found', HttpStatus.BAD_REQUEST);
+    }
+    if (!req.body.teacherId) {
+      throw new HttpException('Teacher Not found', HttpStatus.BAD_REQUEST);
     }
 
     try {
       // Generate new filename
       const newFilePath: string = path.join(
         __dirname,
-        `../../../../../static/img/teacher-profile-pictures/${
+        `../../../../../../static/img/teacher-profile-pictures/${
           req.body.teacherId
         }.jpg`
       );
@@ -265,9 +284,14 @@ export class TeachersService {
       // Resize image and save image to public folder
       await processImage(`${file.destination}${file.filename}`, newFilePath);
 
+      // Save new image URL to db
+      await this.teacherModel.updateOne({_id: req.body.teacherId}, {$set: {imgSrc: `${this.baseHyperlink}/${req.body.teacherId}.jpg`}});
+
       // Delete temporary file
       fs.unlinkSync(file.path);
     } catch (error) {
+      // tslint:disable-next-line:no-console
+      console.log(error);
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }

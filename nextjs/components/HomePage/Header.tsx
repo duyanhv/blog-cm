@@ -27,7 +27,7 @@ export default class Header extends React.Component {
               <ul className="nav navbar-nav">
                 <li>
                   <Link prefetch href="/">
-                    <a>HOME</a>
+                    <a>Trang Chủ</a>
                   </Link>
                 </li>
 
@@ -111,32 +111,32 @@ export default class Header extends React.Component {
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/11">
                         <a>Lịch Học Lớp 11</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/10">
                         <a>Lịch Học Lớp 10</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/9">
                         <a>Lịch Học Lớp 9</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/8">
                         <a>Lịch Học Lớp 8</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/7">
                         <a>Lịch Học Lớp 7</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/6">
                         <a>Lịch Học Lớp 6</a>
                       </Link>
                     </li>
@@ -151,7 +151,7 @@ export default class Header extends React.Component {
 
                 <li>
                   <Link prefetch href="/contact">
-                    <a>Contact</a>
+                    <a>Liên Hệ</a>
                   </Link>
                 </li>
               </ul>

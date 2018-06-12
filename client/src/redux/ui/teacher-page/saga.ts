@@ -25,6 +25,8 @@ import { getErrorMessage, message } from '../../../helpers';
 import { getTeacherService } from '../../../service-proxies/service.provider';
 import { TeacherPageState } from '.';
 import { AppState } from '../..';
+import { UpdateTeacherInfoDto } from '../../../service-proxies/service-proxies';
+import * as moment from 'moment';
 
 const getState = () => select<AppState>(state => state.ui.teacherPage);
 
@@ -100,6 +102,9 @@ function* createNewTeacherWorker(action: CreateNewTeacher): any {
     const teacherService = getTeacherService();
     const result = yield teacherService.create(action.payload.teacherInfo);
 
+    // tslint:disable-next-line:no-console
+    console.log(result);
+
     yield put(createNewTeacherSuccess(result));
     message.success('Create New Teacher Success', 1);
   } catch (error) {
@@ -112,10 +117,13 @@ function* updateTeacherWorker(action: UpdateTeacher): any {
     yield put(starting());
 
     const teacherService = getTeacherService();
-    const result = yield teacherService.update(action.payload.teacherInfo);
+    yield teacherService.update({
+      ...action.payload.teacherInfo,
+      dob: moment(action.payload.teacherInfo.dob).format(),
+    } as UpdateTeacherInfoDto);
 
-    yield put(updateTeacherSuccess(result));
-    message.success('Create New Teacher Success', 1);
+    yield put(updateTeacherSuccess(action.payload.teacherInfo as any));
+    message.success('Update Teacher Success', 1);
   } catch (error) {
     yield put(errorHappen(getErrorMessage(error)));
   }

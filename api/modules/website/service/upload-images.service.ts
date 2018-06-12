@@ -2,7 +2,7 @@ import { HttpStatus, HttpException, Inject, Injectable } from '@nestjs/common';
 import { ImageConst } from '../constants/image.constant';
 import { Model } from 'mongoose';
 import { Image } from '../interfaces';
-import { GetUploadedImagesDetailDto, GetUploadedImagesResultDto } from '../dto';
+import { GetUploadedImagesDetailDto, GetUploadedImagesResultDto, GetAlbumsResultDto, GetAlbumImagesResultDto } from '../dto';
 import * as path from 'path';
 import * as fs from 'fs';
 import { promisify } from 'util';
@@ -105,6 +105,48 @@ export class UploadImageService {
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  async getAlbums(): Promise<GetAlbumsResultDto> {
+    const readdir = promisify(fs.readdir);
+    const albumsList = await readdir(path.join(__dirname, `../../../../../../static/img/upload`));
+    const imageList = await this.imageModel.find({}).lean().exec();
+    const albums = albumsList.map((item) => {
+      const imgList = imageList.filter((ite) => {
+        if (ite.album === item) {
+          ite.hyperlink = `${this.baseHyperlink}/${ite.album}/${ite.filename}`;
+          return ite;
+        }
+      });
+
+      return {
+        albumName: item,
+        imgList,
+      };
+    });
+    
+    return albums as any;
+  }
+
+  async getImagesOfAlbum(albumName: string): Promise<GetAlbumImagesResultDto> {
+    if (!albumName) {
+      throw new HttpException('Album Name Cant Empty', HttpStatus.BAD_REQUEST);
+    }
+
+    const readdir = promisify(fs.readdir);
+    const albumsList = await readdir(path.join(__dirname, `../../../../../../static/img/upload`));
+    if (albumsList.indexOf(albumName) === -1) {
+      throw new HttpException('Album Not Found', HttpStatus.NOT_FOUND);
+    }
+
+    const imageList = await this.imageModel.find({}).lean().exec();
+    return {
+      data: imageList.filter((item) => item.album === albumName).map((ite) => ({
+        _id: ite._id,
+        filename: ite.filename,
+        hyperlink: `${this.baseHyperlink}/${ite.album}/${ite.filename}`,
+      }))
+    };
   }
 
   async updateFilename(imageId: string, newName: string): Promise<void> {

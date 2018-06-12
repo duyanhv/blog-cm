@@ -12,7 +12,6 @@ interface TeacherPageState {
   sortBy: string;
   asc: boolean;
   currentTeacher: FindTeachersDetailDto;
-  imageSrc: string;
   errorMessage: string;
 }
 

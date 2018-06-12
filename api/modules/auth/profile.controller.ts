@@ -98,11 +98,11 @@ export class ProfileController {
     title: 'Upload profile picture',
     description: 'Upload profile picture',
   })
-  // @ApiResponse({
-  //   status: HttpStatus.OK,
-  //   description: 'Upload profile picture success',
-  //   type: String,
-  // })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Upload profile picture success',
+    type: String,
+  })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     description: 'Bad Request',

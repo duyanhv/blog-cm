@@ -25,6 +25,8 @@ import {
   DeactivateTeacherSuccess,
   ACTIVATE_TEACHER_SUCCESS,
   DEACTIVATE_TEACHER_SUCCESS,
+  UploadImgSuccess,
+  UPLOAD_IMG_SUCCESS,
 } from './action';
 import { FindTeachersDetailDto } from '../../../service-proxies/service-proxies';
 
@@ -40,7 +42,6 @@ const initialState = {
   sortBy: 'fullName',
   asc: true,
   currentTeacher: {} as FindTeachersDetailDto,
-  imageSrc: '',
   errorMessage: '',
 };
 
@@ -57,11 +58,12 @@ const openAddTeacherModalReducer = (
 
 const closeAddUserModalReducer = (
   state: TeacherPageState,
-  action: CloseAddTeacherModal,
+  _action: CloseAddTeacherModal,
 ) => {
   return {
     ...state,
     addTeacherModalVisible: false,
+    isBusy: false,
     currentTeacher: {} as FindTeachersDetailDto,
   };
 };
@@ -111,7 +113,7 @@ const errorHappenReducer = (
 
 const startingReducer = (
   state: TeacherPageState,
-  action: Starting,
+  _action: Starting,
 ) => {
   return {
     ...state,
@@ -138,8 +140,11 @@ const createNewTeacherSuccessReducer = (
   return {
     ...state,
     isBusy: false,
+    addTeacherModalVisible: false,
     total: state.total + 1,
     data: [action.payload.teacherInfo, ...state.data],
+    currentUser: {},
+    errorMessage: '',
   };
 };
 
@@ -150,9 +155,13 @@ const updateTeacherSuccessReducer = (
   return {
     ...state,
     isBusy: false,
+    addTeacherModalVisible: false,
     data: state.data.map((item) => {
       if (item._id === state.currentTeacher._id) {
-        return state.currentTeacher;
+        return {
+          ...state.currentTeacher,
+          fullName: [action.payload.teacherInfo.firstName, action.payload.teacherInfo.lastName].join(' '),
+        } as FindTeachersDetailDto;
       } else {
         return item;
       }
@@ -200,6 +209,19 @@ const deactivateTeacherSuccessReducer = (
   };
 };
 
+const uploadImgSuccessReducer = (
+  state: TeacherPageState,
+  action: UploadImgSuccess,
+) => {
+  return {
+    ...state,
+    currentTeacher: {
+      ...state.currentTeacher,
+      imgSrc: action.payload.imgSrc,
+    } as FindTeachersDetailDto,
+  };
+};
+
 const teacherPageReducer = handleActions<TeacherPageState, any>(
   {
     [OPEN_ADD_TEACHER_MODAL]: openAddTeacherModalReducer,
@@ -214,6 +236,7 @@ const teacherPageReducer = handleActions<TeacherPageState, any>(
     [UPDATE_TEACHER_SUCCESS]: updateTeacherSuccessReducer,
     [ACTIVATE_TEACHER_SUCCESS]: activateTeacherSuccessReducer,
     [DEACTIVATE_TEACHER_SUCCESS]: deactivateTeacherSuccessReducer,
+    [UPLOAD_IMG_SUCCESS]: uploadImgSuccessReducer,
   },
   initialState,
 );

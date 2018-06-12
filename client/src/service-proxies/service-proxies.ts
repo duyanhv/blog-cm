@@ -775,8 +775,9 @@ export class ProfilesServiceProxy {
 
     /**
      * Upload profile picture
+     * @return Upload profile picture success
      */
-    uploadProfilePicture(): Promise<void> {
+    uploadProfilePicture(): Promise<string> {
         let url_ = this.baseUrl + "/profiles/uploadProfilePicture";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -784,6 +785,7 @@ export class ProfilesServiceProxy {
             method: "POST",
             headers: {
                 "Content-Type": "application/json", 
+                "Accept": "application/json"
             }
         };
 
@@ -792,10 +794,17 @@ export class ProfilesServiceProxy {
         });
     }
 
-    protected processUploadProfilePicture(response: Response): Promise<void> {
+    protected processUploadProfilePicture(response: Response): Promise<string> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 400) {
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return result200;
+            });
+        } else if (status === 400) {
             return response.text().then((_responseText) => {
             return throwException("A server error occurred.", status, _responseText, _headers);
             });
@@ -808,7 +817,7 @@ export class ProfilesServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(<any>null);
+        return Promise.resolve<string>(<any>null);
     }
 }
 
@@ -1530,6 +1539,103 @@ export class UploadImagesServiceProxy {
             });
         }
         return Promise.resolve<GetUploadedImagesResultDto>(<any>null);
+    }
+
+    /**
+     * Get all albums
+     * @return Return albums info
+     */
+    albums(): Promise<GetUploadedImagesResultDto> {
+        let url_ = this.baseUrl + "/uploadImages/albums";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processAlbums(_response);
+        });
+    }
+
+    protected processAlbums(response: Response): Promise<GetUploadedImagesResultDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetUploadedImagesResultDto.fromJS(resultData200) : new GetUploadedImagesResultDto();
+            return result200;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<GetUploadedImagesResultDto>(<any>null);
+    }
+
+    /**
+     * Get all images of an album
+     * @return Return all images of an album
+     */
+    getImages(albumName: string): Promise<GetAlbumImagesResultDto> {
+        let url_ = this.baseUrl + "/uploadImages/getImages/{albumName}";
+        if (albumName === undefined || albumName === null)
+            throw new Error("The parameter 'albumName' must be defined.");
+        url_ = url_.replace("{albumName}", encodeURIComponent("" + albumName)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetImages(_response);
+        });
+    }
+
+    protected processGetImages(response: Response): Promise<GetAlbumImagesResultDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetAlbumImagesResultDto.fromJS(resultData200) : new GetAlbumImagesResultDto();
+            return result200;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<GetAlbumImagesResultDto>(<any>null);
     }
 
     /**
@@ -2286,6 +2392,53 @@ export class BlogServiceProxy {
         }
         return Promise.resolve<void>(<any>null);
     }
+
+    /**
+     * getlastestpost
+     * @return Post has been successfully fetched.
+     */
+    getlastestpost(): Promise<void> {
+        let url_ = this.baseUrl + "/blog/getlastestpost";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json", 
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetlastestpost(_response);
+        });
+    }
+
+    protected processGetlastestpost(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 422) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(<any>null);
+    }
 }
 
 export class TeachersServiceProxy {
@@ -2431,7 +2584,7 @@ export class TeachersServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json", 
             }
@@ -2479,7 +2632,7 @@ export class TeachersServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json", 
             }
@@ -2525,7 +2678,7 @@ export class TeachersServiceProxy {
 
         let options_ = <RequestInit>{
             body: content_,
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json", 
             }
@@ -4156,6 +4309,105 @@ export interface IGetUploadedImagesResultDto {
     albums: string[];
 }
 
+export class GetAlbumsDetailDto implements IGetAlbumsDetailDto {
+    /** image id */
+    _id!: string;
+    /** file name */
+    filename!: string;
+    /** hyperlink */
+    hyperlink!: string;
+
+    constructor(data?: IGetAlbumsDetailDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this._id = data["_id"];
+            this.filename = data["filename"];
+            this.hyperlink = data["hyperlink"];
+        }
+    }
+
+    static fromJS(data: any): GetAlbumsDetailDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetAlbumsDetailDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["_id"] = this._id;
+        data["filename"] = this.filename;
+        data["hyperlink"] = this.hyperlink;
+        return data; 
+    }
+}
+
+export interface IGetAlbumsDetailDto {
+    /** image id */
+    _id: string;
+    /** file name */
+    filename: string;
+    /** hyperlink */
+    hyperlink: string;
+}
+
+export class GetAlbumImagesResultDto implements IGetAlbumImagesResultDto {
+    /** all images of an album */
+    data!: GetAlbumsDetailDto[];
+
+    constructor(data?: IGetAlbumImagesResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.data = [];
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["data"] && data["data"].constructor === Array) {
+                this.data = [];
+                for (let item of data["data"])
+                    this.data.push(GetAlbumsDetailDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetAlbumImagesResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetAlbumImagesResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.data && this.data.constructor === Array) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IGetAlbumImagesResultDto {
+    /** all images of an album */
+    data: GetAlbumsDetailDto[];
+}
+
 export class UpdateFilenameDto implements IUpdateFilenameDto {
     /** image id */
     imageId!: string;
@@ -4689,6 +4941,10 @@ export class FindTeachersDetailDto implements IFindTeachersDetailDto {
     subject!: string;
     /** is the teacher active ? */
     isActive!: boolean;
+    /** description */
+    description!: string;
+    /** profile picture hyperlink */
+    imgSrc!: string;
 
     constructor(data?: IFindTeachersDetailDto) {
         if (data) {
@@ -4719,6 +4975,8 @@ export class FindTeachersDetailDto implements IFindTeachersDetailDto {
             }
             this.subject = data["subject"];
             this.isActive = data["isActive"];
+            this.description = data["description"];
+            this.imgSrc = data["imgSrc"];
         }
     }
 
@@ -4746,6 +5004,8 @@ export class FindTeachersDetailDto implements IFindTeachersDetailDto {
         }
         data["subject"] = this.subject;
         data["isActive"] = this.isActive;
+        data["description"] = this.description;
+        data["imgSrc"] = this.imgSrc;
         return data; 
     }
 }
@@ -4768,6 +5028,10 @@ export interface IFindTeachersDetailDto {
     subject: string;
     /** is the teacher active ? */
     isActive: boolean;
+    /** description */
+    description: string;
+    /** profile picture hyperlink */
+    imgSrc: string;
 }
 
 export class FindTeachersResultDto implements IFindTeachersResultDto {
@@ -4837,6 +5101,8 @@ export class CreateTeacherInputDto implements ICreateTeacherInputDto {
     dob!: any;
     /** subject */
     subject!: string;
+    /** description */
+    description!: string;
 
     constructor(data?: ICreateTeacherInputDto) {
         if (data) {
@@ -4864,6 +5130,7 @@ export class CreateTeacherInputDto implements ICreateTeacherInputDto {
                 }
             }
             this.subject = data["subject"];
+            this.description = data["description"];
         }
     }
 
@@ -4888,6 +5155,7 @@ export class CreateTeacherInputDto implements ICreateTeacherInputDto {
             }
         }
         data["subject"] = this.subject;
+        data["description"] = this.description;
         return data; 
     }
 }
@@ -4904,6 +5172,8 @@ export interface ICreateTeacherInputDto {
     dob: any;
     /** subject */
     subject: string;
+    /** description */
+    description: string;
 }
 
 export class UpdateTeacherInfoDto implements IUpdateTeacherInfoDto {
@@ -4920,6 +5190,8 @@ export class UpdateTeacherInfoDto implements IUpdateTeacherInfoDto {
     dob!: any;
     /** subject */
     subject!: string;
+    /** description */
+    description!: string;
 
     constructor(data?: IUpdateTeacherInfoDto) {
         if (data) {
@@ -4948,6 +5220,7 @@ export class UpdateTeacherInfoDto implements IUpdateTeacherInfoDto {
                 }
             }
             this.subject = data["subject"];
+            this.description = data["description"];
         }
     }
 
@@ -4973,6 +5246,7 @@ export class UpdateTeacherInfoDto implements IUpdateTeacherInfoDto {
             }
         }
         data["subject"] = this.subject;
+        data["description"] = this.description;
         return data; 
     }
 }
@@ -4991,6 +5265,8 @@ export interface IUpdateTeacherInfoDto {
     dob: any;
     /** subject */
     subject: string;
+    /** description */
+    description: string;
 }
 
 export class GetAttendanceRecordInputDto implements IGetAttendanceRecordInputDto {

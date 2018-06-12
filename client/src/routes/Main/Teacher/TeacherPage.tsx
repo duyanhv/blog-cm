@@ -18,10 +18,13 @@ import {
   errorHappen,
   updateTeacher,
   createNewTeacher,
+  activateTeacher,
+  deactivateTeacher,
 } from '../../../redux/ui/teacher-page';
 import { ProfileState } from '../../../redux/profile';
 import { Dispatch } from 'redux';
 import * as _ from 'lodash';
+import { FindTeachersDetailDto } from '../../../service-proxies/service-proxies';
 
 interface TeacherPageProps extends TeacherPageState {
   profile: ProfileState;
@@ -95,7 +98,16 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
           errorHappen(this.props.t('TeacherPage.fillInAllFields')),
         );
       } else {
-        this.props.dispatch(updateTeacher(this.props.currentTeacher));
+        this.props.dispatch(updateTeacher({
+          _id: this.props.currentTeacher._id,
+          firstName: this.props.currentTeacher.firstName,
+          lastName: this.props.currentTeacher.lastName,
+          email: this.props.currentTeacher.email,
+          phone: this.props.currentTeacher.phone,
+          dob: this.props.currentTeacher.dob,
+          subject: this.props.currentTeacher.subject,
+          description: this.props.currentTeacher.description
+        } as any));
       }
     } else {
       if (
@@ -107,13 +119,17 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
         !this.props.currentTeacher.subject
       ) {
         this.props.dispatch(
-          errorHappen(this.props.t('UserListPage.fillInAllFields')),
+          errorHappen(this.props.t('TeacherPage.fillInAllFields')),
         );
       } else {
         this.props.dispatch(createNewTeacher(this.props.currentTeacher));
       }
     }
   };
+
+  toggleActivate = (record: FindTeachersDetailDto) => {
+    this.props.currentTeacher.isActive ? this.props.dispatch(deactivateTeacher(record._id)) : this.props.dispatch(activateTeacher(record._id));
+  }
 
   render(): JSX.Element {
     return (
@@ -128,6 +144,7 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
         <TeacherTable
           handleTableChange={this.handleTableChange}
           showAddTeacherModal={this.showAddTeacherModal}
+          toggleActivate={this.toggleActivate}
           {...this.props}
         />
 

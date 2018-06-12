@@ -101,6 +101,7 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
       )
     );
   });
+
   // redirect from /blogpost to /blog or /blogpost?id to /blog/:id 
   server.get('/blogpost', (req, res) => {
     if (req.query.id) {
@@ -108,6 +109,7 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     }
     res.redirect(301, `/blog/${req.query.id}`);
   });
+
   server.get('/study-result/attendance-record', (req, res) => {
     const actualPage = '/study-result/attendance-record';
     const queryParams = {};
@@ -126,7 +128,7 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     app.render(req, res, actualPage, queryParams);
   });
 
-  server.get('/time-table/12', (req, res) => {
+  server.get('/time-table/:grade', (req, res) => {
     const actualPage = '/time-table/time-table-12';
     const queryParams = {};
     app.render(req, res, actualPage, queryParams);
@@ -144,10 +146,34 @@ const setupPublicRoutes = (server: express.Express, app: next.Server) => {
     app.render(req, res, actualPage, queryParams);
   });
 
+  server.get('/introduction/activities/:albumName', (req, res) => {
+    const actualPage = '/introduction/activities-detail';
+    const queryParams = {
+      albumName: req.params.albumName
+    };
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/introduction/activities-detail', (_req, res) => {
+    res.redirect(301, `/introduction/activities`);
+  });
+
   server.get('/introduction/teachers', (req, res) => {
     const actualPage = '/introduction/teachers';
     const queryParams = {};
     app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/introduction/teachers/:teacherId', (req, res) => {
+    const actualPage = '/introduction/teachers-detail';
+    const queryParams = {
+      teacherId: req.params.teacherId
+    };
+    app.render(req, res, actualPage, queryParams);
+  });
+
+  server.get('/introduction/teachers-detail', (_req, res) => {
+    res.redirect(301, `/introduction/teachers`);
   });
 };
 

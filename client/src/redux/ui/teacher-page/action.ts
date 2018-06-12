@@ -53,6 +53,12 @@ export type DEACTIVATE_TEACHER = typeof DEACTIVATE_TEACHER;
 export const DEACTIVATE_TEACHER_SUCCESS = 'TEACHER_PAGE/DEACTIVATE_TEACHER_SUCCESS';
 export type DEACTIVATE_TEACHER_SUCCESS = typeof DEACTIVATE_TEACHER_SUCCESS;
 
+export const UPLOAD_IMG_SUCCESS = 'TEACHER_PAGE/UPLOAD_IMG_SUCCESS';
+export type UPLOAD_IMG_SUCCESS = typeof UPLOAD_IMG_SUCCESS;
+
+export const TOGGLE_ACTIVATE = 'TEACHER_PAGE/TOGGLE_ACTIVATE';
+export type TOGGLE_ACTIVATE = typeof TOGGLE_ACTIVATE;
+
 // Action Interface
 export interface OpenAddTeacherModal {
   type: OPEN_ADD_TEACHER_MODAL;
@@ -172,6 +178,13 @@ export interface DeactivateTeacherSuccess {
   };
 }
 
+export interface UploadImgSuccess {
+  type: UPLOAD_IMG_SUCCESS;
+  payload: {
+    imgSrc: string;
+  };
+}
+
 // Payload Creator
 export const openAddTeacherModal = createAction(
   OPEN_ADD_TEACHER_MODAL,
@@ -200,13 +213,14 @@ export const createNewTeacher = createAction(
 export const createNewTeacherSuccess = createAction(
   CREATE_NEW_TEACHER_SUCCESS,
   (teacherInfo: FindTeachersDetailDto) => ({
+    teacherInfo
   }),
 );
 
 export const updateTeacher = createAction(
   UPDATE_TEACHER,
-  (userInfo: UpdateTeacherInfoDto) => ({
-    userInfo,
+  (teacherInfo: UpdateTeacherInfoDto) => ({
+    teacherInfo,
   }),
 );
 
@@ -259,4 +273,8 @@ export const deactivateTeacher = createAction(DEACTIVATE_TEACHER, (teacherId: st
 
 export const deactivateTeacherSuccess = createAction(DEACTIVATE_TEACHER_SUCCESS, (teacherId: string) => ({
   teacherId,
+}));
+
+export const uploadImgSuccess = createAction(UPLOAD_IMG_SUCCESS, (imgSrc: string) => ({
+  imgSrc,
 }));

@@ -70,7 +70,7 @@ class NestedAddNewUserForm extends React.Component<
                 name="userName"
                 placeholder={this.props.t('AddNewUserForm.username')}
                 onChange={this.onUserInfoChange}
-              />,
+              />
             )}
           </Form.Item>
 
