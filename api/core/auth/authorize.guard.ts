@@ -1,9 +1,9 @@
 import {
-  Guard,
   CanActivate,
   ExecutionContext,
   HttpException,
   HttpStatus,
+  Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ReflectMedatataType, ApiResponseMessageConstants } from '../constants';
@@ -12,12 +12,14 @@ import { Token } from '../../modules/auth/interfaces/token.interface';
 import { AuthorizedPermission } from './authorize.decorator';
 import config from '../../config';
 
-@Guard()
+@Injectable()
 export class AuthorizeGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
-  canActivate(req: any, context: ExecutionContext): boolean {
-    const { handler } = context;
+  canActivate(context: ExecutionContext): boolean {
+    const req = context.switchToHttp().getRequest();
+    const handler = context.getHandler();
+  
     const permission = this.reflector.get<string>(
       ReflectMedatataType.Permission,
       handler,

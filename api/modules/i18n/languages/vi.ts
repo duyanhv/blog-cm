@@ -122,5 +122,37 @@ export const vi = {
     middleName: 'Tên Đệm',
     lastName: 'Tên',
     isActive: 'Hoạt Động'
-  }
+  },
+  TeacherPage: {
+    fillInAllFields: 'Hãy Điền Đầy Đủ Các Thông Tin',
+    add: 'Tạo \'Giáo Viên\' Mới',
+    ok: 'Lưu',
+    cancel: 'Hủy',
+  },
+  TeacherFilter: {
+    search: 'Tìm Theo Tên Giáo Viên',
+    filter: 'Lọc Theo Môn Học',
+    add: 'Tạo \'Giáo Viên\' Mới',
+  },
+  TeacherTable: {
+    edit: 'Chỉnh Sửa Thông Tin Giáo Viên',
+    activate: 'Kích Hoạt',
+    deactivate: 'Hủy Kích Hoạt',
+    fullName: 'Họ Và Tên',
+    email: 'Email',
+    phone: 'Điện Thoại',
+    subject: 'Môn Học',
+    isactive: 'Đang Hoạt Động',
+    actions: 'Hành Động',
+  },
+  AddNewTeacherForm: {
+    phone: 'Điện Thoại',
+    dob: 'Ngày Sinh',
+    subject: 'Môn Học',
+    description: 'Mô Tả',
+    upload: 'Tải Ảnh Lên',
+    firstName: 'Họ',
+    lastName: 'Tên',
+    email: 'Email',
+  },
 };

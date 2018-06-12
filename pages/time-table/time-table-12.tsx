@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Link from 'next/link';
+import SignUpForTesting from '../../nextjs/components/HomePage/SignUpForTesting';
 import Layout from '../../nextjs/components/HomePage/Layout';
 import * as moment from 'moment';
 import { Table } from 'react-bootstrap';
@@ -55,7 +55,7 @@ class TimeTable12 extends React.Component {
       <Layout>
         <div className="container time-table-12">
           <div className="alert alert-warning title" role="alert">
-            <strong>Lịch Học Của Các Lớp 12 ! <Link href="/time-table/register"><a>Đăng Ký Học Thử Ngay.</a></Link></strong>
+            <strong>Lịch Học Của Các Lớp 12 </strong>
           </div>
 
           <div className="address">
@@ -98,6 +98,10 @@ class TimeTable12 extends React.Component {
               })}
             </Table>
           </div>
+
+          <hr />
+
+          <SignUpForTesting />
         </div>
 
         <style jsx>{`

@@ -10,6 +10,8 @@ const TeachersSchema = new mongoose.Schema({
   dob: Date,
   subject: String,
   isActive: Boolean,
+  description: String,
+  imgSrc: String,
 });
 
 export { TeachersSchema };

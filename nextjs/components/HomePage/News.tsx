@@ -11,7 +11,7 @@ import {
 
 // export interface TechnologyProps {}
 
-class News extends React.Component {
+export default class News extends React.Component {
   onClick = () => {
     // tslint:disable-next-line:no-console
     console.log('heyeh');
@@ -269,5 +269,3 @@ class News extends React.Component {
     );
   }
 }
-
-export default News;

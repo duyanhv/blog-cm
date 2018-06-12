@@ -56,5 +56,4 @@ const Map = compose(
     </GoogleMap>
 );
 
-
 export default Map;

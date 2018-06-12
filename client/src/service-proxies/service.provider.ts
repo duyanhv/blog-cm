@@ -8,6 +8,7 @@ import {
   ProfilesServiceProxy,
   UploadImagesServiceProxy,
   BlogServiceProxy,
+  TeachersServiceProxy,
 } from './service-proxies';
 import { store } from '../redux/store';
 
@@ -15,10 +16,12 @@ const getAuthHttp = (): any => {
   return {
     fetch: (url, option): Promise<Response> => {
       if (store.getState().profile.isLoggedIn) {
-        option.headers.set(
-          'Authorization',
-          `Bearer ${store.getState().profile.token}`,
-        );
+        // option.headers.set(
+        //   'Authorization',
+        //   `Bearer ${store.getState().profile.token}`,
+        // );
+
+        option.headers.Authorization = `Bearer ${store.getState().profile.token}`;
       }
       return window.fetch(url, option);
     },
@@ -74,6 +77,13 @@ const getBlogService = (): BlogServiceProxy => {
   );
 };
 
+const getTeacherService = (): TeachersServiceProxy => {
+  return new TeachersServiceProxy(
+    store.getState().appSettings.apiUrl,
+    getAuthHttp(),
+  );
+};
+
 const getI18nService = (): I18nServiceProxy => {
   return new I18nServiceProxy(store.getState().appSettings.apiUrl);
 };
@@ -92,4 +102,5 @@ export {
   getProfileService,
   getUploadImageService,
   getBlogService,
+  getTeacherService,
 };

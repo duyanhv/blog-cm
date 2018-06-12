@@ -11,7 +11,7 @@ import { Carousel, Glyphicon } from 'react-bootstrap';
 //     carouselHeight: number;
 // }
 
-class Slider extends React.Component {
+export default class Slider extends React.Component {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -34,8 +34,8 @@ class Slider extends React.Component {
                 prevIcon={<Glyphicon glyph="chevron-left" />}
                 nextIcon={<Glyphicon glyph="chevron-right" />}
                 indicators={true}
-                carouselwidth={1140}
-                carouselheight={415.63}
+                // carouselwidth={1140}
+                // carouselheight={415.63}
               >
                 <Carousel.Item>
                   <img src="static/img/slides/flexslider/1.jpg" alt="" />
@@ -80,5 +80,3 @@ class Slider extends React.Component {
     );
   }
 }
-
-export default Slider;

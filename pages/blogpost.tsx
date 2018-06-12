@@ -1,45 +1,54 @@
 import { Component } from 'react';
-import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
 import Layout from '../nextjs/components/HomePage/Layout';
-import BlogAside from '../nextjs/components/Blog/BlogAside';
 import { Grid, Col, Row } from 'react-bootstrap';
+import BlogAside, { BlogAsideProps } from '../nextjs/components/Blog/BlogAside';
 
 export interface BlogPostProps {
-    data: {
-        _id: string,
-        title: string,
-        subtitle: string,
-        content: string,
-        author: string,
-        imageSrc: string,
-        postCreatedAt: string
-    };
+  data: {
+    _id: string;
+    title: string;
+    subtitle: string;
+    content: string;
+    author: string;
+    imageSrc: string;
+    postCreatedAt: string;
+  };
+
+  blogAside: BlogAsideProps;
 }
 
 const convertStringToHtml = (content: string) => {
-    return {
-        __html: content
-    };
+  return {
+    __html: content
+  };
 };
 
 export default class BlogPost extends Component<BlogPostProps> {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props: any) {
+    super(props);
+  }
 
-    static async getInitialProps({ query }) {
-        const blogData = await fetch(`http://localhost:3000/api/blog/getpostbyid/${query.id}`);
-        const jsonBlogData = await blogData.json();
-        return {
-            data: jsonBlogData
-        };
-    }
+  static async getInitialProps({ req, query }: any) {
+    const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : '';
 
-    render() {
-        return (
-            <Layout>
-                {/* <div className="blog-post-header">
+    const blogData = await fetch(`${baseUrl}/api/blog/getpostbyid/${query.id}`);
+    const jsonBlogData = await blogData.json();
+
+    const lastestBlogPostData = await fetch(
+      `${baseUrl}/api/blog/getlastestpost`
+    );
+    const jsonLastestBlogPostData = await lastestBlogPostData.json();
+    return {
+      data: jsonBlogData,
+      blogAside: jsonLastestBlogPostData
+    };
+  }
+
+  render() {
+    return (
+      <Layout>
+        {/* <div className="blog-post-header">
                     <div className="blog-post-header-content">
                         <p>{this.props.data.title}</p>
                         <p>{this.props.data.subtitle}</p>
@@ -53,39 +62,50 @@ export default class BlogPost extends Component<BlogPostProps> {
                     </div>
                 </div> */}
 
-                <div className="container blog-post-wrapper">
-                    <Grid>
-
-                        <Row>
-                            <Col className="blog-post-content-wrapper" xs={12} md={8}>
-                                <div className="blog-post-header-content">
-                                    <p dangerouslySetInnerHTML={convertStringToHtml(this.props.data.title)}></p>
-                                    <p>Posted by {this.props.data.author} on {this.props.data.postCreatedAt.split('T')[0]}</p>
-                                </div>
-
-                                <Row className="blog-post-by-id-content">
-                                    <Col xs={6} md={4}>
-                                        <div className="blog-post-content-img">
-                                            img goes here
-                                        </div>
-                                    </Col>
-                                    <Col xs={12} md={8}>
-                                        <p dangerouslySetInnerHTML={convertStringToHtml(this.props.data.subtitle)}></p>
-                                    </Col>
-                                </Row>
-
-                                <div className="blog-post-content-content">
-                                    <div dangerouslySetInnerHTML={convertStringToHtml(this.props.data.content)}>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col xs={6} md={4}>
-                                <BlogAside />
-                            </Col>
-                        </Row>
-                    </Grid>
+        <div className="container blog-post-wrapper">
+          <Grid>
+            <Row>
+              <Col className="blog-post-content-wrapper" xs={12} md={8}>
+                <div className="blog-post-header-content">
+                  <p
+                    dangerouslySetInnerHTML={convertStringToHtml(
+                      this.props.data.title
+                    )}
+                  />
+                  <p>
+                    Posted by {this.props.data.author} on{' '}
+                    {this.props.data.postCreatedAt.split('T')[0]}
+                  </p>
                 </div>
-            </Layout>
-        );
-    }
+
+                <Row className="blog-post-by-id-content">
+                  <Col xs={6} md={4}>
+                    <div className="blog-post-content-img" />
+                  </Col>
+                  <Col xs={12} md={8}>
+                    <p
+                      dangerouslySetInnerHTML={convertStringToHtml(
+                        this.props.data.subtitle
+                      )}
+                    />
+                  </Col>
+                </Row>
+
+                <div className="blog-post-content-content">
+                  <div
+                    dangerouslySetInnerHTML={convertStringToHtml(
+                      this.props.data.content
+                    )}
+                  />
+                </div>
+              </Col>
+              <Col xs={6} md={4}>
+                <BlogAside {...this.props.blogAside} />
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      </Layout>
+    );
+  }
 }

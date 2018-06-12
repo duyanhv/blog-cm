@@ -644,7 +644,7 @@ section.callaction {
 #content {
 	position:relative;
 	background:#fff;
-	padding: 40px 0 40px 0;
+	padding: 0;
 }
 
 #content img {
@@ -2027,6 +2027,15 @@ ul.recent li h6 a{
 .widget ul.tags li a:hover {
 	text-decoration:none;
 	color:#fff;
+}
+
+.recent-blog-post{
+	width: 100%;
+	height: max-content;
+	flex-direction: column;
+}
+.recent-blog-post div{
+	overflow: auto;
 }
 
 /* ===== Widgets ===== */

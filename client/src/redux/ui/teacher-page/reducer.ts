@@ -13,7 +13,22 @@ import {
   FILTER_CHANGE,
   ErrorHappen,
   ERROR_HAPPEN,
+  Starting,
+  STARTING,
+  FetchDataSuccess,
+  FETCH_DATA_SUCCESS,
+  CreateNewTeacherSuccess,
+  CREATE_NEW_TEACHER_SUCCESS,
+  UpdateTeacherSuccess,
+  UPDATE_TEACHER_SUCCESS,
+  ActivateTeacherSuccess,
+  DeactivateTeacherSuccess,
+  ACTIVATE_TEACHER_SUCCESS,
+  DEACTIVATE_TEACHER_SUCCESS,
+  UploadImgSuccess,
+  UPLOAD_IMG_SUCCESS,
 } from './action';
+import { FindTeachersDetailDto } from '../../../service-proxies/service-proxies';
 
 const initialState = {
   addTeacherModalVisible: false,
@@ -26,8 +41,7 @@ const initialState = {
   name: '',
   sortBy: 'fullName',
   asc: true,
-  currentTeacher: {},
-  imageSrc: '',
+  currentTeacher: {} as FindTeachersDetailDto,
   errorMessage: '',
 };
 
@@ -44,12 +58,13 @@ const openAddTeacherModalReducer = (
 
 const closeAddUserModalReducer = (
   state: TeacherPageState,
-  action: CloseAddTeacherModal,
+  _action: CloseAddTeacherModal,
 ) => {
   return {
     ...state,
     addTeacherModalVisible: false,
-    currentTeacher: {},
+    isBusy: false,
+    currentTeacher: {} as FindTeachersDetailDto,
   };
 };
 
@@ -96,6 +111,117 @@ const errorHappenReducer = (
   };
 };
 
+const startingReducer = (
+  state: TeacherPageState,
+  _action: Starting,
+) => {
+  return {
+    ...state,
+    isBusy: true,
+  };
+};
+
+const fetchDataSuccessReducer = (
+  state: TeacherPageState,
+  action: FetchDataSuccess,
+) => {
+  return {
+    ...state,
+    isBusy: false,
+    total: action.payload.result.total,
+    data: action.payload.result.data,
+  };
+};
+
+const createNewTeacherSuccessReducer = (
+  state: TeacherPageState,
+  action: CreateNewTeacherSuccess,
+) => {
+  return {
+    ...state,
+    isBusy: false,
+    addTeacherModalVisible: false,
+    total: state.total + 1,
+    data: [action.payload.teacherInfo, ...state.data],
+    currentUser: {},
+    errorMessage: '',
+  };
+};
+
+const updateTeacherSuccessReducer = (
+  state: TeacherPageState,
+  action: UpdateTeacherSuccess,
+) => {
+  return {
+    ...state,
+    isBusy: false,
+    addTeacherModalVisible: false,
+    data: state.data.map((item) => {
+      if (item._id === state.currentTeacher._id) {
+        return {
+          ...state.currentTeacher,
+          fullName: [action.payload.teacherInfo.firstName, action.payload.teacherInfo.lastName].join(' '),
+        } as FindTeachersDetailDto;
+      } else {
+        return item;
+      }
+    }),
+  };
+};
+
+const activateTeacherSuccessReducer = (
+  state: TeacherPageState,
+  action: ActivateTeacherSuccess,
+) => {
+  const activatedTeacher = state.data.filter((item) => item._id === action.payload.teacherId)[0];
+  activatedTeacher.isActive = true;
+
+  return {
+    ...state,
+    isBusy: false,
+    data: state.data.map((item) => {
+      if (item._id === action.payload.teacherId) {
+        return activatedTeacher;
+      } else {
+        return item;
+      }
+    }),
+  };
+};
+
+const deactivateTeacherSuccessReducer = (
+  state: TeacherPageState,
+  action: DeactivateTeacherSuccess,
+) => {
+  const deactivatedTeacher = state.data.filter((item) => item._id === action.payload.teacherId)[0];
+  deactivatedTeacher.isActive = false;
+
+  return {
+    ...state,
+    isBusy: false,
+    data: state.data.map((item) => {
+      if (item._id === action.payload.teacherId) {
+        return deactivatedTeacher;
+      } else {
+        return item;
+      }
+    }),
+  };
+};
+
+const uploadImgSuccessReducer = (
+  state: TeacherPageState,
+  action: UploadImgSuccess,
+) => {
+  return {
+    ...state,
+    currentTeacher: {
+      ...state.currentTeacher,
+      imgSrc: action.payload.imgSrc,
+    } as FindTeachersDetailDto,
+  };
+};
+
 const teacherPageReducer = handleActions<TeacherPageState, any>(
   {
     [OPEN_ADD_TEACHER_MODAL]: openAddTeacherModalReducer,
@@ -104,6 +230,13 @@ const teacherPageReducer = handleActions<TeacherPageState, any>(
     [SEARCH_CHANGE]: searchChangeReducer,
     [FILTER_CHANGE]: filterChangeReducer,
     [ERROR_HAPPEN]: errorHappenReducer,
+    [STARTING]: startingReducer,
+    [FETCH_DATA_SUCCESS]: fetchDataSuccessReducer,
+    [CREATE_NEW_TEACHER_SUCCESS]: createNewTeacherSuccessReducer,
+    [UPDATE_TEACHER_SUCCESS]: updateTeacherSuccessReducer,
+    [ACTIVATE_TEACHER_SUCCESS]: activateTeacherSuccessReducer,
+    [DEACTIVATE_TEACHER_SUCCESS]: deactivateTeacherSuccessReducer,
+    [UPLOAD_IMG_SUCCESS]: uploadImgSuccessReducer,
   },
   initialState,
 );

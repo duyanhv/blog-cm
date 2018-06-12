@@ -8,10 +8,23 @@ import { AppSettingsState } from '../../../redux/app-settings';
 import { AppState } from '../../../redux';
 import { connect } from 'react-redux';
 import { Modal, Alert } from 'antd';
-import { TeacherPageState, openAddTeacherModal, closeAddTeacherModal, fetchData, searchChange, filterChange, errorHappen, updateTeacher, createNewTeacher } from '../../../redux/ui/teacher-page';
+import {
+  TeacherPageState,
+  openAddTeacherModal,
+  closeAddTeacherModal,
+  fetchData,
+  searchChange,
+  filterChange,
+  errorHappen,
+  updateTeacher,
+  createNewTeacher,
+  activateTeacher,
+  deactivateTeacher,
+} from '../../../redux/ui/teacher-page';
 import { ProfileState } from '../../../redux/profile';
 import { Dispatch } from 'redux';
 import * as _ from 'lodash';
+import { FindTeachersDetailDto } from '../../../service-proxies/service-proxies';
 
 interface TeacherPageProps extends TeacherPageState {
   profile: ProfileState;
@@ -40,19 +53,19 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
       1000,
     );
     debounced();
-  }
+  };
 
   handleFilterChange = (value: string) => {
     this.props.dispatch(filterChange(value));
-  }
+  };
 
   showAddTeacherModal = (currentTeacher: any) => {
     this.props.dispatch(openAddTeacherModal(currentTeacher));
-  }
+  };
 
   closeAddTeacherModal = () => {
     this.props.dispatch(closeAddTeacherModal());
-  }
+  };
 
   handleTableChange = (pagination: any, _filters: any, sorter: any) => {
     this.props.dispatch(
@@ -69,39 +82,53 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
           : this.props.asc,
       }),
     );
-  }
+  };
 
   onCreateTeacherFormSubmit = () => {
     if (this.props.currentTeacher._id) {
       if (
-        !this.props.currentTeacher.username ||
         !this.props.currentTeacher.firstName ||
-        !this.props.currentTeacher.middleName ||
         !this.props.currentTeacher.lastName ||
-        !this.props.currentTeacher.email
+        !this.props.currentTeacher.email ||
+        !this.props.currentTeacher.phone ||
+        !this.props.currentTeacher.dob ||
+        !this.props.currentTeacher.subject
       ) {
         this.props.dispatch(
           errorHappen(this.props.t('TeacherPage.fillInAllFields')),
         );
       } else {
-        this.props.dispatch(updateTeacher(this.props.currentTeacher));
+        this.props.dispatch(updateTeacher({
+          _id: this.props.currentTeacher._id,
+          firstName: this.props.currentTeacher.firstName,
+          lastName: this.props.currentTeacher.lastName,
+          email: this.props.currentTeacher.email,
+          phone: this.props.currentTeacher.phone,
+          dob: this.props.currentTeacher.dob,
+          subject: this.props.currentTeacher.subject,
+          description: this.props.currentTeacher.description
+        } as any));
       }
     } else {
       if (
-        !this.props.currentTeacher.username ||
-        !this.props.currentTeacher.password ||
         !this.props.currentTeacher.firstName ||
-        !this.props.currentTeacher.middleName ||
         !this.props.currentTeacher.lastName ||
-        !this.props.currentTeacher.email
+        !this.props.currentTeacher.email ||
+        !this.props.currentTeacher.phone ||
+        !this.props.currentTeacher.dob ||
+        !this.props.currentTeacher.subject
       ) {
         this.props.dispatch(
-          errorHappen(this.props.t('UserListPage.fillInAllFields')),
+          errorHappen(this.props.t('TeacherPage.fillInAllFields')),
         );
       } else {
         this.props.dispatch(createNewTeacher(this.props.currentTeacher));
       }
     }
+  };
+
+  toggleActivate = (record: FindTeachersDetailDto) => {
+    this.props.currentTeacher.isActive ? this.props.dispatch(deactivateTeacher(record._id)) : this.props.dispatch(activateTeacher(record._id));
   }
 
   render(): JSX.Element {
@@ -117,6 +144,7 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
         <TeacherTable
           handleTableChange={this.handleTableChange}
           showAddTeacherModal={this.showAddTeacherModal}
+          toggleActivate={this.toggleActivate}
           {...this.props}
         />
 
@@ -137,9 +165,7 @@ class TeacherPage extends React.Component<TeacherPageProps, any> {
             />
           ) : null}
 
-          <AddNewTeacherForm
-            {...this.props}
-          />
+          <AddNewTeacherForm {...this.props} />
         </Modal>
       </div>
     );

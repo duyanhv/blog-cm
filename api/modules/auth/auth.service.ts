@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { Component, HttpStatus, Inject, HttpException } from '@nestjs/common';
+import { HttpStatus, Inject, HttpException, Injectable } from '@nestjs/common';
 import { User } from './interfaces';
 import { TokenInfo } from './interfaces/token-info.interface';
 import { Token } from './interfaces/token.interface';
@@ -9,7 +9,7 @@ import * as Joi from 'joi';
 import * as bcrypt from 'bcrypt';
 import config from '../../config';
 
-@Component()
+@Injectable()
 export class AuthService {
   constructor(
     @Inject(UsersConst.UserModelToken) private readonly userModel: Model<User>,

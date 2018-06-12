@@ -2,7 +2,7 @@ import React from 'react';
 
 // export interface ClientsProps {}
 
-class Clients extends React.Component {
+export default class Clients extends React.Component {
   render() {
     return (
       <div className="container">
@@ -58,5 +58,3 @@ class Clients extends React.Component {
     );
   }
 }
-
-export default Clients;

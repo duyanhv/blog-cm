@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
 import ScrollToTop from 'react-scroll-up';
+import Header  from './Header';
+import Footer from './Footer';
 
-class Layout extends React.Component {
+export default class Layout extends React.Component {
   render() {
     return (
       <div>
         <Header />
-        
+
         <div>{this.props.children}</div>
 
         <Footer />
@@ -35,5 +35,3 @@ class Layout extends React.Component {
     );
   }
 }
-
-export default Layout;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-class Header extends React.Component {
+export default class Header extends React.Component {
   render() {
     return (
       <header>
@@ -26,8 +26,8 @@ class Header extends React.Component {
             <div className="navbar-collapse collapse ">
               <ul className="nav navbar-nav">
                 <li>
-                  <Link href="/">
-                    <a>HOME</a>
+                  <Link prefetch href="/">
+                    <a>Trang Chủ</a>
                   </Link>
                 </li>
 
@@ -40,53 +40,25 @@ class Header extends React.Component {
                     data-delay="0"
                     data-close-others="false"
                   >
-                    Features &nbsp; <i className="fa fa-angle-down" />
+                    Giới Thiệu &nbsp; <i className="fa fa-angle-down" />
                   </a>
                   <ul className="dropdown-menu">
                     <li>
-                      <a href="typography.html">Typography</a>
+                      <Link href="/introduction/material-facilities">
+                        <a>Cơ Sở Vật Chất</a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="components.html">Components</a>
+                      <Link href="/introduction/activities">
+                        <a>Hoạt Động Tiêu Biểu</a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="pricing-box.html">Pricing box</a>
-                    </li>
-                    <li className="dropdown-submenu">
-                      <a
-                        href="#"
-                        className="dropdown-toggle "
-                        data-toggle="dropdown"
-                        data-hover="dropdown"
-                      >
-                        Pages
-                      </a>
-                      <ul className="dropdown-menu">
-                        <li>
-                          <a href="fullwidth.html">Full width</a>
-                        </li>
-                        <li>
-                          <a href="right-sidebar.html">Right sidebar</a>
-                        </li>
-                        <li>
-                          <a href="left-sidebar.html">Left sidebar</a>
-                        </li>
-                        <li>
-                          <a href="comingsoon.html">Coming soon</a>
-                        </li>
-                        <li>
-                          <a href="search-result.html">Search result</a>
-                        </li>
-                        <li>
-                          <a href="404.html">404</a>
-                        </li>
-                        <li>
-                          <a href="register.html">Register</a>
-                        </li>
-                        <li>
-                          <a href="login.html">Login</a>
-                        </li>
-                      </ul>
+                      <Link href="/introduction/teachers">
+                        <a>
+                          Danh Sách Giảng Viên
+                        </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
@@ -139,32 +111,32 @@ class Header extends React.Component {
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/11">
                         <a>Lịch Học Lớp 11</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/10">
                         <a>Lịch Học Lớp 10</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/9">
                         <a>Lịch Học Lớp 9</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/8">
                         <a>Lịch Học Lớp 8</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/7">
                         <a>Lịch Học Lớp 7</a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="#">
+                      <Link href="/time-table/6">
                         <a>Lịch Học Lớp 6</a>
                       </Link>
                     </li>
@@ -172,14 +144,14 @@ class Header extends React.Component {
                 </li>
 
                 <li>
-                  <Link href="/blog">
+                  <Link prefetch href="/blog">
                     <a>Blog</a>
                   </Link>
                 </li>
 
                 <li>
-                  <Link href="/contact">
-                    <a>Contact</a>
+                  <Link prefetch href="/contact">
+                    <a>Liên Hệ</a>
                   </Link>
                 </li>
               </ul>
@@ -190,5 +162,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;

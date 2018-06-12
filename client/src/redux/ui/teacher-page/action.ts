@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import { FindTeachersDetailDto, CreateTeacherInputDto, UpdateTeacherInfoDto, FindTeachersResultDto } from '../../../service-proxies/service-proxies';
 
 // Actions
 export const OPEN_ADD_TEACHER_MODAL = 'TEACHER_PAGE/OPEN_ADD_TEACHER_MODAL';
@@ -31,14 +32,38 @@ export type TEACHER_INFO_CHANGE = typeof TEACHER_INFO_CHANGE;
 export const FETCH_DATA = 'TEACHER_PAGE/FETCH_DATA';
 export type FETCH_DATA = typeof FETCH_DATA;
 
+export const FETCH_DATA_SUCCESS = 'TEACHER_PAGE/FETCH_DATA_SUCCESS';
+export type FETCH_DATA_SUCCESS = typeof FETCH_DATA_SUCCESS;
+
 export const ERROR_HAPPEN = 'TEACHER_PAGE/ERROR_HAPPEN';
 export type ERROR_HAPPEN = typeof ERROR_HAPPEN;
+
+export const STARTING = 'TEACHER_PAGE/STARTING';
+export type STARTING = typeof STARTING;
+
+export const ACTIVATE_TEACHER = 'TEACHER_PAGE/ACTIVATE_TEACHER';
+export type ACTIVATE_TEACHER = typeof ACTIVATE_TEACHER;
+
+export const ACTIVATE_TEACHER_SUCCESS = 'TEACHER_PAGE/ACTIVATE_TEACHER_SUCCESS';
+export type ACTIVATE_TEACHER_SUCCESS = typeof ACTIVATE_TEACHER_SUCCESS;
+
+export const DEACTIVATE_TEACHER = 'TEACHER_PAGE/DEACTIVATE_TEACHER';
+export type DEACTIVATE_TEACHER = typeof DEACTIVATE_TEACHER;
+
+export const DEACTIVATE_TEACHER_SUCCESS = 'TEACHER_PAGE/DEACTIVATE_TEACHER_SUCCESS';
+export type DEACTIVATE_TEACHER_SUCCESS = typeof DEACTIVATE_TEACHER_SUCCESS;
+
+export const UPLOAD_IMG_SUCCESS = 'TEACHER_PAGE/UPLOAD_IMG_SUCCESS';
+export type UPLOAD_IMG_SUCCESS = typeof UPLOAD_IMG_SUCCESS;
+
+export const TOGGLE_ACTIVATE = 'TEACHER_PAGE/TOGGLE_ACTIVATE';
+export type TOGGLE_ACTIVATE = typeof TOGGLE_ACTIVATE;
 
 // Action Interface
 export interface OpenAddTeacherModal {
   type: OPEN_ADD_TEACHER_MODAL;
   payload: {
-    currentTeacher: any; // FindAllTeachersDetailDto;
+    currentTeacher: FindTeachersDetailDto;
   };
 }
 
@@ -63,28 +88,28 @@ export interface FilterChange {
 export interface CreateNewTeacher {
   type: CREATE_NEW_TEACHER;
   payload: {
-    teacherInfo: any; // CreateTeacherInputDto;
+    teacherInfo: CreateTeacherInputDto;
   };
 }
 
 export interface CreateNewTeacherSuccess {
   type: CREATE_NEW_TEACHER_SUCCESS;
   payload: {
-    teacherInfo: any; // FindAllTeachersDetailDto;
+    teacherInfo: FindTeachersDetailDto;
   };
 }
 
 export interface UpdateTeacher {
   type: UPDATE_TEACHER;
   payload: {
-    teacherInfo: any; // UpdateTeacherInputDto;
+    teacherInfo: UpdateTeacherInfoDto;
   };
 }
 
 export interface UpdateTeacherSuccess {
   type: UPDATE_TEACHER_SUCCESS;
   payload: {
-    teacherInfo: any; // FindAllTeachersDetailDto;
+    teacherInfo: FindTeachersDetailDto;
   };
 }
 
@@ -107,6 +132,13 @@ export interface FetchData {
   };
 }
 
+export interface FetchDataSuccess {
+  type: FETCH_DATA_SUCCESS;
+  payload: {
+    result: FindTeachersResultDto;
+  };
+}
+
 export interface ErrorHappen {
   type: ERROR_HAPPEN;
   payload: {
@@ -114,10 +146,49 @@ export interface ErrorHappen {
   };
 }
 
+export interface Starting {
+  type: STARTING;
+}
+
+export interface ActivateTeacher {
+  type: ACTIVATE_TEACHER;
+  payload: {
+    teacherId: string;
+  };
+}
+
+export interface ActivateTeacherSuccess {
+  type: ACTIVATE_TEACHER_SUCCESS;
+  payload: {
+    teacherId: string;
+  };
+}
+
+export interface DeactivateTeacher {
+  type: DEACTIVATE_TEACHER;
+  payload: {
+    teacherId: string;
+  };
+}
+
+export interface DeactivateTeacherSuccess {
+  type: DEACTIVATE_TEACHER_SUCCESS;
+  payload: {
+    teacherId: string;
+  };
+}
+
+export interface UploadImgSuccess {
+  type: UPLOAD_IMG_SUCCESS;
+  payload: {
+    imgSrc: string;
+  };
+}
+
 // Payload Creator
 export const openAddTeacherModal = createAction(
   OPEN_ADD_TEACHER_MODAL,
-  (currentTeacher: any ) => ({ // FindAllTeachersDetailDto
+  (currentTeacher: FindTeachersDetailDto ) => ({
     currentTeacher,
   }),
 );
@@ -134,28 +205,28 @@ export const filterChange = createAction(FILTER_CHANGE, (filter: string) => ({
 
 export const createNewTeacher = createAction(
   CREATE_NEW_TEACHER,
-  (teacherInfo: any) => ({ // CreateTeacherInputDto
+  (teacherInfo: CreateTeacherInputDto) => ({
     teacherInfo,
   }),
 );
 
 export const createNewTeacherSuccess = createAction(
   CREATE_NEW_TEACHER_SUCCESS,
-  (teacherInfo: any) => ({ // FindAllTeachersDetailDto
-    teacherInfo,
+  (teacherInfo: FindTeachersDetailDto) => ({
+    teacherInfo
   }),
 );
 
 export const updateTeacher = createAction(
   UPDATE_TEACHER,
-  (userInfo: any) => ({ // UpdateTeacherInputDto
-    userInfo,
+  (teacherInfo: UpdateTeacherInfoDto) => ({
+    teacherInfo,
   }),
 );
 
 export const updateTeacherSuccess = createAction(
   UPDATE_TEACHER_SUCCESS,
-  (teacherInfo: any) => ({ // FindAllTeachersDetailDto
+  (teacherInfo: FindTeachersDetailDto) => ({
     teacherInfo,
   }),
 );
@@ -178,6 +249,32 @@ export const fetchData = createAction(
   }),
 );
 
-export const errorHappen = createAction(ERROR_HAPPEN, errorMessage => ({
+export const fetchDataSuccess = createAction(FETCH_DATA_SUCCESS, (result: FindTeachersResultDto) => ({
+  result,
+}));
+
+export const errorHappen = createAction(ERROR_HAPPEN, (errorMessage: string) => ({
   errorMessage,
+}));
+
+export const starting = createAction(STARTING);
+
+export const activateTeacher = createAction(ACTIVATE_TEACHER, (teacherId: string) => ({
+  teacherId,
+}));
+
+export const activateTeacherSuccess = createAction(ACTIVATE_TEACHER_SUCCESS, (teacherId: string) => ({
+  teacherId,
+}));
+
+export const deactivateTeacher = createAction(DEACTIVATE_TEACHER, (teacherId: string) => ({
+  teacherId,
+}));
+
+export const deactivateTeacherSuccess = createAction(DEACTIVATE_TEACHER_SUCCESS, (teacherId: string) => ({
+  teacherId,
+}));
+
+export const uploadImgSuccess = createAction(UPLOAD_IMG_SUCCESS, (imgSrc: string) => ({
+  imgSrc,
 }));

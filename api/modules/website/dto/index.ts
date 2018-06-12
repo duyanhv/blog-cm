@@ -12,6 +12,9 @@ import { FindTeachersInputDto } from './find-teachers-input.dto';
 import { CreateTeacherInputDto } from './create-teacher-input.dto';
 import { ActivateTeacherDto } from './activate-teacher.dto';
 import { UpdateTeacherInfoDto } from './update-teacher-info.dto';
+import { GetAlbumsDetailDto } from './get-album-detail.dto';
+import { GetAlbumsResultDto } from './get-album-result.dto';
+import { GetAlbumImagesResultDto } from './get-album-images-result.dto';
 
 export {
   // create company
@@ -31,4 +34,8 @@ export {
   CreateTeacherInputDto,
   ActivateTeacherDto,
   UpdateTeacherInfoDto,
+
+  GetAlbumsDetailDto,
+  GetAlbumsResultDto,
+  GetAlbumImagesResultDto,
 };

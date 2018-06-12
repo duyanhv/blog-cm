@@ -9,9 +9,11 @@ export interface BlogProps {
   blogArticle: BlogArticleProps;
 }
 
-class Blog extends React.Component<BlogProps> {
-  static async getInitialProps(): Promise<BlogProps> {
-    const blogData = await fetch('http://localhost:3000/api/blog/getpostpublic');
+export default class Blog extends React.Component<BlogProps> {
+  static async getInitialProps({ req }: any): Promise<BlogProps> {
+    const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : '';
+  
+    const blogData = await fetch(`${baseUrl}/api/blog/getpostpublic`);
     const jsonBlogData = await blogData.json();
     return {
       blogArticle: jsonBlogData,
@@ -33,5 +35,3 @@ class Blog extends React.Component<BlogProps> {
     );
   }
 }
-
-export default Blog;

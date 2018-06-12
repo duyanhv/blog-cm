@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Row, Col, Input, Button, Icon, Select } from 'antd';
 import { TranslationFunction } from 'react-i18next';
 import './TeacherFilter.less';
+import { TeacherPageState } from '../../../redux/ui/teacher-page';
 
-interface TeacherFilterProps {
+interface TeacherFilterProps extends TeacherPageState {
   handleSearchChange: (value: string) => void;
   handleFilterChange: (value: string) => void;
   showAddTeacherModal: any;
@@ -20,7 +21,7 @@ const TeacherFilter = (props: TeacherFilterProps) => {
               className="search-input"
               style={{ width: '96%' }}
               placeholder={`${props.t('TeacherFilter.search')} ...`}
-              defaultValue="Test" // props.teacherPage.search
+              defaultValue={props.name}
               onChange={(e: React.FormEvent<HTMLInputElement>) =>
                 props.handleSearchChange((e.target as any).value.toLowerCase())
               }
@@ -34,9 +35,8 @@ const TeacherFilter = (props: TeacherFilterProps) => {
               onChange={value => props.handleFilterChange(value as any)}
               className="select"
               style={{ width: '96%' }}
-              placeholder={props.t('TeacherPage.filter')}
+              placeholder={props.t('TeacherFilter.filter')}
               allowClear={true}
-              defaultValue="math" // props.teacherPage.filter
             >
               <Select.Option key="math" value="math">Math</Select.Option>
               <Select.Option key="physic" value="physic">Physic</Select.Option>

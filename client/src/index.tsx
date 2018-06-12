@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import './index.less';
 import { history, store } from './redux/store';
 import bootstrap from './bootstrap';
@@ -24,4 +24,4 @@ bootstrap().then(i18n => {
   );
 });
 
-registerServiceWorker();
+// registerServiceWorker();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Col, Row } from 'react-bootstrap';
-class Footer extends React.Component {
+export default class Footer extends React.Component {
     render() {
         return (
             // <footer>
@@ -113,4 +113,3 @@ class Footer extends React.Component {
         );
     }
 }
-export default Footer;

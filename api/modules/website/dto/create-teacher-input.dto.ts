@@ -18,4 +18,7 @@ export class CreateTeacherInputDto {
 
   @ApiModelProperty({description: 'subject'})
   readonly subject: string;
+
+  @ApiModelProperty({description: 'description'})
+  readonly description: string;
 }

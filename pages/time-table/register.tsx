@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { Form, FormGroup, Col, FormControl, ControlLabel, Button, Checkbox, Alert } from 'react-bootstrap';
+import {
+  Form,
+  FormGroup,
+  Col,
+  FormControl,
+  ControlLabel,
+  Button,
+  Checkbox,
+  Alert
+} from 'react-bootstrap';
 import DatePicker from 'react-16-bootstrap-date-picker';
 import Layout from '../../nextjs/components/HomePage/Layout';
 
@@ -15,15 +24,16 @@ class Register extends React.Component {
     registerSubjects: [],
     isValidate: undefined,
     isSuccess: undefined,
-    message: '',
+    message: ''
   };
 
-  onFormSubmit = async (e) => {
+  onFormSubmit = async e => {
     e.preventDefault();
-    
+
     try {
       // Validate all required fields arent empty
-      if (!this.state.studentName ||
+      if (
+        !this.state.studentName ||
         !this.state.studentEmail ||
         !this.state.studentBirthday ||
         !this.state.studentAddress ||
@@ -32,35 +42,33 @@ class Register extends React.Component {
       ) {
         this.setState({
           ...this.state,
-          isValidate: false,
+          isValidate: false
         });
       } else {
         // Set Req to server to save to GG sheet
         if (fetch) {
-          await fetch(
-            '/api/time-table/register',
-            {
-              method: 'Post',
-              headers: new Headers({
-                'Content-Type': 'application/json',
-              }),
-              body: JSON.stringify({
-                studentName: this.state.studentName,
-                studentPhoneNumber: this.state.studentPhoneNumber,
-                studentEmail: this.state.studentEmail,
-                studentBirthday: this.state.studentBirthday,
-                studentAddress: this.state.studentAddress,
-                parentPhoneNumber: this.state.parentPhoneNumber,
-                note: this.state.note,
-                registerSubjects: this.state.registerSubjects,
-              }),
-            }
-          );
+          await fetch('/api/time-table/register', {
+            method: 'Post',
+            headers: new Headers({
+              'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+              studentName: this.state.studentName,
+              studentPhoneNumber: this.state.studentPhoneNumber,
+              studentEmail: this.state.studentEmail,
+              studentBirthday: this.state.studentBirthday,
+              studentAddress: this.state.studentAddress,
+              parentPhoneNumber: this.state.parentPhoneNumber,
+              note: this.state.note,
+              registerSubjects: this.state.registerSubjects
+            })
+          });
 
           this.setState({
             ...this.state,
             isSuccess: true,
-            message: '',
+            isValidate: undefined,
+            message: ''
           });
         }
       }
@@ -68,31 +76,33 @@ class Register extends React.Component {
       this.setState({
         ...this.state,
         isSuccess: false,
-        message: error.message,
+        message: error.message
       });
     }
   }
 
-  onInputChange = (e) => {
+  onInputChange = e => {
     this.setState({
       ...this.state,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   }
 
-  subjectChange = (e) => {
+  subjectChange = e => {
     const subject = e.target.value;
 
     this.setState({
       ...this.state,
-      registerSubjects: e.target.checked ? [...this.state.registerSubjects, subject] : this.state.registerSubjects.filter((item) => item !== subject),
+      registerSubjects: e.target.checked
+        ? [...this.state.registerSubjects, subject]
+        : this.state.registerSubjects.filter(item => item !== subject)
     });
   }
 
-  birthdayChange = (date) => {
+  birthdayChange = date => {
     this.setState({
       ...this.state,
-      studentBirthday: date,
+      studentBirthday: date
     });
   }
 
@@ -104,20 +114,25 @@ class Register extends React.Component {
             <strong>Đăng Ký Học Thử - Test Đầu Vào !!</strong>
           </div>
 
-          <Form horizontal onSubmit={this.onFormSubmit} className="register-form">
+          <Form
+            horizontal
+            onSubmit={this.onFormSubmit}
+            className="register-form"
+          >
             {this.state.isValidate === false ? (
               <FormGroup controlId="studentName">
                 <Col sm={3} />
                 <Col sm={7}>
                   <Alert bsStyle="danger">
-                      <strong>Hãy Điền Đầy Đủ Thông Tin</strong>
+                    <strong>Hãy Điền Đầy Đủ Thông Tin</strong>
                   </Alert>
                 </Col>
                 <Col sm={2} />
               </FormGroup>
             ) : null}
 
-            {this.state.isSuccess === undefined ? null : this.state.isSuccess === true ? (
+            {this.state.isSuccess === undefined ? null : this.state
+              .isSuccess === true ? (
               <FormGroup>
                 <Col sm={2} />
                 <Col sm={8}>
@@ -144,7 +159,12 @@ class Register extends React.Component {
                 Họ Tên Học Sinh <span style={{ color: 'red' }}>(*)</span>:
               </Col>
               <Col sm={7}>
-                <FormControl type="text" placeholder="Nhập Họ Tên Học Sinh" name="studentName" onChange={this.onInputChange} />
+                <FormControl
+                  type="text"
+                  placeholder="Nhập Họ Tên Học Sinh"
+                  name="studentName"
+                  onChange={this.onInputChange}
+                />
               </Col>
               <Col sm={2} />
             </FormGroup>
@@ -154,7 +174,12 @@ class Register extends React.Component {
                 SĐT Học Sinh:
               </Col>
               <Col sm={7}>
-                <FormControl type="text" placeholder="Nhập SĐT Học Sinh" name="studentPhoneNumber" onChange={this.onInputChange} />
+                <FormControl
+                  type="text"
+                  placeholder="Nhập SĐT Học Sinh"
+                  name="studentPhoneNumber"
+                  onChange={this.onInputChange}
+                />
               </Col>
               <Col sm={2} />
             </FormGroup>
@@ -164,7 +189,12 @@ class Register extends React.Component {
                 Email <span style={{ color: 'red' }}>(*)</span>:
               </Col>
               <Col sm={7}>
-                <FormControl type="text" placeholder="Nhập Email" name="studentEmail" onChange={this.onInputChange} />
+                <FormControl
+                  type="text"
+                  placeholder="Nhập Email"
+                  name="studentEmail"
+                  onChange={this.onInputChange}
+                />
               </Col>
               <Col sm={2} />
             </FormGroup>
@@ -174,7 +204,12 @@ class Register extends React.Component {
                 Ngày Sinh <span style={{ color: 'red' }}>(*)</span>:
               </Col>
               <Col sm={7}>
-                <DatePicker value={this.state.studentBirthday} onChange={this.birthdayChange} showClearButton={false} />
+                <DatePicker
+                  onChange={this.birthdayChange}
+                  showClearButton={false}
+                  dateFormat="MM/DD/YYYY"
+                  value={this.state.studentBirthday}
+                />
               </Col>
               <Col sm={2} />
             </FormGroup>
@@ -184,7 +219,12 @@ class Register extends React.Component {
                 Địa Chỉ <span style={{ color: 'red' }}>(*)</span>:
               </Col>
               <Col sm={7}>
-                <FormControl type="text" placeholder="Nhập Địa Chỉ Liên Hệ" name="studentAddress" onChange={this.onInputChange} />
+                <FormControl
+                  type="text"
+                  placeholder="Nhập Địa Chỉ Liên Hệ"
+                  name="studentAddress"
+                  onChange={this.onInputChange}
+                />
               </Col>
               <Col sm={2} />
             </FormGroup>
@@ -194,7 +234,12 @@ class Register extends React.Component {
                 SĐT Phụ Huynh <span style={{ color: 'red' }}>(*)</span>:
               </Col>
               <Col sm={7}>
-                <FormControl type="text" placeholder="Nhập SĐT Phụ Huynh" name="parentPhoneNumber" onChange={this.onInputChange} />
+                <FormControl
+                  type="text"
+                  placeholder="Nhập SĐT Phụ Huynh"
+                  name="parentPhoneNumber"
+                  onChange={this.onInputChange}
+                />
               </Col>
               <Col sm={2} />
             </FormGroup>
@@ -204,12 +249,32 @@ class Register extends React.Component {
                 Môn Học Đăng Ký <span style={{ color: 'red' }}>(*)</span>:
               </Col>
               <Col sm={7}>
-                <Checkbox inline value="math" onChange={this.subjectChange}>Toán</Checkbox>
-                <Checkbox inline value="physic" onChange={this.subjectChange}>Lý</Checkbox>
-                <Checkbox inline value="chemistry" onChange={this.subjectChange}>Hóa</Checkbox>
-                <Checkbox inline value="literature" onChange={this.subjectChange}>Văn</Checkbox>
-                <Checkbox inline value="english" onChange={this.subjectChange}>Anh</Checkbox>
-                <Checkbox inline value="biolofy" onChange={this.subjectChange}>Sinh</Checkbox>
+                <Checkbox inline value="math" onChange={this.subjectChange}>
+                  Toán
+                </Checkbox>
+                <Checkbox inline value="physic" onChange={this.subjectChange}>
+                  Lý
+                </Checkbox>
+                <Checkbox
+                  inline
+                  value="chemistry"
+                  onChange={this.subjectChange}
+                >
+                  Hóa
+                </Checkbox>
+                <Checkbox
+                  inline
+                  value="literature"
+                  onChange={this.subjectChange}
+                >
+                  Văn
+                </Checkbox>
+                <Checkbox inline value="english" onChange={this.subjectChange}>
+                  Anh
+                </Checkbox>
+                <Checkbox inline value="biolofy" onChange={this.subjectChange}>
+                  Sinh
+                </Checkbox>
               </Col>
               <Col sm={2} />
             </FormGroup>
@@ -232,7 +297,9 @@ class Register extends React.Component {
             <FormGroup>
               <Col sm={3} />
               <Col sm={7} style={{ textAlign: 'right' }}>
-                <Button type="submit" bsStyle="info">Đăng Ký</Button>
+                <Button type="submit" bsStyle="info">
+                  Đăng Ký
+                </Button>
               </Col>
               <Col sm={2} />
             </FormGroup>

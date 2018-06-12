@@ -1,4 +1,4 @@
-import { Component, HttpStatus, Inject, HttpException } from '@nestjs/common';
+import { HttpStatus, Inject, HttpException, Injectable } from '@nestjs/common';
 import { UsersConst } from './constants/users.constant';
 import { Model } from 'mongoose';
 import { User } from './interfaces';
@@ -10,7 +10,7 @@ import * as Joi from 'joi';
 import * as bcrypt from 'bcrypt';
 import config from '../../config';
 
-@Component()
+@Injectable()
 export class ProfileService {
   private readonly baseHyperlink: string = `/static/img/profile-pictures`;
 

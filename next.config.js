@@ -6,7 +6,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const { ANALYZE } = process.env
 
 module.exports = withTypeScript(withCSS(withLess({
-    webpack: function (config) {
+    webpack: function (config, {dev}) {
       if (ANALYZE) {
         config.plugins.push(new BundleAnalyzerPlugin({
           analyzerMode: 'static',
@@ -14,8 +14,15 @@ module.exports = withTypeScript(withCSS(withLess({
           openAnalyzer: true
         }))
       }
+      // increase build speed in development
+      if (dev) {
+        config.devtool = 'cheap-module-source-map';
+      }
   
       return config
-    }
+    },
+    onDemandEntries: {
+      maxInactiveAge: 1000 * 60 * 60 * 24,
+    },
   }
 )))

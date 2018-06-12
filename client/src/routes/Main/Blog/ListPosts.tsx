@@ -79,7 +79,7 @@ export class ListPosts extends React.Component<ListPostsProps, ListPostsState> {
         postRating: 0,
         _id: '',
         deactivate: false,
-      },
+      } as any,
       titleDataSource: ['Input Title'],
     };
   }

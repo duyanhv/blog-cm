@@ -1,15 +1,14 @@
-import { Component, Inject, HttpStatus } from '@nestjs/common';
+import { Inject, HttpStatus, Injectable, HttpException } from '@nestjs/common';
 import { BlogConst } from '../constants/blog.constant';
 import { Model } from 'mongoose';
 import * as Joi from 'joi';
-import { HttpException } from '@nestjs/core';
 import { ObjectId, ObjectID } from 'bson';
 import { CreateBlogInputDto, UpdateBlogDetailDto } from '../dto/blog-dto';
 import { FindAllBlogPostsDto } from '../dto/blog-dto/find-all-blog-posts.dto';
 import { Blog } from '../interfaces/blog.interface';
 import { FindBlogDetailDto } from 'client/src/service-proxies/service-proxies';
 
-@Component()
+@Injectable()
 export class BlogService {
   constructor(
     @Inject(BlogConst.BlogModelToken) private blogModel: Model<Blog>,
@@ -200,6 +199,28 @@ export class BlogService {
         postCreatedAt: -1,
       })
       .exec();
+    return {
+      data,
+    };
+  }
+
+  async getlastestpost(): Promise<FindAllBlogPostsDto> {
+    const data = await this.blogModel
+      .find(
+        {
+          deactivate: false
+        },
+        {
+          title: 1,
+          imageSrc: 1,
+        }
+      )
+      .sort({
+        postCreatedAt: -1,
+      })
+      .limit(3)
+      .exec();
+
     return {
       data,
     };

@@ -4,7 +4,7 @@ import Layout from '../nextjs/components/HomePage/Layout';
 import ContactForm from '../nextjs/components/ContactPage/ContactForm';
 import Map from '../nextjs/components/ContactPage/Map';
 
-class Contact extends React.Component {
+export default class Contact extends React.Component {
   render() {
     return (
       <Layout>
@@ -15,5 +15,3 @@ class Contact extends React.Component {
     );
   }
 }
-
-export default Contact;

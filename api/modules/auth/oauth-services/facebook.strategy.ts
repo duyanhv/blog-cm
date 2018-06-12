@@ -1,11 +1,11 @@
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as passport from 'passport';
 import { Strategy } from 'passport-facebook';
 import { UsersService } from '../users.service';
 import { User } from '../interfaces';
 import config from '../../../config';
 
-@Component()
+@Injectable()
 export class FacebookAuthService extends Strategy {
   constructor(private readonly usersService: UsersService) {
     super(
