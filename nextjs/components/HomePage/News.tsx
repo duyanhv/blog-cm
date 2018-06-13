@@ -53,7 +53,7 @@ export default class News extends React.Component {
                   <CardImg
                     top
                     width="100%"
-                    src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+                    src="/static/img/introduction/material-facilities/hanhlang.jpg"
                     alt="Card image cap"
                   />
                   <CardBody className="newsCardBody">
@@ -74,7 +74,7 @@ export default class News extends React.Component {
                   <CardImg
                     className="cardImg"
                     top
-                    src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+                    src="/static/img/introduction/material-facilities/phong-hoc-6_1.jpg"
                     alt="Card image cap"
                   />
                   <CardBody className="newsCardBody">
@@ -95,7 +95,7 @@ export default class News extends React.Component {
                   <CardImg
                     top
                     width="100%"
-                    src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+                    src="/static/img/introduction/material-facilities/phong-hoc-12.jpg"
                     alt="Card image cap"
                   />
                   <CardBody className="newsCardBody">

@@ -34,7 +34,7 @@ export default class TeacherImage extends React.Component {
                         <div className="col-lg-12">
                             <div className="text-center">
                                 {/* <h2>We use <span className="highlight">modern</span> infrastructure & technology</h2> */}
-                                <h2>Thầy cô giáo của</h2>
+                                <h2>Giảng Viên Tại Educlass</h2>
                             </div>
                         </div>
                     </div>

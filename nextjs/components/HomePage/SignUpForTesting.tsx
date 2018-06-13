@@ -14,6 +14,8 @@ import {
 } from 'react-bootstrap';
 
 export default class SignUpForTesting extends React.Component<any, any> {
+  emailRegex = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
+
   state = {
     studentName: '',
     studentPhoneNumber: '',
@@ -33,13 +35,19 @@ export default class SignUpForTesting extends React.Component<any, any> {
 
     try {
       // Validate all required fields arent empty
-      if (
+      if (!this.emailRegex.test(this.state.studentEmail)) {
+        await this.setState({
+          ...this.state,
+          isValidate: false,
+          message: 'Email Không Phù Hợp',
+        });
+      } else if (
         !this.state.studentName ||
         !this.state.studentEmail ||
         !this.state.studentBirthday ||
         !this.state.studentAddress ||
         !this.state.parentPhoneNumber ||
-        !this.state.registerSubjects
+        this.state.registerSubjects.length === 0
       ) {
         this.setState({
           ...this.state,
@@ -132,7 +140,7 @@ export default class SignUpForTesting extends React.Component<any, any> {
                     <Col sm={3} />
                     <Col sm={7}>
                       <Alert bsStyle="danger">
-                        <strong>Hãy Điền Đầy Đủ Thông Tin</strong>
+                        <strong>{this.state.message ? this.state.message : 'Hãy Điền Đầy Đủ Thông Tin'}</strong>
                       </Alert>
                     </Col>
                     <Col sm={2} />

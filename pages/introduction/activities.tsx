@@ -18,10 +18,12 @@ class Activities extends React.Component<any, any> {
     return (
       <Layout>
         <div className="container activities">
-          <h1>Các Hoạt Động Nổi Bật Tại Educlass</h1>
+          <h2>Các Hoạt Động Tiêu Biểu Tại Educlass</h2>
+
+          <hr className="colorgraph" />
 
           <div className="row albums-group">
-            {this.props.albums.map((item) => (
+            {this.props.albums.filter((ite) => ite.imgList.length > 0).map((item) => (
               <div className="col-sm-4 col-md-3" key={item.albumName}>
                 <div className="thumbnail">
                   <Link href={`/introduction/activities/${item.albumName}`}>

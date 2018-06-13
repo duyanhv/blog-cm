@@ -5,7 +5,6 @@ import Technology from '../nextjs/components/HomePage/Technology';
 import News from '../nextjs/components/HomePage/News';
 import TeacherImage from '../nextjs/components/HomePage/TeacherImage';
 import About from '../nextjs/components/HomePage/About';
-import SignUpForTesting from '../nextjs/components/HomePage/SignUpForTesting';
 
 export interface HomeProps {}
 

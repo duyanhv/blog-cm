@@ -7,7 +7,9 @@ class MaterialFacilities extends React.Component {
     return (
       <Layout>
         <div className="container material-acilities">
-          <h1>Cơ sở vật chất của Educlass</h1>
+          <h2>Cơ Sở Vật Chất Của Educlass</h2>
+
+          <hr className="colorgraph" />
 
           <p>
             <b>

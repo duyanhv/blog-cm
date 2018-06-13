@@ -195,7 +195,7 @@ export class UploadImageService {
       if (imageInfo && imageInfo.filename) {
         const filePath = path.join(
           __dirname,
-          `../../../../../../static/img/upload/default/${imageInfo.filename}`,
+          `../../../../../../static/img/upload/${imageInfo.album}/${imageInfo.filename}`,
         );
         const unlink = promisify(fs.unlink);
         await unlink(filePath);

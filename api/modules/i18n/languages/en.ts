@@ -50,7 +50,8 @@ export const en = {
     companyInfo: 'Company Info',
     uploadImages: 'Upload Images',
     blog: 'Blog',
-    teacher: 'Teacher'
+    teacher: 'Teacher',
+    menuconfig: 'Menu Configuration',
   },
   Header: {
     profile: 'Profile',

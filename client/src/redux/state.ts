@@ -9,6 +9,7 @@ import { ProfilePageState } from './ui/profile-page';
 import { UploadImagePageState } from './ui/upload-image-page';
 import { TeacherPageState } from './ui/teacher-page';
 import BlogPageState from './ui/blog-page/state';
+import MenuConfigPageState from './ui/menuconfig-page/state';
 
 interface AppState {
   appSettings: AppSettingsState;
@@ -23,6 +24,7 @@ interface AppState {
     uploadImgPage: UploadImagePageState;
     blogPage: BlogPageState;
     teacherPage: TeacherPageState;
+    menuConfigPage: MenuConfigPageState;
   };
 }
 

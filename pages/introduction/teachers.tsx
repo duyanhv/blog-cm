@@ -26,23 +26,27 @@ class Teachers extends React.Component<any, any> {
     return (
       <Layout>
         <div className="container">
-          <h1>Đội Ngũ Giảng Viên Nhiệt Huyết Của Educlass</h1>
+          <h2>Đội Ngũ Giảng Viên Nhiệt Huyết Của Educlass</h2>
+
+          <hr className="colorgraph" />
 
           <div className="teachers-group">
             {this.props.teachers.map(item => (
               <div className="row" key={item._id}>
                 <div className="col-sm-4">
-                  <a className="thumbnail">
-                    <div
-                      style={{
-                        backgroundImage: `url(${item.imgSrc})`,
-                        backgroundSize: 'auto',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
-                        height: 188
-                      }}
-                    />
-                  </a>
+                  <Link href={`/introduction/teachers/${item._id}`}>
+                    <a className="thumbnail">
+                      <div
+                        style={{
+                          backgroundImage: `url(${item.imgSrc})`,
+                          backgroundSize: 'auto',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: 'center',
+                          height: 188
+                        }}
+                      />
+                    </a>
+                </Link>
                 </div>
 
                 <div className="col-sm-8">
@@ -56,6 +60,9 @@ class Teachers extends React.Component<any, any> {
                       </h3>
                     </a>
                   </Link>
+
+                  <p><b>Môn Học: <i>{item.subject}</i></b></p>
+                  <p><b>Email: <i>{item.email}</i></b></p>
                 </div>
               </div>
             ))}

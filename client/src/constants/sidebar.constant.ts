@@ -66,6 +66,12 @@ const sidebarMenu: Submenu[] = [
         title: 'Sidebar.teacher',
         permissions: [],
       },
+      {
+        key: '/main/menuconfig',
+        path: '/main/menuconfig',
+        title: 'Sidebar.menuconfig',
+        permissions: [],
+      }
     ],
   },
 ];

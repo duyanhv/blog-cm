@@ -25,6 +25,10 @@ export default class Blog extends React.Component<BlogProps> {
         {/* <ContactButton /> */}
         <section id="content">
           <div className="container">
+            <h2>Blogs</h2>
+
+            <hr className="colorgraph" /> 
+
             <div className="row">
               {/* <BlogAside /> */}
               <BlogArticle {...this.props.blogArticle} />
