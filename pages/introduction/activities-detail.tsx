@@ -38,7 +38,9 @@ class ActivityDetail extends React.Component<any, any> {
     return (
       <Layout>
         <div className="container">
-          <h1>{this.props.albumName}</h1>
+          <h2>{this.props.albumName}</h2>
+
+          <hr className="colorgraph" /> 
 
           <div className="row image-group">
             {this.props.imgList.map((item) => (

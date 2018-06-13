@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { Grid, Col, Row } from 'react-bootstrap';
 import Link from 'next/link';
 export interface BlogArticleProps {
-  data: [{
-    _id: string,
-    title: string,
-    previewContent: string,
-    author: string,
-    imageSrc: string,
-    postCreatedAt: string
-  }];
+  data: [
+    {
+      _id: string;
+      title: string;
+      previewContent: string;
+      author: string;
+      imageSrc: string;
+      postCreatedAt: string;
+    }
+  ];
 }
 
 const convertStringToHtml = (content: string) => {
@@ -18,45 +20,61 @@ const convertStringToHtml = (content: string) => {
   };
 };
 const BlogData = (data: {
-  _id: string,
-  title: string,
-  previewContent: string,
-  author: string,
-  imageSrc: string,
-  postCreatedAt: string
+  _id: string;
+  title: string;
+  previewContent: string;
+  author: string;
+  imageSrc: string;
+  postCreatedAt: string;
 }) => {
   return (
     <Grid key={data.title}>
       <Row>
         <Col xs={6} md={4}>
-          <img src="static/img/dummies/blog/img1.jpg" alt="" className="img-responsive" />
+          <img
+            src="static/img/dummies/blog/img1.jpg"
+            alt=""
+            className="img-responsive"
+          />
         </Col>
-        <Col xs={12} md={8} >
+        <Col xs={12} md={8}>
           <div className="post-image">
             <div className="post-heading">
               <h3>
-                <Link href={`/blogpost?id=${data._id}`} as={`/blog/${data._id}`}>
-                  <a href="#">
-                    {data.title}
-                  </a>
+                <Link
+                  href={`/blogpost?id=${data._id}`}
+                  as={`/blog/${data._id}`}
+                >
+                  <a href="#">{data.title}</a>
                 </Link>
               </h3>
             </div>
-
           </div>
           <div className="blog-post-content">
-            <div dangerouslySetInnerHTML={convertStringToHtml(data.previewContent)}>
-
-            </div> [...]
-                    </div>
+            <div
+              dangerouslySetInnerHTML={convertStringToHtml(data.previewContent)}
+            />{' '}
+            [...]
+          </div>
           <div className="bottom-article">
             <ul className="meta-post">
-              <li><i className="fa fa-calendar"></i><a href="#"> {data.postCreatedAt.split('T')[0]}</a></li>
-              <li><i className="fa fa-user"></i><a href="#"> {data.author}</a></li>
+              <li>
+                <i className="fa fa-calendar" />
+                <a href="#"> {data.postCreatedAt.split('T')[0]}</a>
+              </li>
+              <li>
+                <i className="fa fa-user" />
+                <a href="#"> {data.author}</a>
+              </li>
               {/* <li><i className="fa fa-folder-open"></i><a href="#"> Blog</a></li>
                             <li><i className="fa fa-comments"></i><a href="#">4 Comments</a></li> */}
             </ul>
-            <a href="#" className="readmore pull-right">Continue reading <i className="fa fa-angle-right"></i></a>
+
+            <Link href={`/blogpost?id=${data._id}`} as={`/blog/${data._id}`}>
+              <a className="readmore pull-right">
+                Continue reading <i className="fa fa-angle-right" />
+              </a>
+            </Link>
           </div>
         </Col>
       </Row>
@@ -66,16 +84,12 @@ const BlogData = (data: {
 
 export default class BlogArticle extends Component<BlogArticleProps> {
   componentDidMount() {
-    // tslint:disable-next-line:no-console 
+    // tslint:disable-next-line:no-console
     // console.log(this.props.data);
   }
 
   render() {
-    return (
-      <div>
-        {this.props.data.map((data) => BlogData(data))}
-      </div>
-    );
+    return <div>{this.props.data.map(data => BlogData(data))}</div>;
   }
 }
 // class BlogArticle extends Component<BlogArticleProps> {

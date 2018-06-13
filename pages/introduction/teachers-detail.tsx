@@ -24,10 +24,26 @@ class TeacherDetail extends React.Component<any, any> {
     return (
       <Layout>
         <div className="container">
-          <h1>Giảng Viên {this.props.teacherInfo.fullName}</h1>
+          <h2>Giảng Viên {this.props.teacherInfo.fullName}</h2>
+
+          <hr className="colorgraph" /> 
 
           <div className="row image-group">
-            <div className="col-sm-12">
+            <div className="col-sm-4">
+              <a className="thumbnail">
+                <div
+                  style={{
+                    backgroundImage: `url(${this.props.teacherInfo.imgSrc})`,
+                    backgroundSize: 'auto',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    height: 188
+                  }}
+                />
+              </a>
+            </div>
+
+            <div className="col-sm-8">
               <div dangerouslySetInnerHTML={convertStringToHtml(this.props.teacherInfo.description)} />
             </div>
           </div>

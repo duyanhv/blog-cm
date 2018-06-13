@@ -54,16 +54,16 @@ class TimeTable12 extends React.Component {
     return (
       <Layout>
         <div className="container time-table-12">
-          <div className="alert alert-warning title" role="alert">
-            <strong>Lịch Học Của Các Lớp 12 </strong>
-          </div>
+          <h2>Lịch Học Các Lớp 12</h2>
+
+          <hr className="colorgraph" />
 
           <div className="address">
             <strong>Địa Chỉ: </strong> Số 22 Thành Công, Ba Đình, Hà Nội
           </div>
           
           <div className="time-table">
-            <Table bordered hover responsive>
+            <Table bordered responsive>
               <thead>
                 <tr>
                   <th>Tên Lớp Học</th>
@@ -82,7 +82,7 @@ class TimeTable12 extends React.Component {
                       <td rowSpan={item.time.length}>{item.classTitle}</td>
                       <td>{dayInWeek[item.time[0].day]}</td>
                       <td>{`${item.time[0].start} - ${item.time[0].end}`}</td>
-                      <td rowSpan={item.time.length}>{moment(item.begin).format('DD/MM/YYY HH:mm')}</td>
+                      <td rowSpan={item.time.length}>{moment(item.begin).format('DD/MM/YYYY - HH:mm')}</td>
                       <td rowSpan={item.time.length}>{item.teacher}</td>
                       <td rowSpan={item.time.length}>{item.note}</td>
                     </tr>
