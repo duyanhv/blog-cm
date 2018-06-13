@@ -2441,376 +2441,6 @@ export class BlogServiceProxy {
     }
 }
 
-export class MenuconfigServiceProxy {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "http:///api";
-    }
-
-    /**
-     * findAllMenuConfig
-     * @return Menu Config has successfully been fetched
-     */
-    findAllMenuConfig(): Promise<FindAllMenuConfigDto> {
-        let url_ = this.baseUrl + "/menuconfig/findAllMenuConfig";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <RequestInit>{
-            method: "GET",
-            headers: new Headers({
-                "Content-Type": "application/json", 
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processFindAllMenuConfig(_response);
-        });
-    }
-
-    protected processFindAllMenuConfig(response: Response): Promise<FindAllMenuConfigDto> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v, k) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? FindAllMenuConfigDto.fromJS(resultData200) : new FindAllMenuConfigDto();
-            return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 422) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<FindAllMenuConfigDto>(<any>null);
-    }
-
-    /**
-     * findMenuConfigById
-     * @return Menu Config has successfully been fetched
-     */
-    findMenuConfigById(id: string): Promise<FindMenuConfigDto> {
-        let url_ = this.baseUrl + "/menuconfig/findMenuConfigById/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <RequestInit>{
-            method: "GET",
-            headers: new Headers({
-                "Content-Type": "application/json", 
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processFindMenuConfigById(_response);
-        });
-    }
-
-    protected processFindMenuConfigById(response: Response): Promise<FindMenuConfigDto> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v, k) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? FindMenuConfigDto.fromJS(resultData200) : new FindMenuConfigDto();
-            return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 422) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<FindMenuConfigDto>(<any>null);
-    }
-
-    /**
-     * findparentidmenuconfig
-     * @return Menu Config has successfully been fetched
-     */
-    findparentidmenuconfig(): Promise<FindAllParentIdMenuConfigDto> {
-        let url_ = this.baseUrl + "/menuconfig/findparentidmenuconfig";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <RequestInit>{
-            method: "GET",
-            headers: new Headers({
-                "Content-Type": "application/json", 
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processFindparentidmenuconfig(_response);
-        });
-    }
-
-    protected processFindparentidmenuconfig(response: Response): Promise<FindAllParentIdMenuConfigDto> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v, k) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? FindAllParentIdMenuConfigDto.fromJS(resultData200) : new FindAllParentIdMenuConfigDto();
-            return result200;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 422) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<FindAllParentIdMenuConfigDto>(<any>null);
-    }
-
-    /**
-     * createMenuConfig
-     * @return A new post has been successfully created.
-     */
-    createMenuConfig(createMenuConfigDto: CreateMenuConfigDto): Promise<void> {
-        let url_ = this.baseUrl + "/menuconfig/createMenuConfig";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(createMenuConfigDto);
-
-        let options_ = <RequestInit>{
-            body: content_,
-            method: "POST",
-            headers: new Headers({
-                "Content-Type": "application/json", 
-            })
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processCreateMenuConfig(_response);
-        });
-    }
-
-    protected processCreateMenuConfig(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v, k) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 422) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(<any>null);
-    }
-
-    /**
-     * updatemenuconfig
-     * @return Menuconfig has successfully edited
-     */
-    updateMenuConfig(updateMenuConfigDto: UpdateMenuConfigDto, id: string): Promise<void> {
-        let url_ = this.baseUrl + "/menuconfig/updateMenuConfig/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(updateMenuConfigDto);
-
-        let options_ = <RequestInit>{
-            body: content_,
-            method: "PUT",
-            headers: new Headers({
-                "Content-Type": "application/json", 
-            })
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUpdateMenuConfig(_response);
-        });
-    }
-
-    protected processUpdateMenuConfig(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v, k) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 422) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(<any>null);
-    }
-
-    /**
-     * deactivatemenuconfig
-     * @return Menuconfig has successfully deactivated
-     */
-    deactivateMenuConfig(id: string): Promise<void> {
-        let url_ = this.baseUrl + "/menuconfig/deactivateMenuConfig/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <RequestInit>{
-            method: "PATCH",
-            headers: new Headers({
-                "Content-Type": "application/json", 
-            })
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDeactivateMenuConfig(_response);
-        });
-    }
-
-    protected processDeactivateMenuConfig(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v, k) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 422) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(<any>null);
-    }
-
-    /**
-     * activatemenuconfig
-     * @return Menuconfig has successfully activated
-     */
-    activateMenuConfig(id: string): Promise<void> {
-        let url_ = this.baseUrl + "/menuconfig/activateMenuConfig/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <RequestInit>{
-            method: "PATCH",
-            headers: new Headers({
-                "Content-Type": "application/json", 
-            })
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processActivateMenuConfig(_response);
-        });
-    }
-
-    protected processActivateMenuConfig(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v, k) => _headers[k] = v); };
-        if (status === 201) {
-            return response.text().then((_responseText) => {
-            return;
-            });
-        } else if (status === 400) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status === 422) {
-            return response.text().then((_responseText) => {
-            return throwException("A server error occurred.", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(<any>null);
-    }
-}
-
 export class TeachersServiceProxy {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
@@ -2888,6 +2518,60 @@ export class TeachersServiceProxy {
             });
         }
         return Promise.resolve<FindTeachersResultDto>(<any>null);
+    }
+
+    /**
+     * Get Teacher Info
+     * @return Return Teacher Info
+     */
+    getTeacherDetail(teacherId: string): Promise<FindTeachersDetailDto> {
+        let url_ = this.baseUrl + "/teachers/getTeacherDetail/{teacherId}";
+        if (teacherId === undefined || teacherId === null)
+            throw new Error("The parameter 'teacherId' must be defined.");
+        url_ = url_.replace("{teacherId}", encodeURIComponent("" + teacherId)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetTeacherDetail(_response);
+        });
+    }
+
+    protected processGetTeacherDetail(response: Response): Promise<FindTeachersDetailDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? FindTeachersDetailDto.fromJS(resultData200) : new FindTeachersDetailDto();
+            return result200;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 500) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FindTeachersDetailDto>(<any>null);
     }
 
     /**
@@ -3110,6 +2794,376 @@ export class TeachersServiceProxy {
             return;
             });
         } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+}
+
+export class MenuconfigServiceProxy {
+    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
+        this.http = http ? http : <any>window;
+        this.baseUrl = baseUrl ? baseUrl : "http:///api";
+    }
+
+    /**
+     * findAllMenuConfig
+     * @return Menu Config has successfully been fetched
+     */
+    findAllMenuConfig(): Promise<FindAllMenuConfigDto> {
+        let url_ = this.baseUrl + "/menuconfig/findAllMenuConfig";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processFindAllMenuConfig(_response);
+        });
+    }
+
+    protected processFindAllMenuConfig(response: Response): Promise<FindAllMenuConfigDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? FindAllMenuConfigDto.fromJS(resultData200) : new FindAllMenuConfigDto();
+            return result200;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 422) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FindAllMenuConfigDto>(<any>null);
+    }
+
+    /**
+     * findMenuConfigById
+     * @return Menu Config has successfully been fetched
+     */
+    findMenuConfigById(id: string): Promise<FindMenuConfigDto> {
+        let url_ = this.baseUrl + "/menuconfig/findMenuConfigById/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processFindMenuConfigById(_response);
+        });
+    }
+
+    protected processFindMenuConfigById(response: Response): Promise<FindMenuConfigDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? FindMenuConfigDto.fromJS(resultData200) : new FindMenuConfigDto();
+            return result200;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 422) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FindMenuConfigDto>(<any>null);
+    }
+
+    /**
+     * findparentidmenuconfig
+     * @return Menu Config has successfully been fetched
+     */
+    findparentidmenuconfig(): Promise<FindAllParentIdMenuConfigDto> {
+        let url_ = this.baseUrl + "/menuconfig/findparentidmenuconfig";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processFindparentidmenuconfig(_response);
+        });
+    }
+
+    protected processFindparentidmenuconfig(response: Response): Promise<FindAllParentIdMenuConfigDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? FindAllParentIdMenuConfigDto.fromJS(resultData200) : new FindAllParentIdMenuConfigDto();
+            return result200;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 422) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FindAllParentIdMenuConfigDto>(<any>null);
+    }
+
+    /**
+     * createMenuConfig
+     * @return A new post has been successfully created.
+     */
+    createMenuConfig(createMenuConfigDto: CreateMenuConfigDto): Promise<void> {
+        let url_ = this.baseUrl + "/menuconfig/createMenuConfig";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(createMenuConfigDto);
+
+        let options_ = <RequestInit>{
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json", 
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processCreateMenuConfig(_response);
+        });
+    }
+
+    protected processCreateMenuConfig(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 201) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 422) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    /**
+     * updatemenuconfig
+     * @return Menuconfig has successfully edited
+     */
+    updateMenuConfig(updateMenuConfigDto: UpdateMenuConfigDto, id: string): Promise<void> {
+        let url_ = this.baseUrl + "/menuconfig/updateMenuConfig/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(updateMenuConfigDto);
+
+        let options_ = <RequestInit>{
+            body: content_,
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json", 
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processUpdateMenuConfig(_response);
+        });
+    }
+
+    protected processUpdateMenuConfig(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 201) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 422) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    /**
+     * deactivatemenuconfig
+     * @return Menuconfig has successfully deactivated
+     */
+    deactivateMenuConfig(id: string): Promise<void> {
+        let url_ = this.baseUrl + "/menuconfig/deactivateMenuConfig/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json", 
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processDeactivateMenuConfig(_response);
+        });
+    }
+
+    protected processDeactivateMenuConfig(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 201) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 422) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(<any>null);
+    }
+
+    /**
+     * activatemenuconfig
+     * @return Menuconfig has successfully activated
+     */
+    activateMenuConfig(id: string): Promise<void> {
+        let url_ = this.baseUrl + "/menuconfig/activateMenuConfig/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json", 
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processActivateMenuConfig(_response);
+        });
+    }
+
+    protected processActivateMenuConfig(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 201) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("A server error occurred.", status, _responseText, _headers);
+            });
+        } else if (status === 422) {
             return response.text().then((_responseText) => {
             return throwException("A server error occurred.", status, _responseText, _headers);
             });
@@ -4290,421 +4344,6 @@ export class DeleteRoleDto implements IDeleteRoleDto {
 export interface IDeleteRoleDto {
     /** role id */
     id: string;
-}
-
-export class FindMenuConfigDto implements IFindMenuConfigDto {
-    /** id */
-    _id!: string;
-    /** order */
-    order!: number;
-    /** hyperlink */
-    hyperlink!: string;
-    /** submenu */
-    submenu!: any[];
-    /** name */
-    name!: string;
-    /** parentid */
-    parentid!: any[];
-    /** parentIdData */
-    parentIdData!: any[];
-    /** activationStatus */
-    activationStatus!: boolean;
-
-    constructor(data?: IFindMenuConfigDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.submenu = [];
-            this.parentid = [];
-            this.parentIdData = [];
-        }
-    }
-
-    init(data?: any) {
-        if (data) {
-            this._id = data["_id"];
-            this.order = data["order"];
-            this.hyperlink = data["hyperlink"];
-            if (data["submenu"] && data["submenu"].constructor === Array) {
-                this.submenu = [];
-                for (let item of data["submenu"])
-                    this.submenu.push(item);
-            }
-            this.name = data["name"];
-            if (data["parentid"] && data["parentid"].constructor === Array) {
-                this.parentid = [];
-                for (let item of data["parentid"])
-                    this.parentid.push(item);
-            }
-            if (data["parentIdData"] && data["parentIdData"].constructor === Array) {
-                this.parentIdData = [];
-                for (let item of data["parentIdData"])
-                    this.parentIdData.push(item);
-            }
-            this.activationStatus = data["activationStatus"];
-        }
-    }
-
-    static fromJS(data: any): FindMenuConfigDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new FindMenuConfigDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["_id"] = this._id;
-        data["order"] = this.order;
-        data["hyperlink"] = this.hyperlink;
-        if (this.submenu && this.submenu.constructor === Array) {
-            data["submenu"] = [];
-            for (let item of this.submenu)
-                data["submenu"].push(item);
-        }
-        data["name"] = this.name;
-        if (this.parentid && this.parentid.constructor === Array) {
-            data["parentid"] = [];
-            for (let item of this.parentid)
-                data["parentid"].push(item);
-        }
-        if (this.parentIdData && this.parentIdData.constructor === Array) {
-            data["parentIdData"] = [];
-            for (let item of this.parentIdData)
-                data["parentIdData"].push(item);
-        }
-        data["activationStatus"] = this.activationStatus;
-        return data; 
-    }
-}
-
-export interface IFindMenuConfigDto {
-    /** id */
-    _id: string;
-    /** order */
-    order: number;
-    /** hyperlink */
-    hyperlink: string;
-    /** submenu */
-    submenu: any[];
-    /** name */
-    name: string;
-    /** parentid */
-    parentid: any[];
-    /** parentIdData */
-    parentIdData: any[];
-    /** activationStatus */
-    activationStatus: boolean;
-}
-
-export class FindAllMenuConfigDto implements IFindAllMenuConfigDto {
-    /** Arrays of FindBlogDetailDto */
-    allMenuConfigData!: FindMenuConfigDto[];
-
-    constructor(data?: IFindAllMenuConfigDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.allMenuConfigData = [];
-        }
-    }
-
-    init(data?: any) {
-        if (data) {
-            if (data["allMenuConfigData"] && data["allMenuConfigData"].constructor === Array) {
-                this.allMenuConfigData = [];
-                for (let item of data["allMenuConfigData"])
-                    this.allMenuConfigData.push(FindMenuConfigDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): FindAllMenuConfigDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new FindAllMenuConfigDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (this.allMenuConfigData && this.allMenuConfigData.constructor === Array) {
-            data["allMenuConfigData"] = [];
-            for (let item of this.allMenuConfigData)
-                data["allMenuConfigData"].push(item.toJSON());
-        }
-        return data; 
-    }
-}
-
-export interface IFindAllMenuConfigDto {
-    /** Arrays of FindBlogDetailDto */
-    allMenuConfigData: FindMenuConfigDto[];
-}
-
-export class FindParentIdMenuConfigDto implements IFindParentIdMenuConfigDto {
-    /** _id */
-    _id!: string;
-    /** name */
-    name!: string;
-
-    constructor(data?: IFindParentIdMenuConfigDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(data?: any) {
-        if (data) {
-            this._id = data["_id"];
-            this.name = data["name"];
-        }
-    }
-
-    static fromJS(data: any): FindParentIdMenuConfigDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new FindParentIdMenuConfigDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["_id"] = this._id;
-        data["name"] = this.name;
-        return data; 
-    }
-}
-
-export interface IFindParentIdMenuConfigDto {
-    /** _id */
-    _id: string;
-    /** name */
-    name: string;
-}
-
-export class FindAllParentIdMenuConfigDto implements IFindAllParentIdMenuConfigDto {
-    /** list of parent id */
-    parentIdData!: FindParentIdMenuConfigDto[];
-
-    constructor(data?: IFindAllParentIdMenuConfigDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.parentIdData = [];
-        }
-    }
-
-    init(data?: any) {
-        if (data) {
-            if (data["parentIdData"] && data["parentIdData"].constructor === Array) {
-                this.parentIdData = [];
-                for (let item of data["parentIdData"])
-                    this.parentIdData.push(FindParentIdMenuConfigDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): FindAllParentIdMenuConfigDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new FindAllParentIdMenuConfigDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (this.parentIdData && this.parentIdData.constructor === Array) {
-            data["parentIdData"] = [];
-            for (let item of this.parentIdData)
-                data["parentIdData"].push(item.toJSON());
-        }
-        return data; 
-    }
-}
-
-export interface IFindAllParentIdMenuConfigDto {
-    /** list of parent id */
-    parentIdData: FindParentIdMenuConfigDto[];
-}
-
-export class CreateMenuConfigDto implements ICreateMenuConfigDto {
-    /** order */
-    order!: number;
-    /** hyperlink */
-    hyperlink!: string;
-    /** submenu */
-    submenu!: any[];
-    /** name */
-    name!: string;
-    /** parentid */
-    parentid!: any[];
-
-    constructor(data?: ICreateMenuConfigDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.submenu = [];
-            this.parentid = [];
-        }
-    }
-
-    init(data?: any) {
-        if (data) {
-            this.order = data["order"];
-            this.hyperlink = data["hyperlink"];
-            if (data["submenu"] && data["submenu"].constructor === Array) {
-                this.submenu = [];
-                for (let item of data["submenu"])
-                    this.submenu.push(item);
-            }
-            this.name = data["name"];
-            if (data["parentid"] && data["parentid"].constructor === Array) {
-                this.parentid = [];
-                for (let item of data["parentid"])
-                    this.parentid.push(item);
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateMenuConfigDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CreateMenuConfigDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["order"] = this.order;
-        data["hyperlink"] = this.hyperlink;
-        if (this.submenu && this.submenu.constructor === Array) {
-            data["submenu"] = [];
-            for (let item of this.submenu)
-                data["submenu"].push(item);
-        }
-        data["name"] = this.name;
-        if (this.parentid && this.parentid.constructor === Array) {
-            data["parentid"] = [];
-            for (let item of this.parentid)
-                data["parentid"].push(item);
-        }
-        return data; 
-    }
-}
-
-export interface ICreateMenuConfigDto {
-    /** order */
-    order: number;
-    /** hyperlink */
-    hyperlink: string;
-    /** submenu */
-    submenu: any[];
-    /** name */
-    name: string;
-    /** parentid */
-    parentid: any[];
-}
-
-export class UpdateMenuConfigDto implements IUpdateMenuConfigDto {
-    /** order */
-    order!: number;
-    /** hyperlink */
-    hyperlink!: string;
-    /** submenu */
-    submenu!: any[];
-    /** name */
-    name!: string;
-    /** parentid */
-    parentid!: any[];
-
-    constructor(data?: IUpdateMenuConfigDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.submenu = [];
-            this.parentid = [];
-        }
-    }
-
-    init(data?: any) {
-        if (data) {
-            this.order = data["order"];
-            this.hyperlink = data["hyperlink"];
-            if (data["submenu"] && data["submenu"].constructor === Array) {
-                this.submenu = [];
-                for (let item of data["submenu"])
-                    this.submenu.push(item);
-            }
-            this.name = data["name"];
-            if (data["parentid"] && data["parentid"].constructor === Array) {
-                this.parentid = [];
-                for (let item of data["parentid"])
-                    this.parentid.push(item);
-            }
-        }
-    }
-
-    static fromJS(data: any): UpdateMenuConfigDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new UpdateMenuConfigDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["order"] = this.order;
-        data["hyperlink"] = this.hyperlink;
-        if (this.submenu && this.submenu.constructor === Array) {
-            data["submenu"] = [];
-            for (let item of this.submenu)
-                data["submenu"].push(item);
-        }
-        data["name"] = this.name;
-        if (this.parentid && this.parentid.constructor === Array) {
-            data["parentid"] = [];
-            for (let item of this.parentid)
-                data["parentid"].push(item);
-        }
-        return data; 
-    }
-}
-
-export interface IUpdateMenuConfigDto {
-    /** order */
-    order: number;
-    /** hyperlink */
-    hyperlink: string;
-    /** submenu */
-    submenu: any[];
-    /** name */
-    name: string;
-    /** parentid */
-    parentid: any[];
 }
 
 export class GetLanguageResultDto implements IGetLanguageResultDto {
@@ -6052,6 +5691,421 @@ export interface IUpdateTeacherInfoDto {
     subject: string;
     /** description */
     description: string;
+}
+
+export class FindMenuConfigDto implements IFindMenuConfigDto {
+    /** id */
+    _id!: string;
+    /** order */
+    order!: number;
+    /** hyperlink */
+    hyperlink!: string;
+    /** submenu */
+    submenu!: any[];
+    /** name */
+    name!: string;
+    /** parentid */
+    parentid!: any[];
+    /** parentIdData */
+    parentIdData!: any[];
+    /** activationStatus */
+    activationStatus!: boolean;
+
+    constructor(data?: IFindMenuConfigDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.submenu = [];
+            this.parentid = [];
+            this.parentIdData = [];
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this._id = data["_id"];
+            this.order = data["order"];
+            this.hyperlink = data["hyperlink"];
+            if (data["submenu"] && data["submenu"].constructor === Array) {
+                this.submenu = [];
+                for (let item of data["submenu"])
+                    this.submenu.push(item);
+            }
+            this.name = data["name"];
+            if (data["parentid"] && data["parentid"].constructor === Array) {
+                this.parentid = [];
+                for (let item of data["parentid"])
+                    this.parentid.push(item);
+            }
+            if (data["parentIdData"] && data["parentIdData"].constructor === Array) {
+                this.parentIdData = [];
+                for (let item of data["parentIdData"])
+                    this.parentIdData.push(item);
+            }
+            this.activationStatus = data["activationStatus"];
+        }
+    }
+
+    static fromJS(data: any): FindMenuConfigDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindMenuConfigDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["_id"] = this._id;
+        data["order"] = this.order;
+        data["hyperlink"] = this.hyperlink;
+        if (this.submenu && this.submenu.constructor === Array) {
+            data["submenu"] = [];
+            for (let item of this.submenu)
+                data["submenu"].push(item);
+        }
+        data["name"] = this.name;
+        if (this.parentid && this.parentid.constructor === Array) {
+            data["parentid"] = [];
+            for (let item of this.parentid)
+                data["parentid"].push(item);
+        }
+        if (this.parentIdData && this.parentIdData.constructor === Array) {
+            data["parentIdData"] = [];
+            for (let item of this.parentIdData)
+                data["parentIdData"].push(item);
+        }
+        data["activationStatus"] = this.activationStatus;
+        return data; 
+    }
+}
+
+export interface IFindMenuConfigDto {
+    /** id */
+    _id: string;
+    /** order */
+    order: number;
+    /** hyperlink */
+    hyperlink: string;
+    /** submenu */
+    submenu: any[];
+    /** name */
+    name: string;
+    /** parentid */
+    parentid: any[];
+    /** parentIdData */
+    parentIdData: any[];
+    /** activationStatus */
+    activationStatus: boolean;
+}
+
+export class FindAllMenuConfigDto implements IFindAllMenuConfigDto {
+    /** Arrays of FindBlogDetailDto */
+    allMenuConfigData!: FindMenuConfigDto[];
+
+    constructor(data?: IFindAllMenuConfigDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.allMenuConfigData = [];
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["allMenuConfigData"] && data["allMenuConfigData"].constructor === Array) {
+                this.allMenuConfigData = [];
+                for (let item of data["allMenuConfigData"])
+                    this.allMenuConfigData.push(FindMenuConfigDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): FindAllMenuConfigDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindAllMenuConfigDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.allMenuConfigData && this.allMenuConfigData.constructor === Array) {
+            data["allMenuConfigData"] = [];
+            for (let item of this.allMenuConfigData)
+                data["allMenuConfigData"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IFindAllMenuConfigDto {
+    /** Arrays of FindBlogDetailDto */
+    allMenuConfigData: FindMenuConfigDto[];
+}
+
+export class FindParentIdMenuConfigDto implements IFindParentIdMenuConfigDto {
+    /** _id */
+    _id!: string;
+    /** name */
+    name!: string;
+
+    constructor(data?: IFindParentIdMenuConfigDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this._id = data["_id"];
+            this.name = data["name"];
+        }
+    }
+
+    static fromJS(data: any): FindParentIdMenuConfigDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindParentIdMenuConfigDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["_id"] = this._id;
+        data["name"] = this.name;
+        return data; 
+    }
+}
+
+export interface IFindParentIdMenuConfigDto {
+    /** _id */
+    _id: string;
+    /** name */
+    name: string;
+}
+
+export class FindAllParentIdMenuConfigDto implements IFindAllParentIdMenuConfigDto {
+    /** list of parent id */
+    parentIdData!: FindParentIdMenuConfigDto[];
+
+    constructor(data?: IFindAllParentIdMenuConfigDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.parentIdData = [];
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["parentIdData"] && data["parentIdData"].constructor === Array) {
+                this.parentIdData = [];
+                for (let item of data["parentIdData"])
+                    this.parentIdData.push(FindParentIdMenuConfigDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): FindAllParentIdMenuConfigDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindAllParentIdMenuConfigDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.parentIdData && this.parentIdData.constructor === Array) {
+            data["parentIdData"] = [];
+            for (let item of this.parentIdData)
+                data["parentIdData"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IFindAllParentIdMenuConfigDto {
+    /** list of parent id */
+    parentIdData: FindParentIdMenuConfigDto[];
+}
+
+export class CreateMenuConfigDto implements ICreateMenuConfigDto {
+    /** order */
+    order!: number;
+    /** hyperlink */
+    hyperlink!: string;
+    /** submenu */
+    submenu!: any[];
+    /** name */
+    name!: string;
+    /** parentid */
+    parentid!: any[];
+
+    constructor(data?: ICreateMenuConfigDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.submenu = [];
+            this.parentid = [];
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.order = data["order"];
+            this.hyperlink = data["hyperlink"];
+            if (data["submenu"] && data["submenu"].constructor === Array) {
+                this.submenu = [];
+                for (let item of data["submenu"])
+                    this.submenu.push(item);
+            }
+            this.name = data["name"];
+            if (data["parentid"] && data["parentid"].constructor === Array) {
+                this.parentid = [];
+                for (let item of data["parentid"])
+                    this.parentid.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateMenuConfigDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateMenuConfigDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["order"] = this.order;
+        data["hyperlink"] = this.hyperlink;
+        if (this.submenu && this.submenu.constructor === Array) {
+            data["submenu"] = [];
+            for (let item of this.submenu)
+                data["submenu"].push(item);
+        }
+        data["name"] = this.name;
+        if (this.parentid && this.parentid.constructor === Array) {
+            data["parentid"] = [];
+            for (let item of this.parentid)
+                data["parentid"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface ICreateMenuConfigDto {
+    /** order */
+    order: number;
+    /** hyperlink */
+    hyperlink: string;
+    /** submenu */
+    submenu: any[];
+    /** name */
+    name: string;
+    /** parentid */
+    parentid: any[];
+}
+
+export class UpdateMenuConfigDto implements IUpdateMenuConfigDto {
+    /** order */
+    order!: number;
+    /** hyperlink */
+    hyperlink!: string;
+    /** submenu */
+    submenu!: any[];
+    /** name */
+    name!: string;
+    /** parentid */
+    parentid!: any[];
+
+    constructor(data?: IUpdateMenuConfigDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.submenu = [];
+            this.parentid = [];
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.order = data["order"];
+            this.hyperlink = data["hyperlink"];
+            if (data["submenu"] && data["submenu"].constructor === Array) {
+                this.submenu = [];
+                for (let item of data["submenu"])
+                    this.submenu.push(item);
+            }
+            this.name = data["name"];
+            if (data["parentid"] && data["parentid"].constructor === Array) {
+                this.parentid = [];
+                for (let item of data["parentid"])
+                    this.parentid.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): UpdateMenuConfigDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateMenuConfigDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["order"] = this.order;
+        data["hyperlink"] = this.hyperlink;
+        if (this.submenu && this.submenu.constructor === Array) {
+            data["submenu"] = [];
+            for (let item of this.submenu)
+                data["submenu"].push(item);
+        }
+        data["name"] = this.name;
+        if (this.parentid && this.parentid.constructor === Array) {
+            data["parentid"] = [];
+            for (let item of this.parentid)
+                data["parentid"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IUpdateMenuConfigDto {
+    /** order */
+    order: number;
+    /** hyperlink */
+    hyperlink: string;
+    /** submenu */
+    submenu: any[];
+    /** name */
+    name: string;
+    /** parentid */
+    parentid: any[];
 }
 
 export class GetAttendanceRecordInputDto implements IGetAttendanceRecordInputDto {
