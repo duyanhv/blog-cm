@@ -24,6 +24,7 @@ import { I18nextProviderProps } from 'react-i18next/src/I18nextProvider';
 import { UploadImagePageState } from '../../redux/ui/upload-image-page';
 import BlogPage from './Blog/BlogPage';
 import TeacherPage from './Teacher/TeacherPage';
+import MenuConfigPage from './MenuConfig/MenuConfigPage';
 
 interface MainPageProps extends RouteComponentProps<any>, I18nextProviderProps {
   appSettings: AppSettingsState;
@@ -89,6 +90,10 @@ class MainPage extends React.Component<MainPageProps, any> {
                 <Route
                   path={`${match.url}/teacher`}
                   component={TeacherPage}
+                />
+                <Route
+                  path={`${match.url}/menuconfig`}
+                  component={Authorize(MenuConfigPage, UserPermissions.USERS_VIEW)}
                 />
                 <Route component={RedirectNotFound} />
               </Switch>

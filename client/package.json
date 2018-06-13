@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@types/react": "^16.3.17",
     "antd": "^3.6.1",
     "braft-editor": "^1.9.7",
     "classnames": "^2.2.5",

@@ -9,6 +9,7 @@ import {
   UploadImagesServiceProxy,
   BlogServiceProxy,
   TeachersServiceProxy,
+  MenuconfigServiceProxy,
 } from './service-proxies';
 import { store } from '../redux/store';
 
@@ -37,6 +38,13 @@ const getUserService = (): UsersServiceProxy => {
 
 const getAuthService = () => {
   return new AuthServiceProxy(
+    store.getState().appSettings.apiUrl,
+    getAuthHttp(),
+  );
+};
+
+const getMenuConfigService = (): MenuconfigServiceProxy => {
+  return new MenuconfigServiceProxy(
     store.getState().appSettings.apiUrl,
     getAuthHttp(),
   );
@@ -103,4 +111,5 @@ export {
   getUploadImageService,
   getBlogService,
   getTeacherService,
+  getMenuConfigService,
 };
