@@ -21,4 +21,7 @@ export class UpdateTeacherInfoDto {
 
   @ApiModelProperty({description: 'subject'})
   readonly subject: string;
+
+  @ApiModelProperty({description: 'description'})
+  readonly description: string;
 }

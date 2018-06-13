@@ -10,4 +10,6 @@ export interface Teacher extends Document {
   readonly dob: Date;
   readonly subject: string;
   readonly isActive: Boolean;
+  readonly description: string;
+  readonly imgSrc: string;
 }

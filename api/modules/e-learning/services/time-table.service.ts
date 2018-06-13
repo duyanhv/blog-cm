@@ -1,6 +1,7 @@
-import {HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as GoogleSpreadsheet from 'google-spreadsheet';
 import * as Joi from 'joi';
+import * as moment from 'moment';
 import config from '../../../config';
 import { RegisterInputDto } from '../dto/register-input.dto';
 
@@ -42,7 +43,7 @@ export class TimeTableService {
           'Họ Tên HS': registerInput.studentName,
           'SĐT Học Sinh': registerInput.parentPhoneNumber,
           'Email': registerInput.studentEmail,
-          'Ngày Sinh': registerInput.studentBirthday,
+          'Ngày Sinh': moment(registerInput.studentBirthday).format('DD/MM/YYYY'),
           'Địa Chỉ': registerInput.studentAddress,
           'SĐT Phụ Huynh': registerInput.parentPhoneNumber,
           'Môn Học': registerInput.registerSubjects.join(', '),

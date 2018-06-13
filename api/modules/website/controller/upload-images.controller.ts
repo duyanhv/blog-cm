@@ -25,6 +25,8 @@ import {
   GetUploadedImagesDetailDto,
   UpdateFilenameDto,
   CreateAlbumDto,
+  GetAlbumsResultDto,
+  GetAlbumImagesResultDto,
 } from '../dto';
 import { UploadImageService } from '../service/upload-images.service';
 
@@ -84,6 +86,50 @@ export class UploadImagesController {
     @Query('search') search: string,
   ): Promise<GetUploadedImagesResultDto> {
     return await this.uploadImagesService.getUploadedImage(id, search);
+  }
+
+  @Get('albums')
+  @ApiOperation({
+    title: 'Get all albums',
+    description: 'Get all albums',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Return albums info',
+    type: GetUploadedImagesResultDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Album not found',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Bad Request',
+  })
+  async getAlbums(): Promise<GetAlbumsResultDto> {
+    return await this.uploadImagesService.getAlbums();
+  }
+
+  @Get('getImages/:albumName')
+  @ApiOperation({
+    title: 'Get all images of an album',
+    description: 'Get all images of an album',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Return all images of an album',
+    type: GetAlbumImagesResultDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Album not found',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Bad Request',
+  })
+  async getImagesOfAlbum(@Param('albumName') albumName: string): Promise<GetAlbumImagesResultDto> {
+    return await this.uploadImagesService.getImagesOfAlbum(albumName);
   }
 
   @Post('updateFilename')

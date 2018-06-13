@@ -1,7 +1,9 @@
+import { FindTeachersDetailDto } from '../../../service-proxies/service-proxies';
+
 interface TeacherPageState {
   addTeacherModalVisible: boolean;
   isBusy: boolean;
-  data: any; // FindAllTeachersDetailDto[];
+  data: FindTeachersDetailDto[];
   total: number;
   pageNumber: number;
   pageSize: number;
@@ -9,8 +11,7 @@ interface TeacherPageState {
   name: string;
   sortBy: string;
   asc: boolean;
-  currentTeacher: any; // FindAllTeachersDetailDto;
-  imageSrc: string;
+  currentTeacher: FindTeachersDetailDto;
   errorMessage: string;
 }
 

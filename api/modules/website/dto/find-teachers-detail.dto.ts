@@ -1,6 +1,9 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
 export class FindTeachersDetailDto {
+  @ApiModelProperty({ description: 'teacher id' })
+  readonly _id: string;
+
   @ApiModelProperty({ description: 'teacher first name' })
   readonly firstName: string;
 
@@ -16,7 +19,7 @@ export class FindTeachersDetailDto {
   @ApiModelProperty({ description: 'teacher phone number' })
   readonly phone: string;
 
-  @ApiModelProperty({ description: 'teacher date of birth', type: Date })
+  @ApiModelProperty({ description: 'teacher date of birth', type: Date})
   readonly dob: Date;
 
   @ApiModelProperty({ description: 'subject that the teacher teach'})
@@ -24,4 +27,10 @@ export class FindTeachersDetailDto {
 
   @ApiModelProperty({ description: 'is the teacher active ?', type: Boolean })
   readonly isActive: Boolean;
+
+  @ApiModelProperty({ description: 'description' })
+  readonly description: string;
+
+  @ApiModelProperty({ description: 'profile picture hyperlink' })
+  readonly imgSrc: string;
 }

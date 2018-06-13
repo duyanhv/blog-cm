@@ -17,6 +17,7 @@ import {
   DEACTIVATE_TEACHER,
   ACTIVATE_TEACHER_SUCCESS,
   DEACTIVATE_TEACHER_SUCCESS,
+  UPLOAD_IMG_SUCCESS,
   openAddTeacherModal,
   closeAddTeacherModal,
   searchChange,
@@ -34,6 +35,7 @@ import {
   deactivateTeacher,
   activateTeacherSuccess,
   deactivateTeacherSuccess,
+  uploadImgSuccess,
 } from './action';
 import { teacherPageReducer } from './reducer';
 import teacherPageSaga from './saga';
@@ -60,6 +62,7 @@ export {
   DEACTIVATE_TEACHER,
   ACTIVATE_TEACHER_SUCCESS,
   DEACTIVATE_TEACHER_SUCCESS,
+  UPLOAD_IMG_SUCCESS,
   openAddTeacherModal,
   closeAddTeacherModal,
   searchChange,
@@ -77,6 +80,7 @@ export {
   deactivateTeacher,
   activateTeacherSuccess,
   deactivateTeacherSuccess,
+  uploadImgSuccess,
 
   // Saga
   teacherPageSaga,

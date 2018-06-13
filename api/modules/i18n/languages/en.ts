@@ -123,5 +123,37 @@ export const en = {
     middleName: 'Middle Name',
     lastName: 'Last Name',
     isActive: 'Active'
-  }
+  },
+  TeacherPage: {
+    fillInAllFields: 'Please Fill In All Neccessary Fields',
+    add: 'Create A New Teacher',
+    ok: 'Save',
+    cancel: 'Cancel',
+  },
+  TeacherFilter: {
+    search: 'Search By Teacher Name',
+    filter: 'Filter By Subject',
+    add: 'Create A New Teacher',
+  },
+  TeacherTable: {
+    edit: 'Edit Teacher Info',
+    activate: 'Activate',
+    deactivate: 'Deactivate',
+    fullName: 'Full Name',
+    email: 'Email',
+    phone: 'Phone Number',
+    subject: 'Subject',
+    isactive: 'Is Active',
+    actions: 'Actions',
+  },
+  AddNewTeacherForm: {
+    phone: 'Phone Number',
+    dob: 'Date Of Birth',
+    subject: 'Subject',
+    description: 'Description',
+    upload: 'Upload',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    email: 'Email',
+  },
 };

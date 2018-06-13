@@ -32,6 +32,7 @@ const saniTizeConfig = {
     }
   }
 };
+
 interface EditFormProps extends FormComponentProps {
   dataPerPost: IFindBlogDetailDto;
   isBusy: boolean;
@@ -58,8 +59,6 @@ class EditForm extends React.Component<EditFormProps> {
           message.error('Please fill title (6 < words < 30)', 1.5);
           return;
         } else if (this.props.form.getFieldValue('subtitle').length > 300 || this.props.form.getFieldValue('subtitle').length < 6) {
-          // tslint:disable-next-line:no-console
-          console.log(this.props.form.getFieldValue('subtitle').length);
           message.error('Please fill subtitle (6 < words < 150)', 1.5);
           return;
         } else if (this.props.form.getFieldValue('author').length > 30 || this.props.form.getFieldValue('author').length < 6) {

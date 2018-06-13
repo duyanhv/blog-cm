@@ -10,8 +10,10 @@ export interface BlogProps {
 }
 
 export default class Blog extends React.Component<BlogProps> {
-  static async getInitialProps(): Promise<BlogProps> {
-    const blogData = await fetch('/api/blog/getpostpublic');
+  static async getInitialProps({ req }: any): Promise<BlogProps> {
+    const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : '';
+  
+    const blogData = await fetch(`${baseUrl}/api/blog/getpostpublic`);
     const jsonBlogData = await blogData.json();
     return {
       blogArticle: jsonBlogData,
