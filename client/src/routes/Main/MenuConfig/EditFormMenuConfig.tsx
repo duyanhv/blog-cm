@@ -163,8 +163,8 @@ class EditFormMenuConfig extends React.Component<EditFormMenuConfigProps> {
                                 rules: [
                                     { required: true, message: 'Please input hyperlink' },
                                     {
-                                        pattern: /^[a-zA-Z0-9_]{6,25}$/,
-                                        message: 'Hyperlink must be atleast 6 words and maximum is 10',
+                                        pattern: /^[a-zA-Z0-9_]{6, 2083}$/,
+                                        message: 'Hyperlink must be at least 6 words',
                                     },
                                 ],
                                 validateTrigger: 'onBlur',
