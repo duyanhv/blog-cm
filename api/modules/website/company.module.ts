@@ -12,6 +12,9 @@ import { BlogController } from '.';
 import { TeachersController } from './controller/teacher.controller';
 import { TeachersService } from './service/teacher.service';
 import { teacherProviders } from './providers/teacher.provider';
+import { menuConfigProviders } from './providers/menuconfig.provider';
+import { MenuConfigService } from './service/menuconfig.service';
+import { MenuConfigController } from './controller/menuconfig.controller';
 
 @Module({
   providers: [
@@ -19,12 +22,14 @@ import { teacherProviders } from './providers/teacher.provider';
     ...imageProviders,
     ...blogProviders,
     ...teacherProviders,
+    ...menuConfigProviders,
     CompanyService,
     UploadImageService,
     BlogService,
     TeachersService,
+    MenuConfigService,
   ],
-  controllers: [CompanyController, UploadImagesController, BlogController, TeachersController],
+  controllers: [CompanyController, UploadImagesController, BlogController, TeachersController, MenuConfigController],
   imports: [DatabaseModule],
   exports: [],
 })
