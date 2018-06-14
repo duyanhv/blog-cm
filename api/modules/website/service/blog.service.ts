@@ -104,6 +104,35 @@ export class BlogService {
   }
 
   async edit(editedPost: UpdateBlogDetailDto, postId: string): Promise<void> {
+    const existedPost = await this.blogModel
+      .findOne({
+        $or: [
+          { title: editedPost.title },
+          { subtitle: editedPost.subtitle },
+          { content: editedPost.content },
+        ],
+      })
+      .exec();
+
+    if (existedPost) {
+      if (existedPost.title === editedPost.title) {
+        throw new HttpException(
+          'title has been used',
+          HttpStatus.UNPROCESSABLE_ENTITY,
+        );
+      } else if (existedPost.subtitle === editedPost.subtitle) {
+        throw new HttpException(
+          'subtitle has been used',
+          HttpStatus.UNPROCESSABLE_ENTITY,
+        );
+      } else if (existedPost.content === editedPost.content) {
+        throw new HttpException(
+          'content has been used',
+          HttpStatus.UNPROCESSABLE_ENTITY,
+        );
+      }
+    }
+    
     return await this.blogModel.update(
       { _id: new ObjectId(postId) },
       {

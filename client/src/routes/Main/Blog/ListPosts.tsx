@@ -47,16 +47,18 @@ interface ListPostsProps {
   isBusy: boolean;
   currentUsername: string;
   searchByTitleData: IFindBlogDetailDto[];
+  showEditModal: boolean;
   handleEditFormSubmit: (id: string, editedPost: UpdateBlogDetailDto) => void;
   handleSearchChange: (value: any) => void;
   searchPostByDate: (dateRangeInput: string[]) => void;
   deactivateOrActivatePost: (deactivationStatus: boolean, postId: string) => void;
   includeOrExcludeInactivePost: (isInactivePostIncluded: boolean) => void;
+  onHideEditModal: () => void;
+  onShowEditModal: () => void;
 }
 
 interface ListPostsState {
   activationStatus: string;
-  showEditModal: boolean;
   dataPerPost: IFindBlogDetailDto;
   titleDataSource: string[];
 }
@@ -67,7 +69,6 @@ export class ListPosts extends React.Component<ListPostsProps, ListPostsState> {
     super(props);
     this.state = {
       activationStatus: '',
-      showEditModal: false,
       dataPerPost: {
         title: '',
         subtitle: '',
@@ -111,15 +112,14 @@ export class ListPosts extends React.Component<ListPostsProps, ListPostsState> {
 
   onEditItemClick = (item: IFindBlogDetailDto, _e: any) => {
     this.setState({
-      showEditModal: true,
       dataPerPost: item,
     });
+
+    this.props.onShowEditModal();
   };
 
   hideEditModal = () => {
-    this.setState({
-      showEditModal: false,
-    });
+    this.props.onHideEditModal();
   };
 
   filterOption = (inputValue: any, option: any) => {
@@ -142,7 +142,7 @@ export class ListPosts extends React.Component<ListPostsProps, ListPostsState> {
     // const arrayOfTitles = pushPropsToDataSource(this.props.data);
     return (
       <div>
-        {!this.state.showEditModal ? (
+        {!this.props.showEditModal ? (
           <div className="list-post-wrapper">
             <Row>
               <Col span={8}>

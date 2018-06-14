@@ -121,6 +121,15 @@ export type EXCLUDE_INACTIVE_POST_SUCCESS = typeof EXCLUDE_INACTIVE_POST_SUCCESS
 export const EXCLUDE_INACTIVE_POST_ERROR = 'BLOG_PAGE/EXCLUDE_INACTIVE_POST_ERROR';
 export type EXCLUDE_INACTIVE_POST_ERROR = typeof EXCLUDE_INACTIVE_POST_ERROR;
 
+export const CHANGE_RADIO_BUTTON_STATE = 'BLOG_PAGE/CHANGE_RADIO_BUTTON_STATE';
+export type CHANGE_RADIO_BUTTON_STATE = typeof CHANGE_RADIO_BUTTON_STATE;
+
+export const SHOW_EDIT_MODAL = 'BLOG_PAGE/SHOW_EDIT_MODAL';
+export type SHOW_EDIT_MODAL = typeof SHOW_EDIT_MODAL;
+
+export const HIDE_EDIT_MODAL = 'BLOG_PAGE/HIDE_EDIT_MODAL';
+export type HIDE_EDIT_MODAL = typeof HIDE_EDIT_MODAL;
+
 export type BlogPageAction =
   | FetchPostDetail
   | FetchPostDetailInProgress
@@ -157,8 +166,25 @@ export type BlogPageAction =
   | IncludeInactivePost
   | IncludeInactivePostInProgress
   | IncludeInactivePostSuccess
-  | IncludeInactivePostError;
+  | IncludeInactivePostError
+  | ChangeRadioButtonState
+  | ShowEditModal
+  | HideEditModal;
 
+export interface ShowEditModal {
+  type: SHOW_EDIT_MODAL;
+}
+
+export interface HideEditModal {
+  type: HIDE_EDIT_MODAL;
+}
+
+export interface ChangeRadioButtonState {
+  type: CHANGE_RADIO_BUTTON_STATE;
+  payload: {
+    showComponent: string;
+  };
+}
 export interface ExcludeInactivePost {
   type: EXCLUDE_INACTIVE_POST;
 }
@@ -532,4 +558,19 @@ export const excludeInactivePostError = createAction(
   (errorMessage: string) => ({
     errorMessage,
   }),
+);
+
+export const changeRadioButtonState = createAction(
+  CHANGE_RADIO_BUTTON_STATE,
+  (showComponent: string) => ({
+    showComponent,
+  })
+);
+
+export const showEditModal = createAction(
+  SHOW_EDIT_MODAL,
+);
+
+export const hideEditModal = createAction(
+  HIDE_EDIT_MODAL,
 );

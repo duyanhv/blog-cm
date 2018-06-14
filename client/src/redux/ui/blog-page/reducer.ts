@@ -71,10 +71,21 @@ import {
   EXCLUDE_INACTIVE_POST_ERROR,
   EXCLUDE_INACTIVE_POST_SUCCESS,
   EXCLUDE_INACTIVE_POST_IN_PROGRESS,
-  EXCLUDE_INACTIVE_POST
+  EXCLUDE_INACTIVE_POST,
+  ChangeRadioButtonState,
+  CHANGE_RADIO_BUTTON_STATE,
+  ShowEditModal,
+  HideEditModal,
+  HIDE_EDIT_MODAL,
+  SHOW_EDIT_MODAL
 } from './action';
 import { handleActions } from 'redux-actions';
 import { message } from 'antd';
+
+const staticRadioButtonValue = {
+  addpost: 'addpost',
+  allposts: 'allposts',
+};
 
 const createNewPostReducer = (state: BlogPageState, action: CreateNewPost) => {
   return {
@@ -103,6 +114,7 @@ const createNewPostSuccessReducer = (
     ...state,
     errorMessage: '',
     isBusy: false,
+    showComponent: staticRadioButtonValue.allposts,
   };
 };
 
@@ -110,6 +122,7 @@ const createNewPostErrorReducer = (
   state: BlogPageState,
   action: CreateNewPostError,
 ) => {
+  message.error(action.payload.errorMessage, 1.5);
   return {
     ...state,
     errorMessage: action.payload.errorMessage,
@@ -282,6 +295,7 @@ const editBlogDetailSuccessReducer = (
     ...state,
     errorMessage: '',
     isBusy: false,
+    showEditModal: false,
   };
 };
 
@@ -289,6 +303,7 @@ const editBlogDetailErrorReducer = (
   state: BlogPageState,
   action: EditBlogDetailError,
 ) => {
+  message.error(action.payload.errorMessage, 1.5);
   return {
     ...state,
     errorMessage: action.payload.errorMessage,
@@ -474,8 +489,41 @@ const excludeInactivePostErrorReducer = (
   };
 };
 
+const changeRadioButtonStateReducer = (
+  state: BlogPageState,
+  action: ChangeRadioButtonState,
+) => {
+  return {
+    ...state,
+    showComponent: action.payload.showComponent
+  };
+};
+
+const hideEditModalReducer = (
+  state: BlogPageState,
+  action: HideEditModal,
+) => {
+  return{
+    ...state,
+    showEditModal: false
+  };
+};
+
+const showEditModalReducer = (
+  state: BlogPageState,
+  action: ShowEditModal
+) => {
+  return{
+    ...state,
+    showEditModal: true,
+  };
+};
+
 const blogPageReducer = handleActions<BlogPageState, any>(
   {
+    [HIDE_EDIT_MODAL]: hideEditModalReducer,
+    [SHOW_EDIT_MODAL]: showEditModalReducer,
+    [CHANGE_RADIO_BUTTON_STATE]: changeRadioButtonStateReducer,
     [EXCLUDE_INACTIVE_POST]: excludeInactivePostReducer,
     [EXCLUDE_INACTIVE_POST_IN_PROGRESS]: excludeInactivePostInProgressReducer,
     [EXCLUDE_INACTIVE_POST_SUCCESS]: excludeInactivePostSuccessReducer,
@@ -519,6 +567,8 @@ const blogPageReducer = handleActions<BlogPageState, any>(
     isBusy: false,
     deactivateStatus: '',
     searchByTitleData: [],
+    showComponent: staticRadioButtonValue.allposts,
+    showEditModal: false,
   },
 );
 

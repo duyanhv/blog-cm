@@ -6,5 +6,7 @@ interface BlogPageState {
   errorMessage: string;
   deactivateStatus: string;
   searchByTitleData: IFindBlogDetailDto[];
+  showComponent: string;
+  showEditModal: boolean;
 }
 export default BlogPageState;

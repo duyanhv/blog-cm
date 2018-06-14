@@ -122,7 +122,12 @@ class CreateNewPostForm extends React.Component<CreateNewPostFormProps> {
               getValueFromEvent: this.handleEditorChange,
             })(<BraftEditor {...editorProps} />)}
           </Form.Item>
-          <Button className="submitButton" type="default" htmlType="submit">
+          <Button
+            className="submitButton"
+            type="default"
+            htmlType="submit"
+            loading={this.props.isBusy}
+          >
             Publish
           </Button>
         </Form>

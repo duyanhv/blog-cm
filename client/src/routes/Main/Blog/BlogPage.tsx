@@ -22,6 +22,9 @@ import {
   deactivatePost,
   includeInactivePost,
   excludeInactivePost,
+  changeRadioButtonState,
+  hideEditModal,
+  showEditModal,
 } from '../../../redux/ui/blog-page/action';
 import {
   // Button,
@@ -46,6 +49,8 @@ interface BlogPageProps extends BlogPageState {
   dispatch: Dispatch<any>;
   currentUsername: string;
   searchByTitleData: IFindBlogDetailDto[];
+  showComponent: string;
+  showEditModal: boolean;
   onFetchPostDetail: () => IFindBlogDetailDto[];
   onCreatePost: (newPost: CreateBlogInputDto) => void;
   onEditPostDetail: (id: string, editedPost: UpdateBlogDetailDto) => void;
@@ -55,13 +60,12 @@ interface BlogPageProps extends BlogPageState {
   onDeactivatePost: (postId: string) => void;
   onIncludeInactivePost: () => void;
   onExcludeInactivePost: () => void;
+  onChangeRadioButtonState: (showComponent: string) => void;
+  onHideEditModal: () => void;
+  onShowEditModal: () => void;
 }
 
-interface RadioButtonState {
-  showComponent: string;
-}
-
-class BlogPage extends React.Component<BlogPageProps, RadioButtonState> {
+class BlogPage extends React.Component<BlogPageProps> {
   constructor(props: any) {
     super(props);
 
@@ -80,14 +84,11 @@ class BlogPage extends React.Component<BlogPageProps, RadioButtonState> {
   };
 
   _onAddPost = async (e: any): Promise<any> => {
-    this.setState({
-      showComponent: e.target.value,
-    });
+    this.props.onChangeRadioButtonState(e.target.value);
   }
 
   handleEditFormSubmit = async (id: string, editedPost: UpdateBlogDetailDto): Promise<any> => {
     this.props.onEditPostDetail(id, editedPost);
-    this.props.onFetchPostDetail();
   };
 
   handleSearchChange = async (value: string): Promise<void> => {
@@ -102,8 +103,6 @@ class BlogPage extends React.Component<BlogPageProps, RadioButtonState> {
   };
 
   searchPostByDate = async (dateRangeInput: string[]): Promise<void> => {
-    // tslint:disable-next-line:no-console
-    console.log(dateRangeInput);
     const debounced = _.debounce(
       () => this.props.onSearchPostByDate({ dateRangeInput } as DateRangeInputDto),
       1000,
@@ -132,6 +131,7 @@ class BlogPage extends React.Component<BlogPageProps, RadioButtonState> {
           <RadioGroup
             defaultValue={staticRadioButtonValue.allposts}
             size="large"
+            value={this.props.showComponent}
           >
             <RadioButton value={staticRadioButtonValue.allposts}>
               All Posts
@@ -141,7 +141,7 @@ class BlogPage extends React.Component<BlogPageProps, RadioButtonState> {
             </RadioButton>
           </RadioGroup>
         </div>
-        {this.state.showComponent === staticRadioButtonValue.allposts ? (
+        {this.props.showComponent === staticRadioButtonValue.allposts ? (
           <ListPosts
             includeOrExcludeInactivePost={this.includeOrExcludeInactivePost}
             deactivateOrActivatePost={this.deactivateOrActivatePost}
@@ -166,6 +166,8 @@ const mapStateToProps = (state: AppState) => ({
   isBusy: state.ui.blogPage.isBusy,
   currentUsername: state.profile.username,
   searchByTitleData: state.ui.blogPage.searchByTitleData,
+  showComponent: state.ui.blogPage.showComponent,
+  showEditModal: state.ui.blogPage.showEditModal,
   ...state.ui.blogPage,
 });
 
@@ -185,8 +187,13 @@ const mapDispatchToProps = (dispatch: Dispatch<BlogPageAction>) => ({
     dispatch(deactivatePost(postId)),
   onIncludeInactivePost: () =>
     dispatch(includeInactivePost()),
-    onExcludeInactivePost: () =>
+  onExcludeInactivePost: () =>
     dispatch(excludeInactivePost()),
+
+  onChangeRadioButtonState: (showComponent: string) =>
+    dispatch(changeRadioButtonState(showComponent)),
+  onHideEditModal: () => dispatch(hideEditModal()),
+  onShowEditModal: () => dispatch(showEditModal()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogPage);
